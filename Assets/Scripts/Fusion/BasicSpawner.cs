@@ -85,7 +85,7 @@ public class BasicSpawner : MonoBehaviour, INetworkRunnerCallbacks
     public void OnInput(NetworkRunner runner, NetworkInput input) 
     {
         var data = new NetworkInputData();
-
+#if UNITY_STANDALONE_WIN
         if (Input.GetKey(KeyCode.W))
             data.direction += Vector3.forward;
 
@@ -97,6 +97,15 @@ public class BasicSpawner : MonoBehaviour, INetworkRunnerCallbacks
 
         if (Input.GetKey(KeyCode.D))
             data.direction += Vector3.right;
+#endif
+
+#if UNITY_IOS
+        VirtualJoystick joystick = FindObjectOfType<VirtualJoystick>(); 
+
+        Vector3 moveDirection = joystick.GetInputDirection(); // Get the direction from the joystick
+        data.direction += moveDirection;
+#endif
+
 
         input.Set(data);
     }
@@ -117,7 +126,7 @@ public class BasicSpawner : MonoBehaviour, INetworkRunnerCallbacks
     public void OnReliableDataReceived(NetworkRunner runner, PlayerRef player, ReliableKey key, ArraySegment<byte> data) { }
     public void OnReliableDataProgress(NetworkRunner runner, PlayerRef player, ReliableKey key, float progress) { }
 
-    #endregion
+#endregion
 
     private async void StartGame(GameMode mode, string sceneName)
     {
