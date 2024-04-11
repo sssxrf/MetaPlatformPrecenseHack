@@ -486,7 +486,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &335484446
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -728,6 +728,7 @@ GameObject:
   - component: {fileID: 485548736}
   - component: {fileID: 485548738}
   - component: {fileID: 485548737}
+  - component: {fileID: 485548739}
   m_Layer: 5
   m_Name: JoystickBG
   m_TagString: Untagged
@@ -793,6 +794,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 485548735}
   m_CullTransparentMesh: 1
+--- !u!114 &485548739
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 485548735}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2615bdf432cfb414a9450c3788de548d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &710392857
 GameObject:
   m_ObjectHideFlags: 0
@@ -1321,6 +1334,7 @@ GameObject:
   - component: {fileID: 1846219750}
   - component: {fileID: 1846219749}
   - component: {fileID: 1846219748}
+  - component: {fileID: 1846219752}
   m_Layer: 0
   m_Name: CanvasManager
   m_TagString: Untagged
@@ -1383,6 +1397,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1846219752
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1846219747}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed7adc6d1de231544a3fbcea7b66db1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _messagesOnMobile: {fileID: 194857633}
+  _wholeUI: {fileID: 999742362}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
