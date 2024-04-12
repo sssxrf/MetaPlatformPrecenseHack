@@ -61,8 +61,13 @@ public class Player : NetworkBehaviour
 #if UNITY_ANDROID
         HeadSetUIManager.Instance.UpdateMessages(message);
 #endif
+
+#if UNITY_IOS
+        MobileUIManager.Instance.UpdateMessages(message);
+#endif
+
     }
-#endregion
+    #endregion
 
 
 
