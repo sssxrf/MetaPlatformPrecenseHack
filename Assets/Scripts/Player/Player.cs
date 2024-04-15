@@ -47,6 +47,7 @@ public class Player : NetworkBehaviour
 
         if (messageSource == Runner.LocalPlayer)
         {
+            
             message = $"You said: {message}\n";
         }
         else
