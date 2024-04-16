@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using Fusion;
 using TMPro;
+#if UNITY_ANDROID
+        using static OVRInput;
+#endif
 
 public class Player : NetworkBehaviour
 {
@@ -15,6 +18,7 @@ public class Player : NetworkBehaviour
     private void Awake()
     {
         _cc = GetComponent<NetworkCharacterController>();
+        
     }
 
     private void Update()
@@ -24,11 +28,14 @@ public class Player : NetworkBehaviour
         {
             RPC_SendMessage("Hey Mate!");
         }
-    
+
 #endif
 
 #if UNITY_ANDROID
-        
+        if ( OVRInput.Get(OVRInput.RawButton.A))
+        {
+            RPC_SendMessage("Length"+ MRSceneManager.Instance.RoomLength + "width:" + MRSceneManager.Instance.RoomWidth);
+        }
 #endif
     }
     #endregion
@@ -66,6 +73,18 @@ public class Player : NetworkBehaviour
 #if UNITY_IOS
         MobileUIManager.Instance.UpdateMessages(message);
 #endif
+
+    }
+
+    [Rpc(RpcSources.InputAuthority, RpcTargets.StateAuthority, HostMode = RpcHostMode.SourceIsHostPlayer)]
+    public void RPC_SendRoomInfo(float roomlength, float roomwidth, RpcInfo info = default)
+    {
+        RPC_RelayRoomInfo(roomlength, roomwidth, info.Source);
+    }
+
+    [Rpc(RpcSources.StateAuthority, RpcTargets.All, HostMode = RpcHostMode.SourceIsServer)]
+    public void RPC_RelayRoomInfo(float roomlength, float roomwidth, PlayerRef messageSource)
+    {
 
     }
     #endregion

@@ -7,7 +7,7 @@ public class MRSceneManager : MonoBehaviour
 {
     public static MRSceneManager Instance { get; private set; }
 
-    [Header("Dependencies")]
+    [Header("OVR Field")]
     [SerializeField] OVRSceneManager sceneManager;
     private static OVRSceneRoom m_SceneRoom;
 
@@ -57,6 +57,8 @@ public class MRSceneManager : MonoBehaviour
 
         m_SceneWalls = m_SceneRoom.Walls;
         GetRoomSizeSquare();
+
+        //Debug.Log("length:"+ _roomLength + "width:" + _roomWidth);
     }
 
     private void GetRoomSizeSquare()
