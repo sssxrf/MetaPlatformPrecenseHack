@@ -12,6 +12,7 @@ public class BasicSpawner : MonoBehaviour, INetworkRunnerCallbacks
     private NetworkRunner _runner;
     private NetworkRunner _runnerInstance;
     [SerializeField] private NetworkPrefabRef _playerPrefab;
+    [SerializeField] private NetworkPrefabRef _playerPrefabHost;
     private Dictionary<PlayerRef, NetworkObject> _spawnedCharacters = new Dictionary<PlayerRef, NetworkObject>();
     #endregion
 
@@ -75,11 +76,29 @@ public class BasicSpawner : MonoBehaviour, INetworkRunnerCallbacks
         if (runner.IsServer)
         {
             // Create a unique position for the player
-            Vector3 spawnPosition = new Vector3((player.RawEncoded % runner.Config.Simulation.PlayerCount) * 2, 1, 0);
-            NetworkObject networkPlayerObject = runner.Spawn(_playerPrefab, spawnPosition, Quaternion.identity, player);
-            // Keep track of the player avatars for easy access
-            _spawnedCharacters.Add(player, networkPlayerObject);
+            //Vector3 spawnPosition = new Vector3((player.RawEncoded % runner.Config.Simulation.PlayerCount) * 2, 1, 0);
+            Debug.Log("PlayerIndex:" + player.AsIndex);
+            if (player.AsIndex == 1)
+            {
+                
+                // host spawn host prefab
+                Vector3 spawnPosition = new Vector3(0, 1, 0);
+                NetworkObject networkPlayerObject = runner.Spawn(_playerPrefabHost, spawnPosition, Quaternion.identity, player);
+                // Keep track of the player avatars for easy access
+                _spawnedCharacters.Add(player, networkPlayerObject);
+            }
+            else
+            {
+                Vector3 spawnPosition = new Vector3(0.5f, 1, 0);
+                NetworkObject networkPlayerObject = runner.Spawn(_playerPrefab, spawnPosition, Quaternion.identity, player);
+                // Keep track of the player avatars for easy access
+                _spawnedCharacters.Add(player, networkPlayerObject);
+            }
+
+
+
         }
+
     }
     public void OnPlayerLeft(NetworkRunner runner, PlayerRef player) 
     {
@@ -114,6 +133,13 @@ public class BasicSpawner : MonoBehaviour, INetworkRunnerCallbacks
         data.direction += moveDirection;
 #endif
 
+#if UNITY_ANDROID
+        if(PlayerManagerMR.Instance != null)
+        {
+
+            data.headsetPosition = PlayerManagerMR.Instance._headset.transform.position;
+        }
+#endif
 
         input.Set(data);
     }

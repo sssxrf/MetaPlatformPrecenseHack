@@ -12,15 +12,30 @@ public class Player : NetworkBehaviour
 
     #region SerializeField
     private NetworkCharacterController _cc;
+    private NetworkTransform _networktransform;
     #endregion
 
     #region Unity Methods
     private void Awake()
     {
+#if UNITY_STANDALONE_WIN || UNITY_IOS
         _cc = GetComponent<NetworkCharacterController>();
-        
+
+#endif
+#if UNITY_ANDROID
+//        RemoveComponent<NetworkCharacterController>();
+//        RemoveComponent<CharacterController>();
+//        AddComponent<NetworkTransform>();
+       _networktransform = GetComponent<NetworkTransform>();
+#endif
     }
 
+    private void Start()
+    {
+#if UNITY_ANDROID
+        gameObject.transform.GetChild(0).transform.localScale = new Vector3(0.2f, 0.2f, 0.2f);
+#endif
+    }
     private void Update()
     {
 #if UNITY_STANDALONE_WIN
@@ -102,10 +117,42 @@ public class Player : NetworkBehaviour
 
     public override void FixedUpdateNetwork()
     {
+#if UNITY_STANDALONE_WIN || UNITY_IOS
+
         if (GetInput(out NetworkInputData data))
         {
             data.direction.Normalize();
             _cc.Move(5 * data.direction * Runner.DeltaTime);
         }
+#endif
+#if UNITY_ANDROID
+
+        if (GetInput(out NetworkInputData data))
+        {
+            transform.position = new Vector3(data.headsetPosition.x, 1, data.headsetPosition.z);
+        }
+#endif
     }
+
+    #region Public Methods
+    public void RemoveComponent<T>() where T : Component
+    {
+        T component = GetComponent<T>();
+        if (component != null)
+        {
+            Destroy(component);
+        }
+        else
+        {
+            Debug.Log("Component not found on the game object.");
+        }
+    }
+
+    // Generic method to add a component of type T to this GameObject
+    public T AddComponent<T>() where T : Component
+    {
+        T component = gameObject.AddComponent<T>();
+        return component;
+    }
+#endregion
 }

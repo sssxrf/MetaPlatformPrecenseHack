@@ -56,6 +56,7 @@ public class MRSceneManager : MonoBehaviour
         m_SceneFloor = m_SceneRoom.Floor;
 
         m_SceneWalls = m_SceneRoom.Walls;
+       
         GetRoomSizeSquare();
 
         //Debug.Log("length:"+ _roomLength + "width:" + _roomWidth);
