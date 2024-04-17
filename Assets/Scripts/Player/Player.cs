@@ -32,10 +32,10 @@ public class Player : NetworkBehaviour
 #endif
 
 #if UNITY_ANDROID
-        if ( OVRInput.Get(OVRInput.RawButton.A))
-        {
-            RPC_SendMessage("Length"+ MRSceneManager.Instance.RoomLength + "width:" + MRSceneManager.Instance.RoomWidth);
-        }
+        //if ( OVRInput.Get(OVRInput.RawButton.A))
+        //{
+        //    RPC_SendMessage("Length"+ MRSceneManager.Instance.RoomLength + "width:" + MRSceneManager.Instance.RoomWidth);
+        //}
 #endif
     }
     #endregion
@@ -86,6 +86,15 @@ public class Player : NetworkBehaviour
     public void RPC_RelayRoomInfo(float roomlength, float roomwidth, PlayerRef messageSource)
     {
 
+#if UNITY_STANDALONE_WIN
+        RoomManager.Instance.DrawCenteredRoom(roomlength, roomwidth);
+        PcUIManager.Instance.UpdateMessages( "Room set!");
+#endif
+
+#if UNITY_ANDROID
+
+        HeadSetUIManager.Instance.UpdateMessages("RoomInfo sent");
+#endif
     }
     #endregion
 
