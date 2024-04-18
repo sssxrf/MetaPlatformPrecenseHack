@@ -129,7 +129,7 @@ public class Player : NetworkBehaviour
 
         if (GetInput(out NetworkInputData data))
         {
-            transform.position = new Vector3(data.headsetPosition.x, 1, data.headsetPosition.z);
+            transform.position = new Vector3(data.headsetPosition2D.x, 1, data.headsetPosition2D.y);
         }
 #endif
     }

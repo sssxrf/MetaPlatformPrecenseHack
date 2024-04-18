@@ -473,8 +473,8 @@ MonoBehaviour:
     Callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 1268095501}
-          m_TargetAssemblyTypeName: PlayerManagerMR, Assembly-CSharp
+        - m_Target: {fileID: 915561487}
+          m_TargetAssemblyTypeName: MRSceneManager, Assembly-CSharp
           m_MethodName: SendRoomInfo
           m_Mode: 1
           m_Arguments:
@@ -1189,6 +1189,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sceneManager: {fileID: 0}
+  _headset: {fileID: 219086492}
 --- !u!1 &1114974019
 GameObject:
   m_ObjectHideFlags: 0
@@ -1350,7 +1351,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1268095501
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1898,7 +1899,7 @@ MonoBehaviour:
   requestScenePermissionOnStartup: 0
   requestRecordAudioPermissionOnStartup: 0
   _localDimming: 1
-  _trackingOriginType: 2
+  _trackingOriginType: 1
   usePositionTracking: 1
   useRotationTracking: 1
   useIPDInPositionTracking: 1

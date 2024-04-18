@@ -134,10 +134,10 @@ public class BasicSpawner : MonoBehaviour, INetworkRunnerCallbacks
 #endif
 
 #if UNITY_ANDROID
-        if(PlayerManagerMR.Instance != null)
+        if(MRSceneManager.Instance != null)
         {
 
-            data.headsetPosition = PlayerManagerMR.Instance._headset.transform.position;
+            data.headsetPosition2D = MRSceneManager.Instance.PlayerRelativePos;
         }
 #endif
 
