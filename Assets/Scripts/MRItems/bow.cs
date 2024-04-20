@@ -7,8 +7,8 @@ public class bow : MonoBehaviour
 {
     [SerializeField] private Transform startPosition;
     [SerializeField] private Transform endPosition;
-
-    [SerializeField] private 
+    [SerializeField] private Transform stringPosition;
+    [SerializeField] private LineRenderer _stringRenderer;
     // Start is called before the first frame update
     void Start()
     {
@@ -18,13 +18,14 @@ public class bow : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (OVRInput.GetDown(OVRInput.Button.PrimaryHandTrigger))
-        {
-            Debug.Log("primary hand trigger down");
-        }
-        if (OVRInput.GetUp(OVRInput.Button.SecondaryHandTrigger))
-        {
-            Debug.Log("second hand trigger up");
-        }
+        RenerString();
+    }
+
+    private void RenerString()
+    {
+        Vector3 newStringPosition = stringPosition.localPosition;
+        
+        _stringRenderer.SetPosition(1,newStringPosition );
+            
     }
 }
