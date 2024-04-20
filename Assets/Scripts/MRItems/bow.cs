@@ -18,30 +18,54 @@ public class bow : MonoBehaviour
     [SerializeField] private SnapInteractable _bowSnapInteractable;
     [SerializeField] private GrabInteractable _stringGrabInteractable;
     private GameObject _arrow;
+    private SnapInteractor _bowSnapInteractor;
     private bool _isArrowAttached = false;
     // Start is called before the first frame update
     void Start()
     {
         Debug.Log("Test xxxxxxx");
         _bowSnapInteractable.WhenSelectingInteractorAdded.Action += HandleArrowAttached;
-        _stringGrabInteractable.WhenInteractorRemoved.Action += HandleArrowReleased;
+        _bowSnapInteractable.WhenSelectingInteractorRemoved.Action += HandleArrowRemoved;
+        _stringGrabInteractable.WhenSelectingInteractorRemoved.Action += HandleArrowReleased;
         //Update string constraint 
         FloatConstraint stringConstraint = new FloatConstraint();
         stringConstraint.Constrain = true;
         stringConstraint.Value = endPosition.position.z - startPosition.position.z;
         Debug.Log("string value " + stringConstraint.Value);
-        // _stringConstraint.Constraints.MaxZ = stringConstraint;
+        _stringConstraint.Constraints.MaxZ = stringConstraint;
+    }
+
+    private void HandleArrowRemoved(SnapInteractor obj)
+    {
+        if (!_isArrowAttached )
+        {
+            return;
+        }
+        
+        _isArrowAttached = false;
     }
 
     private void HandleArrowReleased(GrabInteractor obj)
     {
-        if (!_isArrowAttached)
+        if (!_isArrowAttached )
         {
             return;
         }
         
         _isArrowAttached = false;
         Debug.Log("Arrow Released");
+        
+        // release arrow from snap socket in
+        var arrowRb =  _arrow.GetComponent<Rigidbody>();
+        _bowSnapInteractor.InjectAllSnapInteractor(_stringGrabInteractable.gameObject.GetComponent<Grabbable>(),arrowRb);
+        
+        // shoot arrow
+        _arrow.transform.SetParent(null);
+        arrowRb.isKinematic = false;
+        arrowRb.useGravity = true;
+        arrowRb.AddForce(stringPosition.up * 10, ForceMode.Impulse);
+        
+        
         
     }
 
@@ -53,7 +77,10 @@ public class bow : MonoBehaviour
         foreach (var snapInteractor in _bowSnapInteractable.SelectingInteractors)
         {
             Debug.Log("Snap Interactor " + snapInteractor.gameObject);
+            _arrow = snapInteractor.gameObject;
+            _bowSnapInteractor = snapInteractor;
         }
+       
     }
 
     // Update is called once per frame
