@@ -1037,7 +1037,7 @@ MonoBehaviour:
       Value: 0
     MaxZ:
       Constrain: 1
-      Value: 1
+      Value: 0.2
 --- !u!1 &858863558
 GameObject:
   m_ObjectHideFlags: 0
@@ -2860,6 +2860,9 @@ MonoBehaviour:
   endPosition: {fileID: 6175831545660099040}
   stringPosition: {fileID: 4195443305752329442}
   _stringRenderer: {fileID: 316444861}
+  _stringConstraint: {fileID: 782614116}
+  _bowSnapInteractable: {fileID: 858863561}
+  _stringGrabInteractable: {fileID: 782614110}
 --- !u!4 &5955662829442307051
 Transform:
   m_ObjectHideFlags: 0
