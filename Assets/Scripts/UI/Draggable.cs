@@ -1,8 +1,10 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class Draggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
+public class Draggable : MonoBehaviour,IBeginDragHandler, IDragHandler, IEndDragHandler
 {
+
+
     private RectTransform rectTransform;
     private Vector2 originalPosition;
     private Canvas canvas;
@@ -10,7 +12,7 @@ public class Draggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
 
     private void Awake()
     {
-        
+
         rectTransform = GetComponent<RectTransform>();
         canvas = GetComponentInParent<Canvas>();
         canvasGroup = GetComponent<CanvasGroup>();
