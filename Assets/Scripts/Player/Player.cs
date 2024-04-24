@@ -110,6 +110,11 @@ public class Player : NetworkBehaviour
 
         HeadSetUIManager.Instance.UpdateMessages("RoomInfo sent");
 #endif
+
+#if UNITY_IOS
+        RoomManager.Instance.DrawCenteredRoom(roomlength, roomwidth);
+        MobileUIManager.Instance.UpdateMessages( "Room set!");
+#endif
     }
     #endregion
 
