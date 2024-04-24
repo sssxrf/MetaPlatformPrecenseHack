@@ -8,22 +8,24 @@ public class FoodmodeButtons : MonoBehaviour
     public Button switchToMapButton;
     
 
-    void Start()
+   
+
+    private void OnEnable()
     {
         if (switchToMapButton != null)
         {
-            
+
             switchToMapButton.onClick.AddListener(OnSwitchToMapButtonClick);
         }
     }
 
-    void OnDestroy()
+    private void OnDisable()
     {
-      
         if (switchToMapButton != null)
         {
             switchToMapButton.onClick.RemoveListener(OnSwitchToMapButtonClick);
         }
+
     }
 
     void OnSwitchToMapButtonClick()
