@@ -127,10 +127,11 @@ public class BasicSpawner : MonoBehaviour, INetworkRunnerCallbacks
 #endif
 
 #if UNITY_IOS
-        VirtualJoystick joystick = FindObjectOfType<VirtualJoystick>(); 
+        // Joystick feature
+        //VirtualJoystick joystick = FindObjectOfType<VirtualJoystick>(); 
 
-        Vector3 moveDirection = joystick.GetInputDirection(); // Get the direction from the joystick
-        data.direction += moveDirection;
+        //Vector3 moveDirection = joystick.GetInputDirection(); // Get the direction from the joystick
+        //data.direction += moveDirection;
 #endif
 
 #if UNITY_ANDROID

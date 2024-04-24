@@ -11,7 +11,11 @@ public class MobileUIManager : MonoBehaviour
     [SerializeField] private TMP_Text _messagesOnMobile;
     [SerializeField] private GameObject _wholeUI;
 
+    [SerializeField] private GameObject _foodmode;
+
     #endregion
+
+    public GameObject Foodmode => _foodmode;
     void Awake()
     {
        
