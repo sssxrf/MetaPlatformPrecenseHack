@@ -62,12 +62,22 @@ public class DragDropController : MonoBehaviour
 
     private void MoveRect(Touch touch)
     {
+        // Convert the screen delta to a world space delta
         Vector2 positionDelta = touch.deltaPosition;
-        Vector3 worldDelta = canvas.transform.TransformVector(new Vector3(positionDelta.x, positionDelta.y, 0));
+        Vector3 worldDelta = new Vector3(positionDelta.x, positionDelta.y, 0);
+
+        // Transform this delta to world space taking into account the canvas' rotation and scale
+        worldDelta = canvas.transform.TransformVector(worldDelta);
+
+        // Adjust the delta by the inverse of the parent's rotation to align it with how the parent has been transformed
+        worldDelta = Quaternion.Inverse(transform.parent.rotation) * worldDelta;
+
+        // Convert the adjusted world delta back to local space relative to the parent, considering the canvas' scale factor
         Vector2 localDelta = new Vector2(worldDelta.x, worldDelta.y) / canvas.scaleFactor;
+
+        // Apply this adjusted local delta to the RectTransform
         rectTransform.anchoredPosition += localDelta;
     }
-
     private void OnDrop()
     {
         // Optionally change an image or do other effects
