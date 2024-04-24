@@ -1,7 +1,8 @@
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
-public class DragDropController : MonoBehaviour
+public class DragDropController : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 {
     public RectTransform targetArea; // Drop target area
     public Image placeholderImage; // Placeholder image to change for food display
@@ -12,6 +13,7 @@ public class DragDropController : MonoBehaviour
     private bool isDragging = false;
     private Vector2 originalPosition;
     private CanvasGroup canvasGroup;
+    private Vector2 touchStart;
 
     void Awake()
     {
@@ -19,6 +21,25 @@ public class DragDropController : MonoBehaviour
         canvas = GetComponentInParent<Canvas>();
         originalPosition = rectTransform.anchoredPosition;
         canvasGroup = GetComponent<CanvasGroup>();
+    }
+
+    public void OnPointerDown(PointerEventData eventData)
+    {
+        touchStart = eventData.position;
+    }
+
+    public void OnPointerUp(PointerEventData eventData)
+    {
+        if (!isDragging && Vector2.Distance(touchStart, eventData.position) < 10) // Threshold for tap
+        {
+            //// It's a tap, check if it's over a button or just a simple tap
+            //if (!EventSystem.current.IsPointerOverGameObject(eventData.pointerId))
+            //{
+            //    // Not over a GUI element
+            //    Debug.Log("Tap on non-UI element");
+            //}
+        }
+        isDragging = false;
     }
 
     void Update()
@@ -29,16 +50,14 @@ public class DragDropController : MonoBehaviour
             switch (touch.phase)
             {
                 case TouchPhase.Began:
-                    if (RectTransformUtility.RectangleContainsScreenPoint(rectTransform, touch.position, null))
-                    {
-                        isDragging = true;
-                        canvasGroup.alpha = 0.6f;
-                    }
+                    // Already handled in OnPointerDown
                     break;
 
                 case TouchPhase.Moved:
-                    if (isDragging)
+                    if (Mathf.Abs(touch.deltaPosition.magnitude) > 10) // Movement threshold for drag start
                     {
+                        isDragging = true;
+                        canvasGroup.alpha = 0.6f;
                         MoveRect(touch);
                     }
                     break;
@@ -53,11 +72,45 @@ public class DragDropController : MonoBehaviour
                         }
                         canvasGroup.alpha = 1f;
                         rectTransform.anchoredPosition = originalPosition;
-                        isDragging = false;
                     }
                     break;
             }
         }
+        //if (Input.touchCount > 0)
+        //{
+        //    Touch touch = Input.GetTouch(0);
+        //    switch (touch.phase)
+        //    {
+        //        case TouchPhase.Began:
+        //            if (RectTransformUtility.RectangleContainsScreenPoint(rectTransform, touch.position, null))
+        //            {
+        //                isDragging = true;
+        //                canvasGroup.alpha = 0.6f;
+        //            }
+        //            break;
+
+        //        case TouchPhase.Moved:
+        //            if (isDragging)
+        //            {
+        //                MoveRect(touch);
+        //            }
+        //            break;
+
+        //        case TouchPhase.Ended:
+        //        case TouchPhase.Canceled:
+        //            if (isDragging)
+        //            {
+        //                if (RectTransformUtility.RectangleContainsScreenPoint(targetArea, touch.position, null))
+        //                {
+        //                    OnDrop();
+        //                }
+        //                canvasGroup.alpha = 1f;
+        //                rectTransform.anchoredPosition = originalPosition;
+        //                isDragging = false;
+        //            }
+        //            break;
+        //    }
+        //}
     }
 
     private void MoveRect(Touch touch)
