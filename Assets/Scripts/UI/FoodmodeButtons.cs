@@ -32,6 +32,7 @@ public class FoodmodeButtons : MonoBehaviour
     {
         
         MobileUIManager.Instance.Foodmode.SetActive(false);
+        MobileUIManager.Instance.Mapmode.SetActive(true);
     }
 
 }

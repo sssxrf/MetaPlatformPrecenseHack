@@ -12,10 +12,13 @@ public class MobileUIManager : MonoBehaviour
     [SerializeField] private GameObject _wholeUI;
 
     [SerializeField] private GameObject _foodmode;
+    [SerializeField] private GameObject _mapmode;
 
     #endregion
 
     public GameObject Foodmode => _foodmode;
+    public GameObject Mapmode => _mapmode;
+
     void Awake()
     {
        
