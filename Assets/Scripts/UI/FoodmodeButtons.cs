@@ -30,8 +30,8 @@ public class FoodmodeButtons : MonoBehaviour
 
     void OnSwitchToMapButtonClick()
     {
-        gameObject.SetActive(false);
-        //MobileUIManager.Instance.Foodmode.SetActive(false);
+        
+        MobileUIManager.Instance.Foodmode.SetActive(false);
     }
 
 }
