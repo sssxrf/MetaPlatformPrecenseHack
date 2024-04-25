@@ -23,41 +23,41 @@ public class DragDropController : MonoBehaviour
 
     void Update()
     {
-        //if (Input.touchCount > 0)
-        //{
-        //    Touch touch = Input.GetTouch(0);
-        //    switch (touch.phase)
-        //    {
-        //        case TouchPhase.Began:
-        //            if (RectTransformUtility.RectangleContainsScreenPoint(rectTransform, touch.position, null))
-        //            {
-        //                isDragging = true;
-        //                canvasGroup.alpha = 0.6f;
-        //            }
-        //            break;
+        if (Input.touchCount > 0)
+        {
+            Touch touch = Input.GetTouch(0);
+            switch (touch.phase)
+            {
+                case TouchPhase.Began:
+                    if (RectTransformUtility.RectangleContainsScreenPoint(rectTransform, touch.position, null))
+                    {
+                        isDragging = true;
+                        canvasGroup.alpha = 0.6f;
+                    }
+                    break;
 
-        //        case TouchPhase.Moved:
-        //            if (isDragging)
-        //            {
-        //                MoveRect(touch);
-        //            }
-        //            break;
+                case TouchPhase.Moved:
+                    if (isDragging)
+                    {
+                        MoveRect(touch);
+                    }
+                    break;
 
-        //        case TouchPhase.Ended:
-        //        case TouchPhase.Canceled:
-        //            if (isDragging)
-        //            {
-        //                if (RectTransformUtility.RectangleContainsScreenPoint(targetArea, touch.position, null))
-        //                {
-        //                    OnDrop();
-        //                }
-        //                canvasGroup.alpha = 1f;
-        //                rectTransform.anchoredPosition = originalPosition;
-        //                isDragging = false;
-        //            }
-        //            break;
-        //    }
-        //}
+                case TouchPhase.Ended:
+                case TouchPhase.Canceled:
+                    if (isDragging)
+                    {
+                        if (RectTransformUtility.RectangleContainsScreenPoint(targetArea, touch.position, null))
+                        {
+                            OnDrop();
+                        }
+                        canvasGroup.alpha = 1f;
+                        rectTransform.anchoredPosition = originalPosition;
+                        isDragging = false;
+                    }
+                    break;
+            }
+        }
     }
 
     private void MoveRect(Touch touch)
