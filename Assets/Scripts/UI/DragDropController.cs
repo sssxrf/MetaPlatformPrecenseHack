@@ -9,12 +9,12 @@ public class DragDropController : MonoBehaviour
     public RectTransform targetArea1;
     public RectTransform targetArea2;
     public Image placeholderImage; // Placeholder image to change for food display
-    public Sprite DisplayedImage; // Food display
     public Image deliverButton;
     public Sprite deliveredTexture;
     public Sprite greyTexture;
 
     [SerializeField] private List<GameObject> draggableObjects;
+    [SerializeField] private List<Sprite> displayedImages;  // Food displays
     private Canvas canvas;
     private RectTransform rectTransform;
     private bool isDragging = false;
@@ -22,13 +22,14 @@ public class DragDropController : MonoBehaviour
     private CanvasGroup canvasGroup;
 
     private int uiButtonsLayer;
-
+    private Sprite DisplayedImage; // Food display
+    
     void Awake()
     {
-        rectTransform = GetComponent<RectTransform>();
+        //rectTransform = GetComponent<RectTransform>();
         canvas = GetComponentInParent<Canvas>();
-        originalPosition = rectTransform.anchoredPosition;
-        canvasGroup = GetComponent<CanvasGroup>();
+        //originalPosition = rectTransform.anchoredPosition;
+        //canvasGroup = GetComponent<CanvasGroup>();
         uiButtonsLayer = LayerMask.NameToLayer("UIButtons");
     }
 
@@ -43,17 +44,22 @@ public class DragDropController : MonoBehaviour
             switch (touch.phase)
             {
                 case TouchPhase.Began:
+                    int index_count = 0;
                     foreach (GameObject draggableobject in draggableObjects)
                     {
-
+                        
                         if (RectTransformUtility.RectangleContainsScreenPoint(draggableobject.GetComponent<RectTransform>(), touch.position, null) && !IsTouchOverUI(touch.position))
                         {
                         
                             isDragging = true;
                             canvasGroup.alpha = 0.6f;
                             rectTransform = draggableobject.GetComponent<RectTransform>();
+                            originalPosition = rectTransform.anchoredPosition;
+                            canvasGroup = GetComponent<CanvasGroup>();
+                            DisplayedImage = displayedImages[index_count];
                             break;
                         }
+                        index_count++;
                     }
                     break;
 
@@ -73,13 +79,13 @@ public class DragDropController : MonoBehaviour
                         //     OnDrop();
                         // }
                         if (RectTransformUtility.RectangleContainsScreenPoint(targetArea1, touch.position, null))
-            {
-                OnDrop("Area1");
-            }
+                        {
+                            OnDrop("Area1");
+                        }
                         else if (RectTransformUtility.RectangleContainsScreenPoint(targetArea2, touch.position, null))
-            {
-                OnDrop("Area2");
-            }
+                        {
+                            OnDrop("Area2");
+                        }
                         canvasGroup.alpha = 1f;
                         rectTransform.anchoredPosition = originalPosition;
                         isDragging = false;
@@ -140,27 +146,27 @@ public class DragDropController : MonoBehaviour
         //     }
         // }
 
-    if (area == "Area1")
-    {
-        if (placeholderImage != null && DisplayedImage != null)
+        if (area == "Area1")
         {
-            Debug.Log("Setting displayed image for Area1");
-            // draggableImage.gameObject.SetActive(true);
-            placeholderImage.enabled = true;
-            placeholderImage.sprite = DisplayedImage;
-            deliverButton.sprite = deliveredTexture;
-        }
-
-    }
-    else if (area == "Area2")
-    {
-        if (placeholderImage != null)
-        {
-            // draggableImage.gameObject.SetActive(false);
-            placeholderImage.enabled = false;
-            deliverButton.sprite = greyTexture;
+            if (placeholderImage != null && DisplayedImage != null)
+            {
+                Debug.Log("Setting displayed image for Area1");
+                // draggableImage.gameObject.SetActive(true);
+                placeholderImage.enabled = true;
+                placeholderImage.sprite = DisplayedImage;
+                deliverButton.sprite = deliveredTexture;
+            }
 
         }
-    }
+        else if (area == "Area2")
+        {
+            if (placeholderImage != null)
+            {
+                // draggableImage.gameObject.SetActive(false);
+                placeholderImage.enabled = false;
+                deliverButton.sprite = greyTexture;
+
+            }
+        }
     }
 }
