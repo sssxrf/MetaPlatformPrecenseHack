@@ -53,10 +53,10 @@ public class DragDropController : MonoBehaviour
                         {
 
                             isDragging = true;
-                            canvasGroup.alpha = 0.6f;
                             rectTransform = draggableobject.GetComponent<RectTransform>();
                             originalPosition = rectTransform.anchoredPosition;
                             canvasGroup = draggableobject.GetComponent<CanvasGroup>();
+                            canvasGroup.alpha = 0.6f;
                             DisplayedImage = displayedImages[index_count];
                             break;
                         }
