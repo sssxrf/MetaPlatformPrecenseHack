@@ -1,11 +1,5 @@
 {
   "dependencies": {
-    "co.parabox.csg": {
-      "version": "file:co.parabox.csg",
-      "depth": 0,
-      "source": "embedded",
-      "dependencies": {}
-    },
     "com.meta.xr.mrutilitykit": {
       "version": "63.0.0",
       "depth": 1,

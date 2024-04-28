@@ -59,7 +59,7 @@ MonoBehaviour:
     changedFromDefault: 0
   ShowWidget:
     serializedValue: 0
-    changedFromDefault: 0
+    changedFromDefault: 1
   DebugMode:
     serializedValue: 0
     changedFromDefault: 0
@@ -83,5 +83,5 @@ MonoBehaviour:
     changedFromDefault: 0
   KeepMainValidationSessionAliveInBackground:
     serializedValue: 0
-    changedFromDefault: 0
-  HasShownValidationConfig: 0
+    changedFromDefault: 1
+  HasShownValidationConfig: 1
