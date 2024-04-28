@@ -14,6 +14,7 @@ public class DragDropController : MonoBehaviour
     public Sprite deliveredTexture;
     public Sprite greyTexture;
 
+    [SerializeField] private List<GameObject> draggableObjects;
     private Canvas canvas;
     private RectTransform rectTransform;
     private bool isDragging = false;
@@ -42,10 +43,17 @@ public class DragDropController : MonoBehaviour
             switch (touch.phase)
             {
                 case TouchPhase.Began:
-                    if (RectTransformUtility.RectangleContainsScreenPoint(rectTransform, touch.position, null) && !IsTouchOverUI(touch.position))
+                    foreach (GameObject draggableobject in draggableObjects)
                     {
-                        isDragging = true;
-                        canvasGroup.alpha = 0.6f;
+
+                        if (RectTransformUtility.RectangleContainsScreenPoint(draggableobject.GetComponent<RectTransform>(), touch.position, null) && !IsTouchOverUI(touch.position))
+                        {
+                        
+                            isDragging = true;
+                            canvasGroup.alpha = 0.6f;
+                            rectTransform = draggableobject.GetComponent<RectTransform>();
+                            break;
+                        }
                     }
                     break;
 
