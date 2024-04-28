@@ -9,15 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-<<<<<<< HEAD
-  m_Script: {fileID: 0}
-  m_Name: GlobalValidationConfig
-  m_EditorClassIdentifier: Sirenix.OdinValidator.Editor:Sirenix.OdinValidator.Editor:GlobalValidationConfig
-=======
   m_Script: {fileID: 1426575000, guid: afbf832bc46149f5a291e87cab63e46d, type: 3}
   m_Name: GlobalValidationConfig
   m_EditorClassIdentifier: 
->>>>>>> feature/windowandbow
   ValidateScenesOnSceneLoad:
     serializedValue: 0
     changedFromDefault: 0

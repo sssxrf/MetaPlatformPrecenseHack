@@ -8,16 +8,11 @@ TagManager:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Wall
   - Water
   - UI
-<<<<<<< HEAD
-  - UIButtons
   - 
-=======
-  - Wall
-  - Window
->>>>>>> feature/windowandbow
+  - 
   - 
   - 
   - 

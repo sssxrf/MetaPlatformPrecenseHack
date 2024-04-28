@@ -31,6 +31,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 8806714155642386599}
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+--- !u!1 &887250922326647828
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8566967616208544307}
+  m_Layer: 0
+  m_Name: rotationPivot
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8566967616208544307
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 887250922326647828}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3447007389358252987}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1481619989707446259
 GameObject:
   m_ObjectHideFlags: 0
@@ -82,7 +113,7 @@ MonoBehaviour:
   _transferOnSecondSelection: 1
   _addNewPointsToFront: 0
   _forwardElement: {fileID: 0}
-  _oneGrabTransformer: {fileID: 0}
+  _oneGrabTransformer: {fileID: 8872039877647613621}
   _twoGrabTransformer: {fileID: 0}
   _targetTransform: {fileID: 3447007389358252987}
   _maxGrabPoints: -1
@@ -177,7 +208,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 124f4583f657475469a45ab6fca8f921, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _pivotTransform: {fileID: 0}
+  _pivotTransform: {fileID: 8566967616208544307}
   _rotationAxis: 1
   _constraints:
     MinAngle:
@@ -221,6 +252,7 @@ Transform:
   - {fileID: 7309114699433202613}
   - {fileID: 8806714155642386599}
   - {fileID: 2413464364613882172}
+  - {fileID: 8566967616208544307}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &519739405242662938
@@ -241,6 +273,7 @@ MonoBehaviour:
   - {fileID: 8828616767942028631}
   - {fileID: 1889757292751410555}
   - {fileID: 4352985893259279968}
+  grabInteractable: {fileID: 4311577507324150260}
 --- !u!54 &3903056170353038713
 Rigidbody:
   m_ObjectHideFlags: 0
