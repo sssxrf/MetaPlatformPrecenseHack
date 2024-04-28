@@ -5,9 +5,14 @@ using System.Collections.Generic;
 
 public class DragDropController : MonoBehaviour
 {
-    public RectTransform targetArea; // Drop target area
+    // public RectTransform targetArea; // Drop target area
+    public RectTransform targetArea1;
+    public RectTransform targetArea2;
     public Image placeholderImage; // Placeholder image to change for food display
     public Sprite DisplayedImage; // Food display
+    public Image deliverButton;
+    public Sprite deliveredTexture;
+    public Sprite greyTexture;
 
     private Canvas canvas;
     private RectTransform rectTransform;
@@ -55,10 +60,18 @@ public class DragDropController : MonoBehaviour
                 case TouchPhase.Canceled:
                     if (isDragging)
                     {
-                        if (RectTransformUtility.RectangleContainsScreenPoint(targetArea, touch.position, null))
-                        {
-                            OnDrop();
-                        }
+                        // if (RectTransformUtility.RectangleContainsScreenPoint(targetArea, touch.position, null))
+                        // {
+                        //     OnDrop();
+                        // }
+                        if (RectTransformUtility.RectangleContainsScreenPoint(targetArea1, touch.position, null))
+            {
+                OnDrop("Area1");
+            }
+                        else if (RectTransformUtility.RectangleContainsScreenPoint(targetArea2, touch.position, null))
+            {
+                OnDrop("Area2");
+            }
                         canvasGroup.alpha = 1f;
                         rectTransform.anchoredPosition = originalPosition;
                         isDragging = false;
@@ -101,13 +114,45 @@ public class DragDropController : MonoBehaviour
         }
         return false; // No UI button was touched
     }
-    private void OnDrop()
+    private void OnDrop(string area)
     {
         // Optionally change an image or do other effects
+        // if (placeholderImage != null && DisplayedImage != null)
+        // {
+        //     placeholderImage.sprite = DisplayedImage;
+        //     if(area == "Area1")
+        //     {
+        //     placeholderImage.enabled = true;
+
+        //     }
+        //     else if(area == "Area2")
+        //     {
+        //     // placeholderImage.enabled = false;
+        //     placeholderImage.sprite = null;
+        //     }
+        // }
+
+    if (area == "Area1")
+    {
         if (placeholderImage != null && DisplayedImage != null)
         {
-            placeholderImage.sprite = DisplayedImage;
+            Debug.Log("Setting displayed image for Area1");
+            // draggableImage.gameObject.SetActive(true);
             placeholderImage.enabled = true;
+            placeholderImage.sprite = DisplayedImage;
+            deliverButton.sprite = deliveredTexture;
         }
+
+    }
+    else if (area == "Area2")
+    {
+        if (placeholderImage != null)
+        {
+            // draggableImage.gameObject.SetActive(false);
+            placeholderImage.enabled = false;
+            deliverButton.sprite = greyTexture;
+
+        }
+    }
     }
 }
