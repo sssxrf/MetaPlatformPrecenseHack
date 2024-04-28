@@ -511,7 +511,7 @@ PlayerSettings:
   - m_BuildTarget: iOSSupport
     m_GraphicsJobs: 0
   - m_BuildTarget: WindowsStandaloneSupport
-    m_GraphicsJobs: 1
+    m_GraphicsJobs: 0
   - m_BuildTarget: XboxOnePlayer
     m_GraphicsJobs: 1
   - m_BuildTarget: LuminSupport
@@ -841,9 +841,14 @@ PlayerSettings:
   webGLMemoryGeometricGrowthCap: 96
   webGLPowerPreference: 2
   scriptingDefineSymbols:
+<<<<<<< HEAD
     Android: FUSION_WEAVER;FUSION2
     Standalone: FUSION_WEAVER;FUSION2
     iPhone: FUSION_WEAVER;FUSION2
+=======
+    Android: FUSION_WEAVER;FUSION2;ODIN_VALIDATOR;ODIN_VALIDATOR_3_1;ODIN_INSPECTOR;ODIN_INSPECTOR_3;ODIN_INSPECTOR_3_1
+    Standalone: FUSION_WEAVER;FUSION2;ODIN_INSPECTOR;ODIN_INSPECTOR_3;ODIN_INSPECTOR_3_1;ODIN_VALIDATOR;ODIN_VALIDATOR_3_1
+>>>>>>> feature/windowandbow
   additionalCompilerArguments: {}
   platformArchitecture: {}
   scriptingBackend:
