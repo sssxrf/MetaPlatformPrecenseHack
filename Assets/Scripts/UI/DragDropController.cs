@@ -38,6 +38,7 @@ public class DragDropController : MonoBehaviour
     void Update()
     {
 
+
         if (Input.touchCount > 0)
         {
             Touch touch = Input.GetTouch(0);
@@ -47,15 +48,15 @@ public class DragDropController : MonoBehaviour
                     int index_count = 0;
                     foreach (GameObject draggableobject in draggableObjects)
                     {
-                        
-                        if (RectTransformUtility.RectangleContainsScreenPoint(draggableobject.GetComponent<RectTransform>(), touch.position, null) && !IsTouchOverUI(touch.position))
+
+                        if (RectTransformUtility.RectangleContainsScreenPoint(draggableobject.GetComponent<RectTransform>(), touch.position, null))
                         {
-                        
+
                             isDragging = true;
                             canvasGroup.alpha = 0.6f;
                             rectTransform = draggableobject.GetComponent<RectTransform>();
                             originalPosition = rectTransform.anchoredPosition;
-                            canvasGroup = GetComponent<CanvasGroup>();
+                            canvasGroup = draggableobject.GetComponent<CanvasGroup>();
                             DisplayedImage = displayedImages[index_count];
                             break;
                         }
@@ -114,20 +115,20 @@ public class DragDropController : MonoBehaviour
         rectTransform.anchoredPosition += localDelta;
     }
 
-    private bool IsTouchOverUI(Vector2 touchPosition)
-    {
-        PointerEventData pointerEventData = new PointerEventData(EventSystem.current) { position = touchPosition };
-        List<RaycastResult> raycastResults = new List<RaycastResult>();
-        EventSystem.current.RaycastAll(pointerEventData, raycastResults);
-        foreach (var result in raycastResults)
-        {
-            if (result.gameObject.layer == uiButtonsLayer)
-            {
-                return true; // The touch is over a UI button
-            }
-        }
-        return false; // No UI button was touched
-    }
+    //private bool IsTouchOverUI(Vector2 touchPosition)
+    //{
+    //    PointerEventData pointerEventData = new PointerEventData(EventSystem.current) { position = touchPosition };
+    //    List<RaycastResult> raycastResults = new List<RaycastResult>();
+    //    EventSystem.current.RaycastAll(pointerEventData, raycastResults);
+    //    foreach (var result in raycastResults)
+    //    {
+    //        if (result.gameObject.layer == uiButtonsLayer)
+    //        {
+    //            return true; // The touch is over a UI button
+    //        }
+    //    }
+    //    return false; // No UI button was touched
+    //}
     private void OnDrop(string area)
     {
         // Optionally change an image or do other effects
