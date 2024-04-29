@@ -39,7 +39,6 @@ public class DragDropController : MonoBehaviour
     void Update()
     {
 
-
         if (Input.touchCount > 0)
         {
             Touch touch = Input.GetTouch(0);
@@ -136,21 +135,6 @@ public class DragDropController : MonoBehaviour
     //}
     private void OnDrop(string area)
     {
-        // Optionally change an image or do other effects
-        // if (placeholderImage != null && DisplayedImage != null)
-        // {
-        //     placeholderImage.sprite = DisplayedImage;
-        //     if(area == "Area1")
-        //     {
-        //     placeholderImage.enabled = true;
-
-        //     }
-        //     else if(area == "Area2")
-        //     {
-        //     // placeholderImage.enabled = false;
-        //     placeholderImage.sprite = null;
-        //     }
-        // }
 
         if (area == "Area1")
         {
@@ -161,14 +145,33 @@ public class DragDropController : MonoBehaviour
                 placeholderImage.enabled = true;
 
                 // fit displayed image's size
-                float width = DisplayedImage.rect.width;
-                float height = DisplayedImage.rect.height;
-                placeholderImage.rectTransform.sizeDelta = new Vector2(width, height);
-                placeholderImage.sprite = DisplayedImage;
-                deliverButton.sprite = deliveredTexture;
-            }
+                // float width = DisplayedImage.rect.width;
+                // float height = DisplayedImage.rect.height;
+                // placeholderImage.rectTransform.sizeDelta = new Vector2(width, height);
+                // placeholderImage.sprite = DisplayedImage;
+                // deliverButton.sprite = deliveredTexture;
 
+            float screenPercentage = 1f;  // Adjust this value to change the max percentage of the screen the image can occupy
+            float screenWidth = Screen.width * screenPercentage;
+            float screenHeight = Screen.height * screenPercentage;
+
+            // Determine the scaling factor to maintain aspect ratio
+            float widthFactor = screenWidth / DisplayedImage.rect.width;
+            float heightFactor = screenHeight / DisplayedImage.rect.height;
+            float scaleFactor = Mathf.Min(widthFactor, heightFactor);
+            Debug.Log("Scale Factor: " + scaleFactor);
+            Debug.Log("Screen Width: " + screenWidth);
+            Debug.Log("Screen Height: " + screenHeight);
+
+            // Adjust placeholder image size while maintaining aspect ratio
+            float adjustedWidth = DisplayedImage.rect.width / scaleFactor;
+            float adjustedHeight = DisplayedImage.rect.height / scaleFactor;
+            placeholderImage.rectTransform.sizeDelta = new Vector2(adjustedWidth, adjustedHeight);
+            placeholderImage.sprite = DisplayedImage;
+            deliverButton.sprite = deliveredTexture;
+            }
         }
+
         else if (area == "Area2")
         {
             if (placeholderImage != null && !pickedGameObject.CompareTag("Food"))
