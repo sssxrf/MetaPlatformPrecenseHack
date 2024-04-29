@@ -16,6 +16,7 @@ public class DragDropController : MonoBehaviour
     [SerializeField] private List<GameObject> draggableObjects;
     [SerializeField] private List<Sprite> displayedImages;  // Food displays
     private Canvas canvas;
+    private GameObject pickedGameObject;
     private RectTransform rectTransform;
     private bool isDragging = false;
     private Vector2 originalPosition;
@@ -53,6 +54,7 @@ public class DragDropController : MonoBehaviour
                         {
 
                             isDragging = true;
+                            pickedGameObject = draggableobject;
                             rectTransform = draggableobject.GetComponent<RectTransform>();
                             originalPosition = rectTransform.anchoredPosition;
                             canvasGroup = draggableobject.GetComponent<CanvasGroup>();
@@ -149,7 +151,7 @@ public class DragDropController : MonoBehaviour
 
         if (area == "Area1")
         {
-            if (placeholderImage != null && DisplayedImage != null)
+            if (placeholderImage != null && DisplayedImage != null && pickedGameObject.CompareTag("Food"))
             {
                 Debug.Log("Setting displayed image for Area1");
                 // draggableImage.gameObject.SetActive(true);
@@ -161,7 +163,7 @@ public class DragDropController : MonoBehaviour
         }
         else if (area == "Area2")
         {
-            if (placeholderImage != null)
+            if (placeholderImage != null && !pickedGameObject.CompareTag("Food"))
             {
                 // draggableImage.gameObject.SetActive(false);
                 placeholderImage.enabled = false;
