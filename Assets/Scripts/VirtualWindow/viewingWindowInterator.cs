@@ -9,7 +9,7 @@ public class viewingWindowInterator : MonoBehaviour
     [SerializeField] private GameObject blockingWindow;
     [SerializeField] private GameObject virtualWindow;
 
-    private bool isVirtual = false;
+    private bool isVirtual = true;
     private bool isInitialized = false;
     public void SwitchWindow()
     {
