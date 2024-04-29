@@ -34,7 +34,7 @@ public class DragDropController : MonoBehaviour
         uiButtonsLayer = LayerMask.NameToLayer("UIButtons");
     }
 
-   
+
 
     void Update()
     {
@@ -159,9 +159,9 @@ public class DragDropController : MonoBehaviour
             float widthFactor = screenWidth / DisplayedImage.rect.width;
             float heightFactor = screenHeight / DisplayedImage.rect.height;
             float scaleFactor = Mathf.Min(widthFactor, heightFactor);
-            Debug.Log("Scale Factor: " + scaleFactor);
-            Debug.Log("Screen Width: " + screenWidth);
-            Debug.Log("Screen Height: " + screenHeight);
+            // Debug.Log("Scale Factor: " + scaleFactor);
+            // Debug.Log("Screen Width: " + screenWidth);
+            // Debug.Log("Screen Height: " + screenHeight);
 
             // Adjust placeholder image size while maintaining aspect ratio
             float adjustedWidth = DisplayedImage.rect.width / scaleFactor;
