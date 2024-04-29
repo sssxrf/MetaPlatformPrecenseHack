@@ -11,8 +11,6 @@ public class MRSceneManager : MonoBehaviour
 
     [Header("OVR Field")]
     [SerializeField] OVRSceneManager sceneManager;
-    [SerializeField] EffectMesh effectMesh;
-    [SerializeField] LayerApplier layerApplier;
     [SerializeField] GameObject projector;
 
     private static OVRSceneRoom m_SceneRoom;
