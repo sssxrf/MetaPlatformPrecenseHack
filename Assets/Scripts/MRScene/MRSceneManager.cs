@@ -3,12 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 
+using Meta.XR.MRUtilityKit;
+
 public class MRSceneManager : MonoBehaviour
 {
     public static MRSceneManager Instance { get; private set; }
 
     [Header("OVR Field")]
     [SerializeField] OVRSceneManager sceneManager;
+    [SerializeField] EffectMesh effectMesh;
+    [SerializeField] LayerApplier layerApplier;
+    [SerializeField] GameObject projector;
+
     private static OVRSceneRoom m_SceneRoom;
 
     //private List<OVRScenePlane> m_SceneWalls = new List<OVRScenePlane>();
@@ -80,10 +86,15 @@ public class MRSceneManager : MonoBehaviour
         m_SceneRoom = GameObject.FindObjectOfType<OVRSceneRoom>();
         // m_SceneRoom.gameObject.SetLayerRecursive("Room");
 
+        // Mesh setup
+        //effectMesh.CreateMesh();
+        //layerApplier.GetRoomObjectAndApplyLayer();
+
         m_SceneCeiling = m_SceneRoom.Ceiling;
         m_SceneFloor = m_SceneRoom.Floor;
 
         m_SceneWalls = m_SceneRoom.Walls;
+        ApplyLayerWalls();
        
         GetRoomSizeSquare();
 
@@ -114,5 +125,21 @@ public class MRSceneManager : MonoBehaviour
 
 
         return localPosition2D;
+    }
+
+    private void ApplyLayer(GameObject obj, string layerName)
+    {
+        int layer = LayerMask.NameToLayer(layerName);
+        obj.layer = layer;
+
+        foreach (Transform child in obj.transform) ApplyLayer(child.gameObject, layerName);
+    }
+
+    private void ApplyLayerWalls()
+    {
+        foreach (OVRScenePlane wall in m_SceneWalls)
+        {
+            ApplyLayer(wall.gameObject, "Wall");
+        }
     }
 }

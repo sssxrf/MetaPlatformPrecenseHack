@@ -32,13 +32,13 @@ public class ProjectorManager : MonoBehaviour
     [Button]
     public void createProjectedWindow()
     {
-        Debug.Log("Creating Projected Window");
-        MRUKRoom mrukComponent = FindObjectOfType<MRUKRoom>();
-        if (mrukComponent == null)
-        {
-            Debug.LogError("No MRUKRoom found");
-            return;
-        }
+        //Debug.Log("Creating Projected Window");
+        //MRUKRoom mrukComponent = FindObjectOfType<MRUKRoom>();
+        //if (mrukComponent == null)
+        //{
+        //    Debug.LogError("No MRUKRoom found");
+        //    return;
+        //}
         // try get the room 
         // ray cast from four directions,swapn window at the hit point
         foreach (var direction in ProjectorDirections)
