@@ -108,7 +108,8 @@ public class DragDropController : MonoBehaviour
         worldDelta = canvas.transform.TransformVector(worldDelta);
 
         // Adjust the delta by the inverse of the parent's rotation to align it with how the parent has been transformed
-        worldDelta = Quaternion.Inverse(transform.parent.rotation) * worldDelta;
+        worldDelta = Quaternion.Inverse(pickedGameObject.transform.parent.rotation) * worldDelta;
+        
 
         // Convert the adjusted world delta back to local space relative to the parent, considering the canvas' scale factor
         Vector2 localDelta = new Vector2(worldDelta.x, worldDelta.y) / canvas.scaleFactor;
