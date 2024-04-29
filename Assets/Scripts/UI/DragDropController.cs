@@ -156,9 +156,14 @@ public class DragDropController : MonoBehaviour
         {
             if (placeholderImage != null && DisplayedImage != null && pickedGameObject.CompareTag("Food"))
             {
-                Debug.Log("Setting displayed image for Area1");
+                
                 // draggableImage.gameObject.SetActive(true);
                 placeholderImage.enabled = true;
+
+                // fit displayed image's size
+                float width = DisplayedImage.rect.width;
+                float height = DisplayedImage.rect.height;
+                placeholderImage.rectTransform.sizeDelta = new Vector2(width, height);
                 placeholderImage.sprite = DisplayedImage;
                 deliverButton.sprite = deliveredTexture;
             }

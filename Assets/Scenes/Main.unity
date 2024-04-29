@@ -1349,7 +1349,6 @@ GameObject:
   - component: {fileID: 1203388702}
   - component: {fileID: 1203388701}
   - component: {fileID: 1203388700}
-  - component: {fileID: 1203388699}
   m_Layer: 5
   m_Name: Sushi
   m_TagString: Food
@@ -1376,26 +1375,6 @@ RectTransform:
   m_AnchoredPosition: {x: 750, y: -50}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1203388699
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1203388697}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b678d13b6fb581b48b54c20145a574e2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  targetArea1: {fileID: 0}
-  targetArea2: {fileID: 0}
-  placeholderImage: {fileID: 0}
-  deliverButton: {fileID: 0}
-  deliveredTexture: {fileID: 0}
-  greyTexture: {fileID: 0}
-  draggableObjects: []
-  displayedImages: []
 --- !u!225 &1203388700
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -1655,7 +1634,6 @@ GameObject:
   - component: {fileID: 1278103222}
   - component: {fileID: 1278103221}
   - component: {fileID: 1278103220}
-  - component: {fileID: 1278103219}
   m_Layer: 5
   m_Name: Milktea
   m_TagString: Food
@@ -1682,26 +1660,6 @@ RectTransform:
   m_AnchoredPosition: {x: 400, y: -50}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1278103219
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1278103217}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b678d13b6fb581b48b54c20145a574e2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  targetArea1: {fileID: 0}
-  targetArea2: {fileID: 0}
-  placeholderImage: {fileID: 0}
-  deliverButton: {fileID: 0}
-  deliveredTexture: {fileID: 0}
-  greyTexture: {fileID: 0}
-  draggableObjects: []
-  displayedImages: []
 --- !u!225 &1278103220
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -2622,7 +2580,6 @@ GameObject:
   - component: {fileID: 1840493684}
   - component: {fileID: 1840493683}
   - component: {fileID: 1840493682}
-  - component: {fileID: 1840493681}
   m_Layer: 5
   m_Name: Noodle
   m_TagString: Food
@@ -2649,30 +2606,6 @@ RectTransform:
   m_AnchoredPosition: {x: 50, y: -50}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1840493681
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1840493679}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b678d13b6fb581b48b54c20145a574e2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  targetArea1: {fileID: 782628376}
-  targetArea2: {fileID: 153727359}
-  placeholderImage: {fileID: 899707165}
-  deliverButton: {fileID: 703863574}
-  deliveredTexture: {fileID: 21300000, guid: a7bbaf7b1e0d5464984117379f128dc5, type: 3}
-  greyTexture: {fileID: 21300000, guid: 0251b79e1c7404cbf97aabd5fd28fbd4, type: 3}
-  draggableObjects:
-  - {fileID: 1840493679}
-  - {fileID: 1278103217}
-  - {fileID: 1203388697}
-  - {fileID: 899707164}
-  displayedImages: []
 --- !u!225 &1840493682
 CanvasGroup:
   m_ObjectHideFlags: 0
