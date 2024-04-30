@@ -52,7 +52,10 @@ public class MRSceneManager : MonoBehaviour
         if (sceneManager == null)
             sceneManager = GameObject.FindObjectOfType<OVRSceneManager>();
 
-        
+#if UNITY_EDITOR_WIN || UNITY_STANDALONE_WIN || UNITY_ANDROID
+        OVRManager.eyeFovPremultipliedAlphaModeEnabled = false;
+#endif
+
         sceneManager.SceneModelLoadedSuccessfully += OnSceneLoaded;
     }
 
