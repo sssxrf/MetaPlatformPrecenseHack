@@ -62,7 +62,7 @@ public class bow : MonoBehaviour
         // shoot arrow
         _arrow.transform.SetParent(null);
         arrowRb.isKinematic = false;
-        arrowRb.useGravity = true;
+        arrowRb.useGravity = false;
         arrowRb.AddForce(stringPosition.up * 10, ForceMode.Impulse);
         
         
