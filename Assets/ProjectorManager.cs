@@ -7,12 +7,17 @@ using UnityEngine;
 
 public class ProjectorManager : MonoBehaviour
 {
+
+    public static ProjectorManager Instance { get; private set; }
     public enum ProjectorState
     {
         Idle,
         Grabbed,
         Rotating
     }
+
+
+    #region SerializedField
     [SerializeField] GameObject ProjectedWindow;
     [SerializeField] private List<Transform> ProjectorDirections;
     [SerializeField] private GrabInteractable grabInteractable;
@@ -23,14 +28,26 @@ public class ProjectorManager : MonoBehaviour
     private bool isInitialized;
     private List<viewingWindowInterator> ProjectedWindows = new List<viewingWindowInterator>();
     private ProjectorState state = ProjectorState.Idle;
+    private viewingWindowInterator currentviewingWindowInterator;
     private GameObject currentOpeningWindow;
+
+    private Vector2 _windowPos2D;
+    private bool _isOpening = false;
+    private static float _windowLen = 2f;
+
+    public Vector2 windowPos2D => _windowPos2D;
+    public bool isOpening => _isOpening;
+    public float windowLen => _windowLen;
+
+    #endregion
+
     public void Initialized()
     {
         isInitialized = true;
         wallLayerMask = LayerMask.GetMask("Wall");
     }
     
-    [Button]
+    
     public void createProjectedWindow()
     {
         //Debug.Log("Creating Projected Window");
@@ -48,7 +65,11 @@ public class ProjectorManager : MonoBehaviour
         //Vector3 rayDirection = direction.forward;
 
         // make sure there only exist one opening window
-        if (currentOpeningWindow != null) { Destroy(currentOpeningWindow); }
+        if (currentOpeningWindow != null) 
+        { 
+            Destroy(currentOpeningWindow);
+            _isOpening = false;
+        }
 
         // Open the window at the direction pointed by the indicator
         Vector3 rayOrigin = ProjectorDirections[0].position;
@@ -63,17 +84,45 @@ public class ProjectorManager : MonoBehaviour
             // rotate the window to 90 degree on y 
             currentOpeningWindow.transform.Rotate(0,90,0);
             // newWall.transform.position = hit.point- hit.normal * 0.1f;
-            ProjectedWindows.Add(currentOpeningWindow.GetComponent<viewingWindowInterator>());
-               
-                
+            currentviewingWindowInterator = currentOpeningWindow.GetComponent<viewingWindowInterator>();
+            //ProjectedWindows.Add(currentOpeningWindow.GetComponent<viewingWindowInterator>());
+
+
         }
-        
-        ProjectedWindows[currentDirectionIndex].SwitchWindow();
-        
-        Debug.Log("Found wall");
+        //currentviewingWindowInterator.SwitchWindow();
+        //ProjectedWindows[currentDirectionIndex].SwitchWindow();
+        _isOpening = true;
+
+        //Debug.Log("Found wall");
         //}
     }
-    
+
+    public void SwitchWindowBlock()
+    {
+        Debug.Log("switch");
+        if (_isOpening && currentOpeningWindow != null && currentviewingWindowInterator != null)
+        {
+            currentviewingWindowInterator.SwitchWindow();
+        }
+    }
+    #region Unity Methods
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+
+            Instance = this;
+
+        }
+        else
+        {
+            // If an instance already exists and it's not this one, destroy this one
+            if (Instance != this)
+            {
+                Destroy(gameObject);
+            }
+        }
+    }
     // Start is called before the first frame update
     void Start()
     {
@@ -81,6 +130,52 @@ public class ProjectorManager : MonoBehaviour
         grabInteractable.WhenSelectingInteractorRemoved.Action += RotationFixed;
         grabInteractable.WhenSelectingInteractorAdded.Action += Grabbed;
     }
+
+    
+  
+   
+    // Update is called once per frame
+    void Update()
+    {
+        if (state == ProjectorState.Rotating)
+        {
+            // lerp the rotation
+            float step = 20 * Time.deltaTime;
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(0, goalAngle, 0), step);
+            float diff = Quaternion.Angle(transform.rotation, Quaternion.Euler(0, goalAngle, 0));
+            if (diff < 2f)
+            {
+                state = ProjectorState.Idle;
+            }
+        }
+
+        //Debug.Log("Opening State:" + _isOpening);
+        if (currentOpeningWindow != null)
+        {
+            if (_isOpening)
+            {
+
+                _windowPos2D = new Vector2(currentOpeningWindow.transform.position.x, currentOpeningWindow.transform.position.z);
+            }
+            else
+            {
+                _windowPos2D = Vector2.zero;
+            }
+
+        }
+        else
+        {
+           // Debug.Log("No Opening Window");
+
+            _windowPos2D = Vector2.zero;
+        }
+
+
+    }
+
+    #endregion
+
+    #region Private Methods
 
     private void Grabbed(GrabInteractor obj)
     {
@@ -116,25 +211,10 @@ public class ProjectorManager : MonoBehaviour
 
         // Delete current window
         Destroy(currentOpeningWindow);
+        _isOpening = false;
 
 
     }
     // coroutine to rotate the projector
-  
-   
-    // Update is called once per frame
-    void Update()
-    {
-        if (state == ProjectorState.Rotating)
-        {
-            // lerp the rotation
-            float step = 20 * Time.deltaTime;
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(0, goalAngle, 0), step);
-            float diff = Quaternion.Angle(transform.rotation, Quaternion.Euler(0, goalAngle, 0));
-            if (diff < 2f)
-            {
-                state = ProjectorState.Idle;
-            }
-        }
-    }
+    #endregion
 }

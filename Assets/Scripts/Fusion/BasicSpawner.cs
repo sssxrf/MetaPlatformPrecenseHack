@@ -13,6 +13,7 @@ public class BasicSpawner : MonoBehaviour, INetworkRunnerCallbacks
     private NetworkRunner _runnerInstance;
     [SerializeField] private NetworkPrefabRef _playerPrefab;
     [SerializeField] private NetworkPrefabRef _playerPrefabHost;
+    [SerializeField] private NetworkPrefabRef _windowPrefab;
     private Dictionary<PlayerRef, NetworkObject> _spawnedCharacters = new Dictionary<PlayerRef, NetworkObject>();
     #endregion
 
@@ -84,15 +85,19 @@ public class BasicSpawner : MonoBehaviour, INetworkRunnerCallbacks
                 // host spawn host prefab
                 Vector3 spawnPosition = new Vector3(0, 1, 0);
                 NetworkObject networkPlayerObject = runner.Spawn(_playerPrefabHost, spawnPosition, Quaternion.identity, player);
+                NetworkObject networkWindow = runner.Spawn(_windowPrefab, spawnPosition, Quaternion.identity, player);
                 // Keep track of the player avatars for easy access
                 _spawnedCharacters.Add(player, networkPlayerObject);
+                //_spawnedCharacters.Add(player, networkWindow);
             }
             else
             {
                 Vector3 spawnPosition = new Vector3(0.5f, 1, 0);
                 NetworkObject networkPlayerObject = runner.Spawn(_playerPrefab, spawnPosition, Quaternion.identity, player);
+                NetworkObject networkWindow = runner.Spawn(_windowPrefab, spawnPosition, Quaternion.identity, player);
                 // Keep track of the player avatars for easy access
                 _spawnedCharacters.Add(player, networkPlayerObject);
+                //_spawnedCharacters.Add(player, networkWindow);
             }
 
 
@@ -139,6 +144,13 @@ public class BasicSpawner : MonoBehaviour, INetworkRunnerCallbacks
         {
 
             data.headsetPosition2D = MRSceneManager.Instance.PlayerRelativePos;
+        }
+
+        if(ProjectorManager.Instance != null)
+        {
+            data.isWindowOpening = ProjectorManager.Instance.isOpening;
+            data.windowPosition2D = ProjectorManager.Instance.windowPos2D;
+            data.windowLength = ProjectorManager.Instance.windowLen;
         }
 #endif
 

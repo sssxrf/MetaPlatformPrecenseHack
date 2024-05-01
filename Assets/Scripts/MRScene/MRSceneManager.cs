@@ -12,7 +12,6 @@ public class MRSceneManager : MonoBehaviour
 
 
     #region SerializeField
-    [Header("OVR Field")]
     [SerializeField] OVRSceneManager sceneManager;
     [SerializeField] GameObject projector;
     [SerializeField] GameObject skybox;

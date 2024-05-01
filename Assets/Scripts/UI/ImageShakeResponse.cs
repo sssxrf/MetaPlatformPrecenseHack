@@ -66,7 +66,9 @@ public class ImageShakeResponse : MonoBehaviour
 
         // Hide the UI image
         uiImage1.SetActive(false);
+#if UNITY_IOS
         Handheld.Vibrate();
+#endif
         deliverButton.sprite = deliveredTexture;
 
         // Reset shake detection (optional, depends on how the ShakeDetector is implemented)
