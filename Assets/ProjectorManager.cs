@@ -23,6 +23,7 @@ public class ProjectorManager : MonoBehaviour
     private bool isInitialized;
     private List<viewingWindowInterator> ProjectedWindows = new List<viewingWindowInterator>();
     private ProjectorState state = ProjectorState.Idle;
+    private GameObject currentOpeningWindow;
     public void Initialized()
     {
         isInitialized = true;
@@ -41,28 +42,36 @@ public class ProjectorManager : MonoBehaviour
         //}
         // try get the room 
         // ray cast from four directions,swapn window at the hit point
-        foreach (var direction in ProjectorDirections)
+        //foreach (var direction in ProjectorDirections)
+        //{
+        //Vector3 rayOrigin = direction.position;
+        //Vector3 rayDirection = direction.forward;
+
+        // make sure there only exist one opening window
+        if (currentOpeningWindow != null) { Destroy(currentOpeningWindow); }
+
+        // Open the window at the direction pointed by the indicator
+        Vector3 rayOrigin = ProjectorDirections[0].position;
+        Vector3 rayDirection = ProjectorDirections[0].forward;
+        Ray ray = new Ray(rayOrigin, rayDirection);
+        Debug.DrawRay(rayOrigin, rayDirection, Color.red, 1000);
+        wallLayerMask =  LayerMask.GetMask("Wall");
+        if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, wallLayerMask))
         {
-            Vector3 rayOrigin = direction.position;
-            Vector3 rayDirection = direction.forward;
-            Ray ray = new Ray(rayOrigin, rayDirection);
-            Debug.DrawRay(rayOrigin, rayDirection, Color.red, 1000);
-            wallLayerMask =  LayerMask.GetMask("Wall");
-            if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, wallLayerMask))
-            {
-                Debug.Log("Found wall hit");
-                var newWall = Instantiate(ProjectedWindow, hit.point, Quaternion.LookRotation(-hit.normal) );
-                // rotate the window to 90 degree on y 
-                newWall.transform.Rotate(0,90,0);
-                // newWall.transform.position = hit.point- hit.normal * 0.1f;
-                ProjectedWindows.Add(newWall.GetComponent<viewingWindowInterator>());
+            Debug.Log("Found wall hit");
+            currentOpeningWindow = Instantiate(ProjectedWindow, hit.point, Quaternion.LookRotation(-hit.normal) );
+            // rotate the window to 90 degree on y 
+            currentOpeningWindow.transform.Rotate(0,90,0);
+            // newWall.transform.position = hit.point- hit.normal * 0.1f;
+            ProjectedWindows.Add(currentOpeningWindow.GetComponent<viewingWindowInterator>());
                
                 
-            }
-            
-            ProjectedWindows[currentDirectionIndex].SwitchWindow();
-            Debug.Log("Found wall");
         }
+        
+        ProjectedWindows[currentDirectionIndex].SwitchWindow();
+        
+        Debug.Log("Found wall");
+        //}
     }
     
     // Start is called before the first frame update
@@ -104,6 +113,10 @@ public class ProjectorManager : MonoBehaviour
         // rotate to the closes direction
         goalAngle = rotationAngels[minIndex];
         state = ProjectorState.Rotating;
+
+        // Delete current window
+        Destroy(currentOpeningWindow);
+
 
     }
     // coroutine to rotate the projector

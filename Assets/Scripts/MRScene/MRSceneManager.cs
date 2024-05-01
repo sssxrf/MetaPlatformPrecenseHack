@@ -9,9 +9,13 @@ public class MRSceneManager : MonoBehaviour
 {
     public static MRSceneManager Instance { get; private set; }
 
+
+
+    #region SerializeField
     [Header("OVR Field")]
     [SerializeField] OVRSceneManager sceneManager;
     [SerializeField] GameObject projector;
+    [SerializeField] GameObject skybox;
 
     private static OVRSceneRoom m_SceneRoom;
 
@@ -27,11 +31,16 @@ public class MRSceneManager : MonoBehaviour
     private Vector2 _playerRelativePos;
     private float _roomLength;
     private float _roomWidth;
+    private float _roomHeight;
+    private Vector3 _roomCenter;
     public float RoomLength => _roomLength;
     public float RoomWidth => _roomWidth;
 
     public Vector2 PlayerRelativePos => _playerRelativePos;
 
+    #endregion
+
+    #region Unity Methods
     private void Awake()
     {
         if (Instance == null)
@@ -82,6 +91,21 @@ public class MRSceneManager : MonoBehaviour
             _playerRelativePos = CalculateLocalPosition(_headset.transform.position, m_SceneFloor.transform);
         }
     }
+
+
+    #endregion
+
+    #region Public methods
+    public void SendRoomInfo()
+    {
+        Debug.Log("Trigger Pressed");
+        _player.RPC_SendRoomInfo(MRSceneManager.Instance.RoomLength, MRSceneManager.Instance.RoomWidth);
+    }
+    #endregion
+
+    #region Private Methods
+
+
     private void OnSceneLoaded()
     {
         m_SceneRoom = GameObject.FindObjectOfType<OVRSceneRoom>();
@@ -96,22 +120,30 @@ public class MRSceneManager : MonoBehaviour
 
         m_SceneWalls = m_SceneRoom.Walls;
         ApplyLayerWalls();
-       
+
         GetRoomSizeSquare();
+        _roomHeight = m_SceneWalls[0].Height;
+        _roomCenter = GetFloorCenter();
 
+
+        // set projector's and skybox's position at center
+        projector.transform.position = _roomCenter;
+        skybox.transform.position = _roomCenter;
+
+        Debug.Log("Room center:" + _roomCenter);
         //Debug.Log("length:"+ _roomLength + "width:" + _roomWidth);
-    }
-
-    public void SendRoomInfo()
-    {
-        Debug.Log("Trigger Pressed");
-        _player.RPC_SendRoomInfo(MRSceneManager.Instance.RoomLength, MRSceneManager.Instance.RoomWidth);
     }
 
     private void GetRoomSizeSquare()
     {
         _roomLength = m_SceneFloor.Width;
         _roomWidth = m_SceneFloor.Height;
+    }
+
+    private Vector3 GetFloorCenter()
+    {
+        var floorCollider = m_SceneFloor.GetComponentInChildren<Collider>(); ;
+        return floorCollider.transform.position;
     }
 
     private Vector2 CalculateLocalPosition(Vector3 worldPosition, Transform referenceTransform)
@@ -143,4 +175,6 @@ public class MRSceneManager : MonoBehaviour
             ApplyLayer(wall.gameObject, "Wall");
         }
     }
+
+    #endregion
 }
