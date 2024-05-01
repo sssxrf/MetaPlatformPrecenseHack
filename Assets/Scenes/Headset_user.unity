@@ -4349,6 +4349,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sceneManager: {fileID: 0}
   projector: {fileID: 935024001}
+  skybox: {fileID: 1015179469}
   _headset: {fileID: 1581680669}
 --- !u!1 &915688927
 GameObject:
@@ -4891,6 +4892,11 @@ MonoBehaviour:
     mipBias: 0
     varianceClampScale: 0.9
     contrastAdaptiveSharpening: 0
+--- !u!1 &1015179469 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: e4c008372f28d439d9ea682dfd817bb6, type: 3}
+  m_PrefabInstance: {fileID: 1502373936}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1030403129
 GameObject:
   m_ObjectHideFlags: 0

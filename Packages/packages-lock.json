@@ -1,11 +1,5 @@
 {
   "dependencies": {
-    "co.parabox.csg": {
-      "version": "file:co.parabox.csg",
-      "depth": 0,
-      "source": "embedded",
-      "dependencies": {}
-    },
     "com.meta.xr.depthapi": {
       "version": "https://github.com/oculus-samples/Unity-DepthAPI.git?path=/Packages/com.meta.xr.depthapi",
       "depth": 0,
