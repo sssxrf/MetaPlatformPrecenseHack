@@ -8,10 +8,22 @@ public class FoodmodeButtons : MonoBehaviour
     public Button switchToMapButton;
     public Button Deliver;
 
-    
+    private Player _player;
 
-    [SerializeField] private List<Sprite> displayedImages;
+    IEnumerator FindPlayerWithDelay(float delay)
+    {
+        while (_player == null)
+        {
+            yield return new WaitForSeconds(delay);
+            _player = FindObjectOfType<Player>();
+        }
+        Debug.Log("Player is found!");
+    }
 
+    private void Start()
+    {
+        StartCoroutine(FindPlayerWithDelay(0.1f));
+    }
 
     private void OnEnable()
     {
@@ -53,7 +65,10 @@ public class FoodmodeButtons : MonoBehaviour
         // if the food is ready
         if (DragDropController.Instance._isfoodReady && DragDropController.Instance._currentFood != null)
         {
-
+            Debug.Log("deliever button called");
+            _player.RPC_SendFoodInfo(DragDropController.Instance._currentFood);
+     
+            DragDropController.Instance.SetPlaceholderImageToDefault();
         }
     }
 

@@ -40,7 +40,7 @@ public class MobileUIManager : MonoBehaviour
 
     public void UpdateMessages(string message)
     {
-        _messagesOnMobile.text += message;
+        _messagesOnMobile.text = message;
     }
 
     public void SetVisibleofUI(bool value)

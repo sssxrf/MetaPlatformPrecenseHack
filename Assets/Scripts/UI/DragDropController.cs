@@ -122,6 +122,16 @@ public class DragDropController : MonoBehaviour
                     break;
             }
         }
+
+       
+    }
+
+    public void SetPlaceholderImageToDefault()
+    {
+        placeholderImage.sprite = null;
+        placeholderImage.enabled = false;
+        deliverButton.sprite = greyTexture;
+        _isfoodReady = false;
     }
 
     private void MoveRect(Touch touch)
@@ -207,8 +217,8 @@ public class DragDropController : MonoBehaviour
             if (placeholderImage != null && !pickedGameObject.CompareTag("Food"))
             {
                 // draggableImage.gameObject.SetActive(false);
-                placeholderImage.enabled = false;
                 placeholderImage.sprite = null;
+                placeholderImage.enabled = false;
                 deliverButton.sprite = greyTexture;
                 _isfoodReady = false;
             }
