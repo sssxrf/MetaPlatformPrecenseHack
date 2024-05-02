@@ -147,7 +147,7 @@ public class Player : NetworkBehaviour
 #endif
 
 #if UNITY_IOS
-            
+            Debug.Log("RPC Food info called");
             MobileUIManager.Instance.UpdateMessages("food info Sent!");
 #endif
     }

@@ -10,7 +10,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4219438730466900073, guid: 80bd39ed0f9967d40b134e8efa2ff7a2, type: 3}
       propertyPath: m_Name
-      value: FoodBubble Variant
+      value: BubbleSushi
       objectReference: {fileID: 0}
     - target: {fileID: 8645342927835296686, guid: 80bd39ed0f9967d40b134e8efa2ff7a2, type: 3}
       propertyPath: m_LocalPosition.x

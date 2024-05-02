@@ -169,17 +169,6 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 2694994003550248397}
   m_SourcePrefab: {fileID: 100100000, guid: 93236b8fdd042e64ca88dae98fee7974, type: 3}
---- !u!114 &1114102962269677801 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4776169102602213489, guid: 93236b8fdd042e64ca88dae98fee7974, type: 3}
-  m_PrefabInstance: {fileID: 5565968393380982936}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &1265648335492702430 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6678335457062621254, guid: 93236b8fdd042e64ca88dae98fee7974, type: 3}
@@ -202,14 +191,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a2ceddb3d8939d4d83028043545aec5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  waitTime: 10000
-  paneltyTime: 1
+  waitTime: 20
+  paneltyTime: 5
   foodBubble:
   - {fileID: 1004634509436868900, guid: a96bbabfe305df345aee59003837b307, type: 3}
   - {fileID: 4854402930611853383, guid: 79f0021604b5ab04f80c42a0f6c7ad1b, type: 3}
   - {fileID: 2505741740215531862, guid: 1a845d58ce616494da7a15b8752b0963, type: 3}
   foodBubblePosition: {fileID: 1265648335492702430}
-  fillImage: {fileID: 1114102962269677801}
+  fillImage: {fileID: 5256096901952238218}
   completionstar: {fileID: 7224387278471131444, guid: c125624968056564683977da5354ba1f, type: 3}
   _onGuestArrived:
     m_PersistentCalls:
@@ -228,6 +217,17 @@ MonoBehaviour:
       m_Calls: []
   _protectionFoodType: 1
   ProtectionBubble: {fileID: 4566428234634995870}
+--- !u!114 &5256096901952238218 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 418591272364835346, guid: 93236b8fdd042e64ca88dae98fee7974, type: 3}
+  m_PrefabInstance: {fileID: 5565968393380982936}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &6967385623171820535 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3282959805804157807, guid: 93236b8fdd042e64ca88dae98fee7974, type: 3}
