@@ -37,6 +37,7 @@ public class MRSceneManager : MonoBehaviour
     public float RoomWidth => _roomWidth;
     public Vector2 PlayerRelativePos => _playerRelativePos;
     public Transform FloorTrans => _floorTrans;
+    public Vector3 RoomCenter => _roomCenter;
     #endregion
 
     #region Unity Methods
