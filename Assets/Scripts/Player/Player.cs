@@ -13,6 +13,7 @@ public class Player : NetworkBehaviour
     #region SerializeField
     private NetworkCharacterController _cc;
     private NetworkTransform _networktransform;
+    private GameObject Body;
     #endregion
 
     #region Unity Methods
@@ -33,7 +34,9 @@ public class Player : NetworkBehaviour
     private void Start()
     {
 #if UNITY_ANDROID
-        gameObject.transform.GetChild(0).transform.localScale = new Vector3(0.2f, 0.2f, 0.2f);
+        transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
+        Body = gameObject.transform.GetChild(0).gameObject;
+        Body.SetActive(false);
 #endif
     }
     private void Update()
@@ -103,6 +106,7 @@ public class Player : NetworkBehaviour
 
 #if UNITY_STANDALONE_WIN
         RoomManager.Instance.DrawCenteredRoom(roomlength, roomwidth);
+        RoomManager.Instance.StoreRoomInfo(roomlength, roomwidth);
         PcUIManager.Instance.UpdateMessages( "Room set!");
 #endif
 
@@ -113,9 +117,38 @@ public class Player : NetworkBehaviour
 
 #if UNITY_IOS
         RoomManager.Instance.DrawCenteredRoom(roomlength, roomwidth);
+        RoomManager.Instance.StoreRoomInfo(roomlength, roomwidth);
         MobileUIManager.Instance.UpdateMessages( "Room set!");
 #endif
     }
+
+
+
+    //    [Rpc(RpcSources.InputAuthority, RpcTargets.StateAuthority, HostMode = RpcHostMode.SourceIsHostPlayer)]
+    //    public void RPC_SendWinInfo(float roomlength, float roomwidth, RpcInfo info = default)
+    //    {
+    //        RPC_RelayRoomInfo(roomlength, roomwidth, info.Source);
+    //    }
+
+    //    [Rpc(RpcSources.StateAuthority, RpcTargets.All, HostMode = RpcHostMode.SourceIsServer)]
+    //    public void RPC_RelayWinInfo(float roomlength, float roomwidth, PlayerRef messageSource)
+    //    {
+
+    //#if UNITY_STANDALONE_WIN
+    //        RoomManager.Instance.DrawCenteredRoom(roomlength, roomwidth);
+    //        PcUIManager.Instance.UpdateMessages("WiNinfo Sent!");
+    //#endif
+
+    //#if UNITY_ANDROID
+
+    //        HeadSetUIManager.Instance.UpdateMessages("RoomInfo sent");
+    //#endif
+
+    //#if UNITY_IOS
+    //        RoomManager.Instance.DrawCenteredRoom(roomlength, roomwidth);
+    //        MobileUIManager.Instance.UpdateMessages( "Room set!");
+    //#endif
+    //    }
     #endregion
 
 

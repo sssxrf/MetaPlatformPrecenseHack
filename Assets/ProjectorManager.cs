@@ -34,10 +34,11 @@ public class ProjectorManager : MonoBehaviour
     private Vector2 _windowPos2D;
     private bool _isOpening = false;
     private static float _windowLen = 2f;
-
+    private bool _isWindowHorizontal = false;
     public Vector2 windowPos2D => _windowPos2D;
     public bool isOpening => _isOpening;
     public float windowLen => _windowLen;
+    public bool isWindowHorizontal => _isWindowHorizontal;
 
     #endregion
 
@@ -99,10 +100,11 @@ public class ProjectorManager : MonoBehaviour
 
     public void SwitchWindowBlock()
     {
-        Debug.Log("switch");
-        if (_isOpening && currentOpeningWindow != null && currentviewingWindowInterator != null)
+        
+        if (currentOpeningWindow != null && currentviewingWindowInterator != null)
         {
             currentviewingWindowInterator.SwitchWindow();
+            _isOpening = !_isOpening;
         }
     }
     #region Unity Methods
@@ -155,7 +157,9 @@ public class ProjectorManager : MonoBehaviour
             if (_isOpening)
             {
 
-                _windowPos2D = new Vector2(currentOpeningWindow.transform.position.x, currentOpeningWindow.transform.position.z);
+                //_windowPos2D = new Vector2(currentOpeningWindow.transform.position.x, currentOpeningWindow.transform.position.z);
+                _windowPos2D = CalculateLocalPosition(currentOpeningWindow.transform.position, MRSceneManager.Instance.FloorTrans);
+                _isWindowHorizontal = IsClosestEdgeLengthorWidth(MRSceneManager.Instance.RoomLength, MRSceneManager.Instance.RoomWidth, _windowPos2D);
             }
             else
             {
@@ -203,8 +207,8 @@ public class ProjectorManager : MonoBehaviour
                 minIndex = i;
             }
         }
-        Debug.Log(currentYaw);
-        Debug.Log("closest direction " + minIndex + " " + rotationAngels[minIndex]);
+        //Debug.Log(currentYaw);
+        //Debug.Log("closest direction " + minIndex + " " + rotationAngels[minIndex]);
         // rotate to the closes direction
         goalAngle = rotationAngels[minIndex];
         state = ProjectorState.Rotating;
@@ -215,6 +219,45 @@ public class ProjectorManager : MonoBehaviour
 
 
     }
-    // coroutine to rotate the projector
+
+    private Vector2 CalculateLocalPosition(Vector3 worldPosition, Transform referenceTransform)
+    {
+        
+
+        // This converts the world position of objectA to the local coordinate system of objectB
+        Vector3 localPosition3D = referenceTransform.InverseTransformPoint(worldPosition);
+
+        
+        Vector2 localPosition2D = new Vector2(localPosition3D.x, localPosition3D.y);
+
+
+        return localPosition2D;
+    }
+   
+
+    private bool IsClosestEdgeLengthorWidth(float roomLength, float roomWidth, Vector2 windowRelativePos2D)
+    {
+        float halfLength = roomLength / 2;
+        float halfWidth = roomWidth / 2;
+
+        // Calculate distances to each edge
+        float distanceToLeft = Mathf.Abs(windowRelativePos2D.x + halfLength);
+        float distanceToRight = Mathf.Abs(windowRelativePos2D.x - halfLength);
+        float distanceToTop = Mathf.Abs(windowRelativePos2D.y - halfWidth);
+        float distanceToBottom = Mathf.Abs(windowRelativePos2D.y + halfWidth);
+
+        // Determine the smallest distance and corresponding edge
+        float minDistance = Mathf.Min(distanceToLeft, distanceToRight, distanceToTop, distanceToBottom);
+
+        Debug.Log("mindist:" + minDistance);
+        if (minDistance == distanceToLeft || minDistance == distanceToRight)
+        {
+            return false;   //width, then window is vertical
+        }
+        else
+        {
+            return true;    //length, then window is horizontal
+        }
+    }
     #endregion
 }

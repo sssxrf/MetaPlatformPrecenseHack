@@ -13,18 +13,21 @@ public class viewingWindowInterator : MonoBehaviour
     private bool isInitialized = false;
     public void SwitchWindow()
     {
-        if (isVirtual)
-        {
-            blockingWindow.SetActive(false);
-            virtualWindow.SetActive(true);
-            isVirtual = false;
-        }
-        else
-        {
-            blockingWindow.SetActive(true);
-            virtualWindow.SetActive(false);
-            isVirtual = true;
-        }
+        blockingWindow.SetActive(!blockingWindow.activeInHierarchy);
+        virtualWindow.SetActive(!virtualWindow.activeInHierarchy);
+
+        //if (isVirtual)
+        //{
+        //    blockingWindow.SetActive(false);
+        //    virtualWindow.SetActive(true);
+        //    isVirtual = false;
+        //}
+        //else
+        //{
+        //    blockingWindow.SetActive(true);
+        //    virtualWindow.SetActive(false);
+        //    isVirtual = true;
+        //}
         
         
           

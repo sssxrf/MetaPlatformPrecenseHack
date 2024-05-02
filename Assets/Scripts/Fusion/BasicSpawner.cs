@@ -78,23 +78,24 @@ public class BasicSpawner : MonoBehaviour, INetworkRunnerCallbacks
         {
             // Create a unique position for the player
             //Vector3 spawnPosition = new Vector3((player.RawEncoded % runner.Config.Simulation.PlayerCount) * 2, 1, 0);
-            Debug.Log("PlayerIndex:" + player.AsIndex);
+            //Debug.Log("PlayerIndex:" + player.AsIndex);
             if (player.AsIndex == 1)
             {
-                
-                // host spawn host prefab
+
+                //host spawn host prefab
                 Vector3 spawnPosition = new Vector3(0, 1, 0);
                 NetworkObject networkPlayerObject = runner.Spawn(_playerPrefabHost, spawnPosition, Quaternion.identity, player);
                 NetworkObject networkWindow = runner.Spawn(_windowPrefab, spawnPosition, Quaternion.identity, player);
-                // Keep track of the player avatars for easy access
-                _spawnedCharacters.Add(player, networkPlayerObject);
-                //_spawnedCharacters.Add(player, networkWindow);
+                //Keep track of the player avatars for easy access
+
+               _spawnedCharacters.Add(player, networkPlayerObject);
+               //_spawnedCharacters.Add(player, networkWindow);
             }
             else
             {
                 Vector3 spawnPosition = new Vector3(0.5f, 1, 0);
                 NetworkObject networkPlayerObject = runner.Spawn(_playerPrefab, spawnPosition, Quaternion.identity, player);
-                NetworkObject networkWindow = runner.Spawn(_windowPrefab, spawnPosition, Quaternion.identity, player);
+                //NetworkObject networkWindow = runner.Spawn(_windowPrefab, spawnPosition, Quaternion.identity, player);
                 // Keep track of the player avatars for easy access
                 _spawnedCharacters.Add(player, networkPlayerObject);
                 //_spawnedCharacters.Add(player, networkWindow);
@@ -151,6 +152,7 @@ public class BasicSpawner : MonoBehaviour, INetworkRunnerCallbacks
             data.isWindowOpening = ProjectorManager.Instance.isOpening;
             data.windowPosition2D = ProjectorManager.Instance.windowPos2D;
             data.windowLength = ProjectorManager.Instance.windowLen;
+            data.isWindowHorizontal = ProjectorManager.Instance.isWindowHorizontal;
         }
 #endif
 
