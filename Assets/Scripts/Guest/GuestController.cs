@@ -8,15 +8,17 @@ using UnityEngine.UI;
 
 public class GuestController : MonoBehaviour
 {
-    // [Label("Setup")]
+    [Header("Setup")]
     [SerializeField] float waitTime = 10f;
-    [Tooltip("panelty if guest is wrong food send to guest")] [SerializeField] private float paneltyTime = 1f;
+    [SerializeField] private float paneltyTime = 1f;
     
-    // [Label("Bubble and Progress")]
+    [Header("Bubble and Progress")]
     [SerializeField] private List<GameObject> foodBubble;
     [SerializeField] private Transform foodBubblePosition;
     public Image fillImage;
-    // [Label("Events")]
+    [SerializeField] GameObject completionstar;
+    
+    [Header("Events")]
     public UnityEvent _onGuestArrived;
     public UnityEvent _onGuestSatisfied;
     public UnityEvent _onGuestUnsatisfied;
@@ -55,11 +57,12 @@ public class GuestController : MonoBehaviour
             return;
         }   
         var bubble = Instantiate(foodBubble[(int)_foodType], foodBubblePosition.position, Quaternion.identity);
-        bubble.transform.SetParent(transform);
+        bubble.transform.SetParent(foodBubblePosition);
     }
     
     protected void guestSatisfied()
     {
+        var star = Instantiate(completionstar, transform.position, Quaternion.identity);
         Destroy(gameObject);
     }
     
@@ -92,7 +95,6 @@ public class GuestController : MonoBehaviour
     {
         currentTime += Time.deltaTime;
         fillImage.fillAmount = (waitTime-currentTime) / waitTime;
-        Debug.Log(fillImage.fillAmount);
         if (currentTime >= waitTime)
         {
             _onGuestUnsatisfied.Invoke();
