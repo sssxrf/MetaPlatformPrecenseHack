@@ -83,7 +83,7 @@ public class ProjectorManager : MonoBehaviour
             Debug.Log("Found wall hit");
             currentOpeningWindow = Instantiate(ProjectedWindow, hit.point, Quaternion.LookRotation(-hit.normal) );
             // rotate the window to 90 degree on y 
-            currentOpeningWindow.transform.Rotate(0,90,0);
+            // currentOpeningWindow.transform.Rotate(0,90,0);
             // newWall.transform.position = hit.point- hit.normal * 0.1f;
             currentviewingWindowInterator = currentOpeningWindow.GetComponent<viewingWindowInterator>();
             //ProjectedWindows.Add(currentOpeningWindow.GetComponent<viewingWindowInterator>());

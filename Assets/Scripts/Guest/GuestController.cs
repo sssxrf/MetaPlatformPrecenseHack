@@ -59,7 +59,7 @@ public class GuestController : MonoBehaviour
             Debug.LogError("Food type not found");
             return;
         }   
-        var bubble = Instantiate(foodBubble[(int)_foodType], foodBubblePosition.position, Quaternion.identity);
+        var bubble = Instantiate(foodBubble[(int)_foodType], foodBubblePosition.position, foodBubblePosition.rotation);
         bubble.transform.SetParent(foodBubblePosition);
     }
     
