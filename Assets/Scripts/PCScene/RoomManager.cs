@@ -7,6 +7,13 @@ public class RoomManager : MonoBehaviour
     public static RoomManager Instance { get; private set; }
 
 
+    private float _roomLengthinMR;
+    private float _roomwidthinMR;
+
+
+    public float roomLengthinMR => _roomLengthinMR;
+    public float roomwidthinMR => _roomwidthinMR;
+
     #region Unity Methods
     private void Awake()
     {
@@ -53,4 +60,11 @@ public class RoomManager : MonoBehaviour
 
         lineRenderer.SetPositions(positions);
     }
+
+    public void StoreRoomInfo(float length, float width)
+    {
+        _roomLengthinMR = length;
+        _roomwidthinMR = width;
+    }
 }
+

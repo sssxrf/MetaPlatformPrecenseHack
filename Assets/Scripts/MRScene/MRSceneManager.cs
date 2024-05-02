@@ -32,11 +32,11 @@ public class MRSceneManager : MonoBehaviour
     private float _roomWidth;
     private float _roomHeight;
     private Vector3 _roomCenter;
+    private Transform _floorTrans;
     public float RoomLength => _roomLength;
     public float RoomWidth => _roomWidth;
-
     public Vector2 PlayerRelativePos => _playerRelativePos;
-
+    public Transform FloorTrans => _floorTrans;
     #endregion
 
     #region Unity Methods
@@ -84,10 +84,12 @@ public class MRSceneManager : MonoBehaviour
 
     private void Update()
     {
+
         if(_headset != null && m_SceneFloor != null)
         {
-
-            _playerRelativePos = CalculateLocalPosition(_headset.transform.position, m_SceneFloor.transform);
+            _floorTrans = m_SceneFloor.transform;
+            _playerRelativePos = CalculateLocalPosition(_headset.transform.position, _floorTrans);
+            //Debug.Log("length:" + _roomLength + "width:" + _roomWidth);
         }
     }
 
@@ -97,7 +99,7 @@ public class MRSceneManager : MonoBehaviour
     #region Public methods
     public void SendRoomInfo()
     {
-        Debug.Log("Trigger Pressed");
+        
         _player.RPC_SendRoomInfo(MRSceneManager.Instance.RoomLength, MRSceneManager.Instance.RoomWidth);
     }
     #endregion
@@ -130,7 +132,7 @@ public class MRSceneManager : MonoBehaviour
         skybox.transform.position = _roomCenter;
 
         Debug.Log("Room center:" + _roomCenter);
-        //Debug.Log("length:"+ _roomLength + "width:" + _roomWidth);
+        Debug.Log("length:"+ _roomLength + "width:" + _roomWidth);
     }
 
     private void GetRoomSizeSquare()

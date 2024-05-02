@@ -8,5 +8,6 @@ public struct NetworkInputData : INetworkInput
     public bool isWindowOpening;
     public float windowLength;
     public Vector2 windowPosition2D;
+    public bool isWindowHorizontal;
 
 }
