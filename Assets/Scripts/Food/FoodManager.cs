@@ -58,6 +58,7 @@ public class FoodManager : MonoBehaviour
 
     public void SpawnfoodByName(string foodName, Vector3 spawnposition)
     {
+        Debug.Log("SpawnFoodByName is called");
         foreach (var food in foodAssets)
         {
             if (food.Key == foodName)

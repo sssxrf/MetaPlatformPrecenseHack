@@ -1,6 +1,12 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Model/test2-purpleMonster.zip.meta
+guid: 45bf36a9b498f4abe828f3708b31a17a
+folderAsset: yes
+DefaultImporter:
+========
 guid: 76c49e5c4fdd60144b68ca808313815c
 PrefabImporter:
+>>>>>>>> 3b14ebdba7566a8e76621c025e530e1b5247cf71:Assets/Prefabs/Guest/ArrowSpawn Variant.prefab.meta
   externalObjects: {}
   userData: 
   assetBundleName: 
