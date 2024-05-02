@@ -108,10 +108,11 @@ public class Player : NetworkBehaviour
         RoomManager.Instance.DrawCenteredRoom(roomlength, roomwidth);
         RoomManager.Instance.StoreRoomInfo(roomlength, roomwidth);
         PcUIManager.Instance.UpdateMessages( "Room set!");
+        
 #endif
 
 #if UNITY_ANDROID
-
+        
         HeadSetUIManager.Instance.UpdateMessages("RoomInfo sent");
 #endif
 
@@ -124,31 +125,32 @@ public class Player : NetworkBehaviour
 
 
 
-    //    [Rpc(RpcSources.InputAuthority, RpcTargets.StateAuthority, HostMode = RpcHostMode.SourceIsHostPlayer)]
-    //    public void RPC_SendWinInfo(float roomlength, float roomwidth, RpcInfo info = default)
-    //    {
-    //        RPC_RelayRoomInfo(roomlength, roomwidth, info.Source);
-    //    }
+    [Rpc(RpcSources.InputAuthority, RpcTargets.StateAuthority, HostMode = RpcHostMode.SourceIsHostPlayer)]
+    public void RPC_SendFoodInfo(string foodtype, RpcInfo info = default)
+    {
+        RPC_RelayFoodInfo(foodtype, info.Source);
+    }
 
-    //    [Rpc(RpcSources.StateAuthority, RpcTargets.All, HostMode = RpcHostMode.SourceIsServer)]
-    //    public void RPC_RelayWinInfo(float roomlength, float roomwidth, PlayerRef messageSource)
-    //    {
+    [Rpc(RpcSources.StateAuthority, RpcTargets.All, HostMode = RpcHostMode.SourceIsServer)]
+    public void RPC_RelayFoodInfo(string foodtype, PlayerRef messageSource)
+    {
 
-    //#if UNITY_STANDALONE_WIN
-    //        RoomManager.Instance.DrawCenteredRoom(roomlength, roomwidth);
-    //        PcUIManager.Instance.UpdateMessages("WiNinfo Sent!");
-    //#endif
+#if UNITY_STANDALONE_WIN
+        
+            PcUIManager.Instance.UpdateMessages("food info Sent!");
 
-    //#if UNITY_ANDROID
+#endif
 
-    //        HeadSetUIManager.Instance.UpdateMessages("RoomInfo sent");
-    //#endif
+#if UNITY_ANDROID
+            FoodManager.Instance.SpawnfoodByName(foodtype, MRSceneManager.Instance.RoomCenter);
+            HeadSetUIManager.Instance.UpdateMessages("food info Sent!");
+#endif
 
-    //#if UNITY_IOS
-    //        RoomManager.Instance.DrawCenteredRoom(roomlength, roomwidth);
-    //        MobileUIManager.Instance.UpdateMessages( "Room set!");
-    //#endif
-    //    }
+#if UNITY_IOS
+            
+            MobileUIManager.Instance.UpdateMessages("food info Sent!");
+#endif
+    }
     #endregion
 
 

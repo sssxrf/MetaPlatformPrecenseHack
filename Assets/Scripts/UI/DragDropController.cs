@@ -5,6 +5,10 @@ using System.Collections.Generic;
 
 public class DragDropController : MonoBehaviour
 {
+
+    public static DragDropController Instance { get; private set; }
+
+
     // public RectTransform targetArea; // Drop target area
     public RectTransform targetArea1;
     public RectTransform targetArea2;
@@ -15,6 +19,7 @@ public class DragDropController : MonoBehaviour
 
     [SerializeField] private List<GameObject> draggableObjects;
     [SerializeField] private List<Sprite> displayedImages;  // Food displays
+    [SerializeField] private List<string> foodNames;
     private Canvas canvas;
     private GameObject pickedGameObject;
     private RectTransform rectTransform;
@@ -24,9 +29,30 @@ public class DragDropController : MonoBehaviour
 
     private int uiButtonsLayer;
     private Sprite DisplayedImage; // Food display
+
+    // Food Status var
+    public bool _isfoodReady { get; set; } = false;
+    public string _currentFood { get; set; }
+
+
     
     void Awake()
     {
+        if (Instance == null)
+        {
+
+            Instance = this;
+
+        }
+        else
+        {
+            // If an instance already exists and it's not this one, destroy this one
+            if (Instance != this)
+            {
+                Destroy(gameObject);
+            }
+        }
+
         //rectTransform = GetComponent<RectTransform>();
         canvas = GetComponentInParent<Canvas>();
         //originalPosition = rectTransform.anchoredPosition;
@@ -59,6 +85,7 @@ public class DragDropController : MonoBehaviour
                             canvasGroup = draggableobject.GetComponent<CanvasGroup>();
                             canvasGroup.alpha = 0.6f;
                             DisplayedImage = displayedImages[index_count];
+                            _currentFood = foodNames[index_count];
                             break;
                         }
                         index_count++;
@@ -151,24 +178,27 @@ public class DragDropController : MonoBehaviour
                 // placeholderImage.sprite = DisplayedImage;
                 // deliverButton.sprite = deliveredTexture;
 
-            float screenPercentage = 1f;  // Adjust this value to change the max percentage of the screen the image can occupy
-            float screenWidth = Screen.width * screenPercentage;
-            float screenHeight = Screen.height * screenPercentage;
+                float screenPercentage = 1f;  // Adjust this value to change the max percentage of the screen the image can occupy
+                float screenWidth = Screen.width * screenPercentage;
+                float screenHeight = Screen.height * screenPercentage;
 
-            // Determine the scaling factor to maintain aspect ratio
-            float widthFactor = screenWidth / DisplayedImage.rect.width;
-            float heightFactor = screenHeight / DisplayedImage.rect.height;
-            float scaleFactor = Mathf.Min(widthFactor, heightFactor);
-            // Debug.Log("Scale Factor: " + scaleFactor);
-            // Debug.Log("Screen Width: " + screenWidth);
-            // Debug.Log("Screen Height: " + screenHeight);
+                // Determine the scaling factor to maintain aspect ratio
+                float widthFactor = screenWidth / DisplayedImage.rect.width;
+                float heightFactor = screenHeight / DisplayedImage.rect.height;
+                float scaleFactor = Mathf.Min(widthFactor, heightFactor);
+                // Debug.Log("Scale Factor: " + scaleFactor);
+                // Debug.Log("Screen Width: " + screenWidth);
+                // Debug.Log("Screen Height: " + screenHeight);
 
-            // Adjust placeholder image size while maintaining aspect ratio
-            float adjustedWidth = DisplayedImage.rect.width / scaleFactor;
-            float adjustedHeight = DisplayedImage.rect.height / scaleFactor;
-            placeholderImage.rectTransform.sizeDelta = new Vector2(adjustedWidth, adjustedHeight);
-            placeholderImage.sprite = DisplayedImage;
-            deliverButton.sprite = deliveredTexture;
+                // Adjust placeholder image size while maintaining aspect ratio
+                float adjustedWidth = DisplayedImage.rect.width / scaleFactor;
+                float adjustedHeight = DisplayedImage.rect.height / scaleFactor;
+                placeholderImage.rectTransform.sizeDelta = new Vector2(adjustedWidth, adjustedHeight);
+                placeholderImage.sprite = DisplayedImage;
+                deliverButton.sprite = deliveredTexture;
+
+                // set food state and string
+                _isfoodReady = true;
             }
         }
 
@@ -178,8 +208,9 @@ public class DragDropController : MonoBehaviour
             {
                 // draggableImage.gameObject.SetActive(false);
                 placeholderImage.enabled = false;
+                placeholderImage.sprite = null;
                 deliverButton.sprite = greyTexture;
-
+                _isfoodReady = false;
             }
         }
     }
