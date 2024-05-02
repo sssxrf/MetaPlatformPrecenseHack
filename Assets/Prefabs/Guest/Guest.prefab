@@ -299,13 +299,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4296964437852941514}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0.931, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3282959805804157807}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
 --- !u!1 &6500269665416897068
 GameObject:
   m_ObjectHideFlags: 0
@@ -438,7 +438,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d71de5a5e4095043bf3c674802f94e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  waitTime: 10
+  waitTime: 10000
   paneltyTime: 1
   foodBubble:
   - {fileID: 1004634509436868900, guid: a96bbabfe305df345aee59003837b307, type: 3}
@@ -446,6 +446,7 @@ MonoBehaviour:
   - {fileID: 2505741740215531862, guid: 1a845d58ce616494da7a15b8752b0963, type: 3}
   foodBubblePosition: {fileID: 6678335457062621254}
   fillImage: {fileID: 4776169102602213489}
+  completionstar: {fileID: 7224387278471131444, guid: c125624968056564683977da5354ba1f, type: 3}
   _onGuestArrived:
     m_PersistentCalls:
       m_Calls: []

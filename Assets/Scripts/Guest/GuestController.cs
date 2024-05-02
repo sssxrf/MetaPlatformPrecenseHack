@@ -36,6 +36,7 @@ public class GuestController : MonoBehaviour
         {
             if (arrow.gameObject.TryGetComponent<Food>(out var food))
             {
+               
                 if (food.foodType == _foodType)
                 {
                     _onGuestSatisfied.Invoke();
@@ -44,6 +45,8 @@ public class GuestController : MonoBehaviour
                 {
                     _onWrongFood.Invoke();
                 }
+                
+                Destroy(arrow.gameObject);
             }
         }
     }
@@ -76,22 +79,29 @@ public class GuestController : MonoBehaviour
     {
         currentTime += paneltyTime;
     }
-    // Start is called before the first frame update
-    void Start()
+    
+    protected void setUpEvents()
     {
-        GenerateFoodType();
+        _onGuestArrived.AddListener(() => Debug.Log("Guest Arrived"));
+        _onGuestSatisfied.AddListener(() => Debug.Log("Guest Satisfied"));
+        _onGuestUnsatisfied.AddListener(() => Debug.Log("Guest Unsatisfied"));
+        _onWrongFood.AddListener(() => Debug.Log("Wrong Food"));
         _onGuestArrived.Invoke();
-        
         _onGuestSatisfied.AddListener(guestSatisfied);
         _onGuestUnsatisfied.AddListener(guestUnsatisfied);
         _onWrongFood.AddListener(sendWrongFood);
-        
+    }
+    // Start is called before the first frame update
+    protected void Start()
+    {
+        setUpEvents();
+        GenerateFoodType();
        
     }
     
 
     // Update is called once per frame
-    void Update()
+    protected void Update()
     {
         currentTime += Time.deltaTime;
         fillImage.fillAmount = (waitTime-currentTime) / waitTime;
