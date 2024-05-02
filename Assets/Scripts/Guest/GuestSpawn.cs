@@ -9,6 +9,10 @@ public class GuestSpa : MonoBehaviour
     private GameObject currentGuest;
     public void SpawnGuest()
     {
+        if (currentGuest != null)
+        {
+            return;
+        }
         int randomGuest = Random.Range(0, guestTypes.Count);
         currentGuest = Instantiate(guestTypes[randomGuest], spawnPoint.position, spawnPoint.rotation);
         currentGuest.transform.SetParent(spawnPoint);
