@@ -26,23 +26,28 @@ public class ImageShakeResponse : MonoBehaviour
 
     void Update()
     {
-
-
-        if (placeholderImage.sprite.name == "boba-sized")
+        
+        if(placeholderImage.enabled){
+            if (placeholderImage.sprite.name == "boba-sized")
         {
             // Show the UI that prompts the user to shake the phone
-            Debug.Log("Shaked!");
+            
             uiImage1.SetActive(true);
             deliverButton.sprite = greyTexture;
             if (shakeDetector != null && shakeDetector.IsShakeDetected)
             {
                 // After a shake is detected
                 ShakeResponse();
+
             }
-            }
-            else{
-                Debug.Log("not detected!");
-            }
+        }
+        }
+        
+        if(!DragDropController.Instance._isfoodReady){
+            uiImage1.SetActive(false);
+        }
+        
+        Debug.Log(DragDropController.Instance._isfoodReady);
     }
 
     // private void CheckSpriteAndUpdateUI()
