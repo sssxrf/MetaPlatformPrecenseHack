@@ -8,16 +8,18 @@ public class FoodmodeButtons : MonoBehaviour
     public Button switchToMapButton;
     public Button Deliver;
 
+    private GameObject _mobilePlayerPrefab;
     private Player _player;
 
     IEnumerator FindPlayerWithDelay(float delay)
     {
-        while (_player == null)
+        while (_mobilePlayerPrefab == null)
         {
             yield return new WaitForSeconds(delay);
-            _player = FindObjectOfType<Player>();
+            _mobilePlayerPrefab = GameObject.Find("PlayerPrefab(Clone)");
         }
-        Debug.Log("Player is found!");
+        Debug.Log("PCPlayer is found!");
+        _player = _mobilePlayerPrefab.GetComponent<Player>();
     }
 
     private void Start()
