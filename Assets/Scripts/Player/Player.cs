@@ -137,12 +137,12 @@ public class Player : NetworkBehaviour
 
 #if UNITY_STANDALONE_WIN
         
-            PcUIManager.Instance.UpdateMessages("food info Sent!");
+            PcUIManager.Instance.UpdateMessages(foodtype);
 
 #endif
 
 #if UNITY_ANDROID
-            FoodManager.Instance.SpawnfoodByName(foodtype, MRSceneManager.Instance.RoomCenter);
+        FoodManager.Instance.SpawnfoodByName(foodtype, MRSceneManager.Instance.RoomCenter);
             HeadSetUIManager.Instance.UpdateMessages("food info Sent!");
 #endif
 

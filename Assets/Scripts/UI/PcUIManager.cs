@@ -32,7 +32,7 @@ public class PcUIManager : MonoBehaviour
 
     public void UpdateMessages(string message)
     {
-        _messagesOnPC.text += message;
+        _messagesOnPC.text = message;
     }
 
     public void SetVisibleofUI(bool value)
