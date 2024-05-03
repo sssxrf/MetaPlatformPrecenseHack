@@ -91,6 +91,8 @@ public class GuestController : MonoBehaviour
         _onGuestUnsatisfied.AddListener(guestUnsatisfied);
         _onWrongFood.AddListener(sendWrongFood);
     }
+
+    
     // Start is called before the first frame update
     protected void Start()
     {
