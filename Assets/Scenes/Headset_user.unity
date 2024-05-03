@@ -4572,6 +4572,7 @@ MonoBehaviour:
   RightController: {fileID: 1640250123}
   numofPotentialPosForGuests: 8
   spawnOffset: 0.5
+  projectedOffset: 0.556
   _headset: {fileID: 1581680669}
 --- !u!1 &915688927
 GameObject:
@@ -7297,9 +7298,13 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2100000, guid: a6c3d83073a24844fbc8823d00e6422f, type: 2}
     - target: {fileID: -715237748961214972, guid: e4c008372f28d439d9ea682dfd817bb6, type: 3}
+      propertyPath: m_LightProbeUsage
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -715237748961214972, guid: e4c008372f28d439d9ea682dfd817bb6, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: e6572ebc85a0a4a969f211971945da0f, type: 2}
+      objectReference: {fileID: 2100000, guid: 7f98e7ff226cc8c449a7da08501e09b5, type: 2}
     - target: {fileID: -696640118918393524, guid: e4c008372f28d439d9ea682dfd817bb6, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -7322,7 +7327,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: a6c3d83073a24844fbc8823d00e6422f, type: 2}
     - target: {fileID: 42152425656954209, guid: e4c008372f28d439d9ea682dfd817bb6, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: e4c008372f28d439d9ea682dfd817bb6, type: 3}
       propertyPath: m_Name
@@ -10727,8 +10732,8 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2033440685}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 4}
-  m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
+  m_LocalPosition: {x: 0, y: 0, z: 1}
+  m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1398670658}
