@@ -13,38 +13,16 @@ public class viewingWindowInterator : MonoBehaviour
     private bool isInitialized = false;
     public void SwitchWindow()
     {
-        blockingWindow.SetActive(!blockingWindow.activeInHierarchy);
+        
         virtualWindow.SetActive(!virtualWindow.activeInHierarchy);
 
-        //if (isVirtual)
-        //{
-        //    blockingWindow.SetActive(false);
-        //    virtualWindow.SetActive(true);
-        //    isVirtual = false;
-        //}
-        //else
-        //{
-        //    blockingWindow.SetActive(true);
-        //    virtualWindow.SetActive(false);
-        //    isVirtual = true;
-        //}
-        
-        
+       
           
     }
     // Start is called before the first frame update
     void Start()
     {
-        if (isVirtual)
-        {
-            blockingWindow.SetActive(false);
-            virtualWindow.SetActive(true);
-        }
-        else
-        {
-            blockingWindow.SetActive(true);
-            virtualWindow.SetActive(false);
-        }
+        virtualWindow.SetActive(isVirtual);
     }
 
     // Update is called once per frame
