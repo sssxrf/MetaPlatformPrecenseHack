@@ -15,6 +15,8 @@ public class MRSceneManager : MonoBehaviour
     [SerializeField] OVRSceneManager sceneManager;
     [SerializeField] GameObject projector;
     [SerializeField] GameObject skybox;
+    [SerializeField] GameObject LeftController;
+    [SerializeField] GameObject RightController;
 
     private static OVRSceneRoom m_SceneRoom;
 
@@ -25,6 +27,7 @@ public class MRSceneManager : MonoBehaviour
     private OVRScenePlane m_PortalWall;
 
 
+
     private Player _player;
     public GameObject _headset;
     private Vector2 _playerRelativePos;
@@ -33,11 +36,17 @@ public class MRSceneManager : MonoBehaviour
     private float _roomHeight;
     private Vector3 _roomCenter;
     private Transform _floorTrans;
+    private float _calibrationHeight = -1;
+    
+    
     public float RoomLength => _roomLength;
     public float RoomWidth => _roomWidth;
     public Vector2 PlayerRelativePos => _playerRelativePos;
     public Transform FloorTrans => _floorTrans;
     public Vector3 RoomCenter => _roomCenter;
+    public float calibrationHeight => _calibrationHeight;
+
+
     #endregion
 
     #region Unity Methods
@@ -102,6 +111,14 @@ public class MRSceneManager : MonoBehaviour
     {
         
         _player.RPC_SendRoomInfo(MRSceneManager.Instance.RoomLength, MRSceneManager.Instance.RoomWidth);
+    }
+
+
+    public void ConfirmCalibration()
+    {
+        _calibrationHeight = (RightController.transform.position.y + LeftController.transform.position.y) / 2f;
+
+        Debug.Log("calibrationHeight:" + _calibrationHeight);
     }
     #endregion
 
