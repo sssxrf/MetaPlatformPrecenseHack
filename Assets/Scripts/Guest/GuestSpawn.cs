@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GuestSpa : MonoBehaviour
+public class GuestSpawn : MonoBehaviour
 {
     [SerializeField] private List<GameObject> guestTypes;
     [SerializeField] private Transform spawnPoint;
