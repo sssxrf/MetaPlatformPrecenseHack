@@ -11,9 +11,8 @@ public class GuestSpawn : MonoBehaviour
     private List<Vector3> _potentialSpawnPoints;
     private List<int> indexesToSpawn;
     private List<int> indexesGusttype;
-
     private bool isreadyToSpawn = false;
-
+    private bool isguestSpawned = false;
     private void Awake()
     {
         _potentialSpawnPoints = new List<Vector3>();
@@ -56,10 +55,14 @@ public class GuestSpawn : MonoBehaviour
                 //currentGuest.transform.SetParent(spawnPoint);
                 currentGuest.transform.LookAt(MRSceneManager.Instance.CalibratedRoomCenter);
                 currentGuest.transform.rotation *= Quaternion.Euler(0, 90, 0);
+                var guestController = currentGuest.GetComponent<GuestController>();
+                StartCoroutine(WaitForGuestReady(guestController));
             }
 
             Debug.Log("Guests are Spawned");
         }
+        
+        isguestSpawned = true;
         
     }
   
@@ -76,6 +79,14 @@ public class GuestSpawn : MonoBehaviour
         _potentialSpawnPoints = MRSceneManager.Instance.PotentialSpawnedPositions;
         isreadyToSpawn = true;
         SpawnGuest();
+    }
+    
+    IEnumerator WaitForGuestReady(GuestController guest)
+    {
+        // Wait until MRSceneManager reports that spawn points are calculated
+        yield return new WaitUntil(() =>isguestSpawned);
+        guest._onGuestArrived.Invoke();
+        
     }
     // Update is called once per frame
     void Update()

@@ -1274,18 +1274,6 @@ MonoBehaviour:
     Callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 915561487}
-          m_TargetAssemblyTypeName: MRSceneManager, Assembly-CSharp
-          m_MethodName: SendRoomInfo
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
         - m_Target: {fileID: 2033440685}
           m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
           m_MethodName: SetActive
@@ -4565,6 +4553,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e684368346b5654f93d057917aacc12, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  testingMode: 1
   sceneManager: {fileID: 0}
   projector: {fileID: 935024001}
   skybox: {fileID: 1015179469}
@@ -4572,6 +4561,7 @@ MonoBehaviour:
   RightController: {fileID: 1640250123}
   numofPotentialPosForGuests: 8
   spawnOffset: 0.5
+  projectedOffset: 0.556
   _headset: {fileID: 1581680669}
 --- !u!1 &915688927
 GameObject:

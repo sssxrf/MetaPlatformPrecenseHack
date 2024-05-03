@@ -9,7 +9,7 @@ using System;
 public class MRSceneManager : MonoBehaviour
 {
     public static MRSceneManager Instance { get; private set; }
-
+    public bool testingMode = true;
 
 
     #region SerializeField
@@ -112,11 +112,23 @@ public class MRSceneManager : MonoBehaviour
     private void Update()
     {
 
-        if (_isRoomInfoSent && _isCalibrationCompleted && !roomSetupTriggered)
+        if (testingMode)
         {
-            roomSetupTriggered = true;
-            StartCoroutine(GeneratePointsAroundCircleCoroutine());
-            //OnRoomSetupComplete?.Invoke();
+            if ( _isCalibrationCompleted && !roomSetupTriggered)
+            {
+                roomSetupTriggered = true;
+                StartCoroutine(GeneratePointsAroundCircleCoroutine());
+                //OnRoomSetupComplete?.Invoke();
+            }
+        }
+        else
+        {
+            if (_isRoomInfoSent && _isCalibrationCompleted && !roomSetupTriggered)
+            {
+                roomSetupTriggered = true;
+                StartCoroutine(GeneratePointsAroundCircleCoroutine());
+                //OnRoomSetupComplete?.Invoke();
+            }
         }
 
         if (_headset != null && m_SceneFloor != null)
