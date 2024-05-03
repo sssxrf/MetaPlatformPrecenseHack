@@ -6,6 +6,7 @@ public class GuestManager : MonoBehaviour
 {
     public static GuestManager Instance { get; private set; }
 
+    
 
     // Values shared to mobile
     //public int _spawnedGuestNum { get; set; } = 0;
@@ -27,6 +28,10 @@ public class GuestManager : MonoBehaviour
     private List<Vector2> _posRelativeToWindows;
     private int _spawnedGuestNum;
 
+    
+
+    
+
     private void Awake()
     {
 
@@ -45,6 +50,12 @@ public class GuestManager : MonoBehaviour
             }
         }
     }
+
+    
+
+
+
+   
 
     // call it when spawning a new guest
     public void SendNewGuestInfo(int guestID, int guestType, int urgentState, Vector2 PosRelativeToWindow)

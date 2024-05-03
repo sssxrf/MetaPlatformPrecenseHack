@@ -191,7 +191,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a2ceddb3d8939d4d83028043545aec5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  waitTime: 20
+  waitTime: 200
   paneltyTime: 5
   foodBubble:
   - {fileID: 1004634509436868900, guid: a96bbabfe305df345aee59003837b307, type: 3}

@@ -898,6 +898,7 @@ GameObject:
   m_Component:
   - component: {fileID: 156799712}
   - component: {fileID: 156799711}
+  - component: {fileID: 156799713}
   m_Layer: 0
   m_Name: GuestManager
   m_TagString: Untagged
@@ -932,6 +933,23 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &156799713
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 156799710}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca2f68d411c17a7448f4212daacf4bb8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  guestTypes:
+  - {fileID: 6833640943243769953, guid: 93236b8fdd042e64ca88dae98fee7974, type: 3}
+  - {fileID: 1435437687792879865, guid: 6591be05ca6616d4fb65c52d6850944b, type: 3}
+  spawnPoint: {fileID: 0}
+  numGuestToSpawn: 4
 --- !u!1 &158341846
 GameObject:
   m_ObjectHideFlags: 0
@@ -4552,6 +4570,8 @@ MonoBehaviour:
   skybox: {fileID: 1015179469}
   LeftController: {fileID: 1640250124}
   RightController: {fileID: 1640250123}
+  numofPotentialPosForGuests: 8
+  spawnOffset: 0.5
   _headset: {fileID: 1581680669}
 --- !u!1 &915688927
 GameObject:
@@ -10707,7 +10727,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2033440685}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 10}
+  m_LocalPosition: {x: 0, y: 0, z: 4}
   m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
   m_ConstrainProportionsScale: 1
   m_Children:

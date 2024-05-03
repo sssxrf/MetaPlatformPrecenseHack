@@ -4,6 +4,7 @@ using UnityEngine;
 using System.Linq;
 
 using Meta.XR.MRUtilityKit;
+using System;
 
 public class MRSceneManager : MonoBehaviour
 {
@@ -17,7 +18,9 @@ public class MRSceneManager : MonoBehaviour
     [SerializeField] GameObject skybox;
     [SerializeField] GameObject LeftController;
     [SerializeField] GameObject RightController;
-
+    [SerializeField] int numofPotentialPosForGuests = 8;
+    [SerializeField] float spawnOffset = 0.5f;
+    [SerializeField] float projectedOffset = 0.556f; 
     private static OVRSceneRoom m_SceneRoom;
 
     //private List<OVRScenePlane> m_SceneWalls = new List<OVRScenePlane>();
@@ -37,14 +40,26 @@ public class MRSceneManager : MonoBehaviour
     private Vector3 _roomCenter;
     private Transform _floorTrans;
     private float _calibrationHeight = -1;
-    
-    
+    private bool _isCalibrationCompleted = false;
+    private bool _isRoomInfoSent = false;
+    private bool roomSetupTriggered = false;
+    private List<Vector3> _potentialSpawnedPositions;
+    private bool _isSpawnedPointsCalculated = false;
+    private Vector3 _calibratedRoomCenter;
+
+
     public float RoomLength => _roomLength;
     public float RoomWidth => _roomWidth;
     public Vector2 PlayerRelativePos => _playerRelativePos;
     public Transform FloorTrans => _floorTrans;
     public Vector3 RoomCenter => _roomCenter;
     public float calibrationHeight => _calibrationHeight;
+
+    public event Action OnRoomSetupComplete;
+    // Spawned points generated
+    public List<Vector3> PotentialSpawnedPositions => _potentialSpawnedPositions;
+    public bool IsSpawnedPointsCalculated => _isSpawnedPointsCalculated;
+    public  Vector3 CalibratedRoomCenter => _calibratedRoomCenter;
 
 
     #endregion
@@ -75,6 +90,7 @@ public class MRSceneManager : MonoBehaviour
 #endif
 
         sceneManager.SceneModelLoadedSuccessfully += OnSceneLoaded;
+        _potentialSpawnedPositions = new List<Vector3>();
     }
 
     IEnumerator FindPlayerWithDelay(float delay)
@@ -90,12 +106,20 @@ public class MRSceneManager : MonoBehaviour
     private void Start()
     {
         StartCoroutine(FindPlayerWithDelay(0.1f));
+        //OnRoomSetupComplete += () => StartCoroutine(GeneratePointsAroundCircleCoroutine());
     }
 
     private void Update()
     {
 
-        if(_headset != null && m_SceneFloor != null)
+        if (_isRoomInfoSent && _isCalibrationCompleted && !roomSetupTriggered)
+        {
+            roomSetupTriggered = true;
+            StartCoroutine(GeneratePointsAroundCircleCoroutine());
+            //OnRoomSetupComplete?.Invoke();
+        }
+
+        if (_headset != null && m_SceneFloor != null)
         {
             _floorTrans = m_SceneFloor.transform;
             _playerRelativePos = CalculateLocalPosition(_headset.transform.position, _floorTrans);
@@ -107,17 +131,67 @@ public class MRSceneManager : MonoBehaviour
     #endregion
 
     #region Public methods
+    IEnumerator GeneratePointsAroundCircleCoroutine()
+    {
+        //yield return null;
+        Vector3 center = _calibratedRoomCenter;
+        float radius = Mathf.Sqrt(Mathf.Pow(RoomLength / 2, 2) + Mathf.Pow(RoomWidth / 2, 2)) + spawnOffset;
+        float angleStep = 360f / numofPotentialPosForGuests;
+
+        for (int i = 0; i < numofPotentialPosForGuests; i++)
+        {
+            float angleInDegrees = i * angleStep;
+            float angleInRadians = angleInDegrees * Mathf.Deg2Rad;
+            Vector3 point = new Vector3(
+                center.x + Mathf.Cos(angleInRadians) * radius,
+                center.y,
+                center.z + Mathf.Sin(angleInRadians) * radius
+            );
+            _potentialSpawnedPositions.Add(point);
+
+            // Yield control back to Unity after processing a few points
+            if (i % 10 == 0)  // Adjust this value based on performance observations
+                yield return null;
+        }
+
+        _isSpawnedPointsCalculated = true;
+        Debug.Log("Generated Points Around Circle, total num: " + _potentialSpawnedPositions.Count);
+    }
+    public void GeneratePointsAroundCircle()
+    {
+        
+        Vector3 center = _calibratedRoomCenter;
+        float radius = Mathf.Sqrt(Mathf.Pow(RoomLength / 2, 2) + Mathf.Pow(RoomWidth / 2, 2)) + spawnOffset;
+        float angleStep = 360f / numofPotentialPosForGuests;
+        for (int i = 0; i < numofPotentialPosForGuests; i++)
+        {
+            float angleInDegrees = i * angleStep;
+            float angleInRadians = angleInDegrees * Mathf.Deg2Rad;
+            Vector3 point = new Vector3(
+                center.x + Mathf.Cos(angleInRadians) * radius,
+                center.y,
+                center.z + Mathf.Sin(angleInRadians) * radius
+            );
+            _potentialSpawnedPositions.Add(point);
+        }
+        _isSpawnedPointsCalculated = true;
+        Debug.Log("generate Points areound, total num: " + _potentialSpawnedPositions.Count);
+    }
+
     public void SendRoomInfo()
     {
         
         _player.RPC_SendRoomInfo(MRSceneManager.Instance.RoomLength, MRSceneManager.Instance.RoomWidth);
+        _isRoomInfoSent = true;
     }
 
 
     public void ConfirmCalibration()
     {
         _calibrationHeight = (RightController.transform.position.y + LeftController.transform.position.y) / 2f;
-
+        _calibratedRoomCenter = new Vector3(_roomCenter.x, _calibrationHeight, _roomCenter.z);
+        CalibrateProjectorAndSkybox();
+        _isCalibrationCompleted = true;
         Debug.Log("calibrationHeight:" + _calibrationHeight);
     }
     #endregion
@@ -151,6 +225,12 @@ public class MRSceneManager : MonoBehaviour
 
         Debug.Log("Room center:" + _roomCenter);
         Debug.Log("length:"+ _roomLength + "width:" + _roomWidth);
+    }
+
+    private void CalibrateProjectorAndSkybox()
+    {
+        projector.transform.position = new Vector3(_calibratedRoomCenter.x, _calibratedRoomCenter.y - projectedOffset, _calibratedRoomCenter.z);
+        skybox.transform.position = new Vector3(_calibratedRoomCenter.x, _calibratedRoomCenter.y - projectedOffset, _calibratedRoomCenter.z);
     }
 
     private void GetRoomSizeSquare()

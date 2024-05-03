@@ -13,7 +13,8 @@ public class ProjectorManager : MonoBehaviour
     {
         Idle,
         Grabbed,
-        Rotating
+        Rotating,
+        Released
     }
 
 
@@ -94,9 +95,11 @@ public class ProjectorManager : MonoBehaviour
         //ProjectedWindows[currentDirectionIndex].SwitchWindow();
         _isOpening = true;
 
+        
         //Debug.Log("Found wall");
         //}
     }
+
 
     public void SwitchWindowBlock()
     {
@@ -198,6 +201,7 @@ public class ProjectorManager : MonoBehaviour
     private void Grabbed(GrabInteractor obj)
     {
         state = ProjectorState.Grabbed;
+       
     }
 
     private void RotationFixed(GrabInteractor obj)
@@ -207,7 +211,7 @@ public class ProjectorManager : MonoBehaviour
 
         // Delete current window
         // Destroy(currentOpeningWindow);
-        _isOpening = false;
+        //_isOpening = false;
 
 
     }
@@ -241,7 +245,7 @@ public class ProjectorManager : MonoBehaviour
         // Determine the smallest distance and corresponding edge
         float minDistance = Mathf.Min(distanceToLeft, distanceToRight, distanceToTop, distanceToBottom);
 
-        Debug.Log("mindist:" + minDistance);
+        //Debug.Log("mindist:" + minDistance);
         if (minDistance == distanceToLeft || minDistance == distanceToRight)
         {
             return false;   //width, then window is vertical

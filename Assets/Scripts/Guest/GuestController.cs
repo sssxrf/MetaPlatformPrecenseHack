@@ -9,7 +9,7 @@ using UnityEngine.UI;
 public class GuestController : MonoBehaviour
 {
     [Header("Setup")]
-    [SerializeField] float waitTime = 10f;
+    [SerializeField] float waitTime = 200f;
     [SerializeField] private float paneltyTime = 1f;
     
     [Header("Bubble and Progress")]
