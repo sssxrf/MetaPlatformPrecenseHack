@@ -6,6 +6,7 @@ public class RoomManager : MonoBehaviour
 {
     public static RoomManager Instance { get; private set; }
 
+    [SerializeField] private GameObject roomPrefab;
 
     private float _roomLengthinMR;
     private float _roomwidthinMR;
@@ -59,6 +60,17 @@ public class RoomManager : MonoBehaviour
         positions[4] = positions[0];
 
         lineRenderer.SetPositions(positions);
+    }
+
+    public void SpawnedCenteredRoom(float length, float width)
+    {
+        GameObject room = Instantiate(roomPrefab, new Vector3(0, 0.2f, 0), Quaternion.identity);
+        room.name = "Room";
+
+        
+        room.transform.localScale = new Vector3(length, 0.1f, width); 
+
+        
     }
 
     public void StoreRoomInfo(float length, float width)

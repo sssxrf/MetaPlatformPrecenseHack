@@ -40,12 +40,12 @@ public class WindowScaleManager : MonoBehaviour
             if (isWinHorizontal)
             {
 
-                transform.localScale = new Vector3(1f, 0.1f, 0.1f);
+                transform.localScale = new Vector3(1f, 0.1f, 0.3f);
             }
             else
             {
    
-                transform.localScale = new Vector3(0.1f, 0.1f, 1f);
+                transform.localScale = new Vector3(0.3f, 0.1f, 1f);
             }
 
 
