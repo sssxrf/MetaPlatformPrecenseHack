@@ -174,6 +174,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6678335457062621254, guid: 93236b8fdd042e64ca88dae98fee7974, type: 3}
   m_PrefabInstance: {fileID: 5565968393380982936}
   m_PrefabAsset: {fileID: 0}
+--- !u!82 &1341662744956444176 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 6890720648948575880, guid: 93236b8fdd042e64ca88dae98fee7974, type: 3}
+  m_PrefabInstance: {fileID: 5565968393380982936}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1435437687792879865 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6833640943243769953, guid: 93236b8fdd042e64ca88dae98fee7974, type: 3}
@@ -211,7 +216,19 @@ MonoBehaviour:
       m_Calls: []
   _onWrongFood:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1341662744956444176}
+        m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
+        m_MethodName: Play
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   onProtectionDestroyed:
     m_PersistentCalls:
       m_Calls: []
