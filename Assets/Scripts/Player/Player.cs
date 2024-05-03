@@ -105,10 +105,10 @@ public class Player : NetworkBehaviour
     {
 
 #if UNITY_STANDALONE_WIN
-        RoomManager.Instance.DrawCenteredRoom(roomlength, roomwidth);
+        RoomManager.Instance.SpawnedCenteredRoom(roomlength, roomwidth);
         RoomManager.Instance.StoreRoomInfo(roomlength, roomwidth);
         PcUIManager.Instance.UpdateMessages( "Room set!");
-        
+
 #endif
 
 #if UNITY_ANDROID
@@ -117,7 +117,7 @@ public class Player : NetworkBehaviour
 #endif
 
 #if UNITY_IOS
-        RoomManager.Instance.DrawCenteredRoom(roomlength, roomwidth);
+        RoomManager.Instance.SpawnedCenteredRoom(roomlength, roomwidth);
         RoomManager.Instance.StoreRoomInfo(roomlength, roomwidth);
         MobileUIManager.Instance.UpdateMessages( "Room set!");
 #endif
