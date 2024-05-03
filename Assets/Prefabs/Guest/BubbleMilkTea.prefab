@@ -12,14 +12,26 @@ PrefabInstance:
       propertyPath: foodType
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2103836465332704617, guid: 80bd39ed0f9967d40b134e8efa2ff7a2, type: 3}
+      propertyPath: rendererSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 368b5b90ff9ef4240b4e9b011560cf3d, type: 3}
     - target: {fileID: 4219438730466900073, guid: 80bd39ed0f9967d40b134e8efa2ff7a2, type: 3}
       propertyPath: m_Name
       value: BubbleMilkTea
       objectReference: {fileID: 0}
     - target: {fileID: 4690986976449110299, guid: 80bd39ed0f9967d40b134e8efa2ff7a2, type: 3}
+      propertyPath: m_Size.y
+      value: 2.34
+      objectReference: {fileID: 0}
+    - target: {fileID: 4690986976449110299, guid: 80bd39ed0f9967d40b134e8efa2ff7a2, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 95953741b104e46c19119e0421ed4ee2, type: 3}
+      objectReference: {fileID: 21300000, guid: 368b5b90ff9ef4240b4e9b011560cf3d, type: 3}
+    - target: {fileID: 4690986976449110299, guid: 80bd39ed0f9967d40b134e8efa2ff7a2, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8645342927835296686, guid: 80bd39ed0f9967d40b134e8efa2ff7a2, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

@@ -13,7 +13,8 @@ public class ProjectorManager : MonoBehaviour
     {
         Idle,
         Grabbed,
-        Rotating
+        Rotating,
+        Released
     }
 
 
@@ -94,9 +95,11 @@ public class ProjectorManager : MonoBehaviour
         //ProjectedWindows[currentDirectionIndex].SwitchWindow();
         _isOpening = true;
 
+        
         //Debug.Log("Found wall");
         //}
     }
+
 
     public void SwitchWindowBlock()
     {
@@ -139,43 +142,57 @@ public class ProjectorManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
         if (state == ProjectorState.Rotating)
         {
-            // lerp the rotation
-            float step = 20 * Time.deltaTime;
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(0, goalAngle, 0), step);
-            float diff = Quaternion.Angle(transform.rotation, Quaternion.Euler(0, goalAngle, 0));
-            if (diff < 2f)
+            if (currentOpeningWindow != null)
             {
-                state = ProjectorState.Idle;
+                // ray cast from main direction to the wall
+                Vector3 rayOrigin = ProjectorDirections[0].position;
+                Vector3 rayDirection = ProjectorDirections[0].forward;
+                Ray ray = new Ray(rayOrigin, rayDirection);
+                Debug.DrawRay(rayOrigin, rayDirection, Color.red, 1000);
+                wallLayerMask = LayerMask.GetMask("Wall");
+                if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, wallLayerMask))
+                {
+                    currentOpeningWindow.transform.position = hit.point;
+                    currentOpeningWindow.transform.rotation = Quaternion.LookRotation(-hit.normal);
+                }
+              
             }
+            
         }
+     
 
         //Debug.Log("Opening State:" + _isOpening);
-        if (currentOpeningWindow != null)
-        {
-            if (_isOpening)
+            if (currentOpeningWindow != null)
             {
+                if (_isOpening)
+                {
 
-                //_windowPos2D = new Vector2(currentOpeningWindow.transform.position.x, currentOpeningWindow.transform.position.z);
-                _windowPos2D = CalculateLocalPosition(currentOpeningWindow.transform.position, MRSceneManager.Instance.FloorTrans);
-                _isWindowHorizontal = IsClosestEdgeLengthorWidth(MRSceneManager.Instance.RoomLength, MRSceneManager.Instance.RoomWidth, _windowPos2D);
+                    //_windowPos2D = new Vector2(currentOpeningWindow.transform.position.x, currentOpeningWindow.transform.position.z);
+                    _windowPos2D = CalculateLocalPosition(currentOpeningWindow.transform.position,
+                        MRSceneManager.Instance.FloorTrans);
+                    _isWindowHorizontal = IsClosestEdgeLengthorWidth(MRSceneManager.Instance.RoomLength,
+                        MRSceneManager.Instance.RoomWidth, _windowPos2D);
+                }
+                else
+                {
+                    _windowPos2D = Vector2.zero;
+                }
+
             }
             else
             {
+                // Debug.Log("No Opening Window");
+
                 _windowPos2D = Vector2.zero;
             }
 
-        }
-        else
-        {
-           // Debug.Log("No Opening Window");
 
-            _windowPos2D = Vector2.zero;
         }
 
-
-    }
+    
 
     #endregion
 
@@ -184,38 +201,17 @@ public class ProjectorManager : MonoBehaviour
     private void Grabbed(GrabInteractor obj)
     {
         state = ProjectorState.Grabbed;
+       
     }
 
     private void RotationFixed(GrabInteractor obj)
     {
-        // check current yaw, check the closes direction, rotate to that direction
-        float currentYaw = transform.rotation.eulerAngles.y;
-        float minDiff = 360;
-        int minIndex = 0;
-        List<float> rotationAngels = new List<float>();
-        rotationAngels.Add(0);
-        rotationAngels.Add(90);
-        rotationAngels.Add(180);
-        rotationAngels.Add(270);
-        for (int i = 0; i < rotationAngels.Count; i++)
-        {
-            Debug.Log("ProjectorDirections[i].rotation.eulerAngles.y " + rotationAngels[i]);
-            float diff = Quaternion.Angle(transform.rotation, Quaternion.Euler(0, rotationAngels[i], 0));
-            if (diff < minDiff)
-            {
-                minDiff = diff;
-                minIndex = i;
-            }
-        }
-        //Debug.Log(currentYaw);
-        //Debug.Log("closest direction " + minIndex + " " + rotationAngels[minIndex]);
-        // rotate to the closes direction
-        goalAngle = rotationAngels[minIndex];
+       
         state = ProjectorState.Rotating;
 
         // Delete current window
-        Destroy(currentOpeningWindow);
-        _isOpening = false;
+        // Destroy(currentOpeningWindow);
+        //_isOpening = false;
 
 
     }
@@ -249,7 +245,7 @@ public class ProjectorManager : MonoBehaviour
         // Determine the smallest distance and corresponding edge
         float minDistance = Mathf.Min(distanceToLeft, distanceToRight, distanceToTop, distanceToBottom);
 
-        Debug.Log("mindist:" + minDistance);
+        //Debug.Log("mindist:" + minDistance);
         if (minDistance == distanceToLeft || minDistance == distanceToRight)
         {
             return false;   //width, then window is vertical

@@ -1,11 +1,12 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 public class ScoreStar : MonoBehaviour
 {
-    [SerializeField] private GameObject Headset;
+    private GameObject Headset;
     [SerializeField] private float speed = 5f;
     public UnityEvent onStarCollected;
    
@@ -35,6 +36,11 @@ public class ScoreStar : MonoBehaviour
 
             // Smoothly move towards the target position
             transform.position = Vector3.Lerp(transform.position, targetPosition, speed * Time.deltaTime);
+        }
+        else
+        {
+            //find game object with collect zone 
+            Headset = FindObjectOfType<CollectZone>().GameObject();
         }
     }
 }

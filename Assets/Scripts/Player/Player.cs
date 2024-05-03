@@ -105,10 +105,10 @@ public class Player : NetworkBehaviour
     {
 
 #if UNITY_STANDALONE_WIN
-        RoomManager.Instance.DrawCenteredRoom(roomlength, roomwidth);
+        RoomManager.Instance.SpawnedCenteredRoom(roomlength, roomwidth);
         RoomManager.Instance.StoreRoomInfo(roomlength, roomwidth);
         PcUIManager.Instance.UpdateMessages( "Room set!");
-        
+
 #endif
 
 #if UNITY_ANDROID
@@ -117,7 +117,7 @@ public class Player : NetworkBehaviour
 #endif
 
 #if UNITY_IOS
-        RoomManager.Instance.DrawCenteredRoom(roomlength, roomwidth);
+        RoomManager.Instance.SpawnedCenteredRoom(roomlength, roomwidth);
         RoomManager.Instance.StoreRoomInfo(roomlength, roomwidth);
         MobileUIManager.Instance.UpdateMessages( "Room set!");
 #endif
@@ -139,10 +139,12 @@ public class Player : NetworkBehaviour
         
             PcUIManager.Instance.UpdateMessages(foodtype);
 
+
 #endif
 
 #if UNITY_ANDROID
-        FoodManager.Instance.SpawnfoodByName(foodtype, MRSceneManager.Instance.RoomCenter);
+            Vector3 spawnPosCenter = new Vector3(MRSceneManager.Instance.RoomCenter.x, MRSceneManager.Instance.RoomCenter.y + 2, MRSceneManager.Instance.RoomCenter.z); 
+            FoodManager.Instance.SpawnfoodByName(foodtype, spawnPosCenter);
             HeadSetUIManager.Instance.UpdateMessages("food info Sent!");
 #endif
 

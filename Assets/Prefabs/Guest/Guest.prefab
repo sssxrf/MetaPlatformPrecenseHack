@@ -437,14 +437,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d71de5a5e4095043bf3c674802f94e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  waitTime: 20
+  waitTime: 200
   paneltyTime: 5
   foodBubble:
   - {fileID: 1004634509436868900, guid: a96bbabfe305df345aee59003837b307, type: 3}
   - {fileID: 4854402930611853383, guid: 79f0021604b5ab04f80c42a0f6c7ad1b, type: 3}
   - {fileID: 2505741740215531862, guid: 1a845d58ce616494da7a15b8752b0963, type: 3}
   foodBubblePosition: {fileID: 6678335457062621254}
-  fillImage: {fileID: 0}
+  fillImage: {fileID: 418591272364835346}
   completionstar: {fileID: 7224387278471131444, guid: c125624968056564683977da5354ba1f, type: 3}
   _onGuestArrived:
     m_PersistentCalls:

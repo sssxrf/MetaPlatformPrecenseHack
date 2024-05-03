@@ -45,21 +45,18 @@ public class BasicSpawner : MonoBehaviour, INetworkRunnerCallbacks
     private void Start()
     {
 #if UNITY_ANDROID
-        StartGame(GameMode.Host, "Headset_user");
-        HeadSetUIManager.Instance.SetVisibleofUI(true);
+        StartGame(GameMode.Host, "Headset_user");      
         PcUIManager.Instance.SetVisibleofUI(false);
         MobileUIManager.Instance.SetVisibleofUI(false);
 #endif
 
 #if UNITY_STANDALONE_WIN
         StartGame(GameMode.Client, "Pc_user");
-        HeadSetUIManager.Instance.SetVisibleofUI(false);
         PcUIManager.Instance.SetVisibleofUI(true);
         MobileUIManager.Instance.SetVisibleofUI(false);
 #endif
 #if UNITY_IOS
         StartGame(GameMode.Client, "Mobile_user");
-        HeadSetUIManager.Instance.SetVisibleofUI(false);
         PcUIManager.Instance.SetVisibleofUI(false);
         MobileUIManager.Instance.SetVisibleofUI(true);
 #endif
