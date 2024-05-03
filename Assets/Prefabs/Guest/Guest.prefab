@@ -472,6 +472,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waitTime: 200
   paneltyTime: 5
+  _urgentPercent: 0.7
   foodBubble:
   - {fileID: 1004634509436868900, guid: a96bbabfe305df345aee59003837b307, type: 3}
   - {fileID: 4854402930611853383, guid: 79f0021604b5ab04f80c42a0f6c7ad1b, type: 3}
@@ -503,6 +504,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  _onGuestUrgent:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!65 &4238188533439658706
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -594,7 +598,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 8a313d01b4b106546bb172649c5ffb5e, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0

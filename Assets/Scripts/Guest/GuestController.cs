@@ -17,6 +17,7 @@ public class GuestController : MonoBehaviour
     [Header("Setup")]
     [SerializeField] float waitTime = 200f;
     [SerializeField] private float paneltyTime = 1f;
+    [SerializeField] private float _urgentPercent = 0.7f;
     [Header("Bubble and Progress")]
     [SerializeField] private List<GameObject> foodBubble;
     [SerializeField] private Transform foodBubblePosition;
@@ -32,7 +33,8 @@ public class GuestController : MonoBehaviour
     public UnityEvent _onGuestUnsatisfied;
     [Tooltip("Event when guest is given wrong food")]
     public UnityEvent _onWrongFood;
-    
+    [Tooltip("Event when guest is in urgent state")]
+    public UnityEvent _onGuestUrgent;
     //section for basic data, that shared to guest manager 
     // Values shared to mobile
      public Vector2 _posRelativeToWindow { get; set; }
@@ -138,7 +140,11 @@ public class GuestController : MonoBehaviour
         }
         
     }
-    
+
+    protected void sendUrgentData()
+    {
+        _guestManager.UpdateGuestInfo(_guestID,1);
+    }
     protected void setUpEvents()
     {
         _onGuestArrived.AddListener(() => Debug.Log("Guest Arrived"));
@@ -149,6 +155,7 @@ public class GuestController : MonoBehaviour
         _onGuestSatisfied.AddListener(guestSatisfied);
         _onGuestUnsatisfied.AddListener(guestUnsatisfied);
         _onWrongFood.AddListener(sendWrongFood);
+        _onGuestUrgent.AddListener(sendUrgentData);
     }
 
    
@@ -176,6 +183,10 @@ public class GuestController : MonoBehaviour
             if (currentTime >= waitTime)
             {
                 _onGuestUnsatisfied.Invoke();
+            }else if (currentTime >= waitTime * _urgentPercent)
+            {
+                _urgentState = 1;
+                _onGuestUrgent.Invoke();
             }
         }
         

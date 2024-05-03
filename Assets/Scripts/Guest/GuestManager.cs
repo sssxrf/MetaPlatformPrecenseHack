@@ -89,7 +89,7 @@ public class GuestManager : MonoBehaviour
     // call it when urgentState changes
     public void UpdateGuestInfo(int guestID, int urgentState)
     {
-
+        Debug.Log("Update Guest Info: " + guestID + " " + urgentState);
     } 
 
 
