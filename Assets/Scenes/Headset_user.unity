@@ -513,9 +513,9 @@ MonoBehaviour:
   - Boba
   - Sushi
   foodModels:
-  - {fileID: 919132149155446097, guid: c8c7f54fc777b469fa2563a1f90dcec2, type: 3}
-  - {fileID: 919132149155446097, guid: 40a3780f43bbc44f3b525b9b56a26269, type: 3}
-  - {fileID: 919132149155446097, guid: d59f819bc7084456c9932fdace8c1567, type: 3}
+  - {fileID: 7443703509063527374, guid: d6c1787ed284f6d428f7740e975e0167, type: 3}
+  - {fileID: 1225859419329719821, guid: c33850aa13cbac94788175aee497cb49, type: 3}
+  - {fileID: 2901257331452079920, guid: 8c798f6e2ea4c80479d91794e4810944, type: 3}
 --- !u!4 &78713910
 Transform:
   m_ObjectHideFlags: 0

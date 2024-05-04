@@ -62,6 +62,7 @@ public class ClientGuestManager : MonoBehaviour
         {
             Destroy(_spawnedGuests[theguestID]);
 
+            Debug.Log("Clear a guest, issatisfied?"+ isSatisfied);
             if (isSatisfied)
             {
                 // earn reward
@@ -122,6 +123,7 @@ public class ClientGuestManager : MonoBehaviour
 
     private void UpdateGuestState(GuestInfos updatedguest)
     {
+        Debug.Log("update guest");
         var id = (updatedguest.guestType, updatedguest.urgentState);
 
         Destroy(_spawnedGuests[updatedguest.guestID]);
