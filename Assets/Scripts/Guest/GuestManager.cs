@@ -2,13 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using Sirenix.OdinInspector;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class GuestManager : MonoBehaviour
 {
     public static GuestManager Instance { get; private set; }
+    public int gamelevel = 0;
+    public int starterGuestNum = 1;
+    public UnityEvent StartGame;
+    public UnityEvent LevelChanged;
 
-    
-
+    public UnityEvent LevelChangeComplete;
     // Values shared to mobile
     //public int _spawnedGuestNum { get; set; } = 0;
 
@@ -25,10 +29,12 @@ public class GuestManager : MonoBehaviour
     // Values keep tracking in GuestManager
     private Dictionary<int, GameObject> _guests = new Dictionary<int, GameObject>();
     private int _currentGuestID = 0;
-
-
+    private bool gameStarted = false;
+    private bool levelChanging = false;
+    private int currentGuestNum = 0;
     private GameObject _HeadsetPlayerPrefab;
     private Player _player;
+    private GuestSpawn _guestSpawner;
 
     IEnumerator FindPlayerWithDelay(float delay)
     {
@@ -41,7 +47,7 @@ public class GuestManager : MonoBehaviour
         _player = _HeadsetPlayerPrefab.GetComponent<Player>();
     }
 
-
+    
     private void Awake()
     {
 
@@ -64,6 +70,40 @@ public class GuestManager : MonoBehaviour
     private void Start()
     {
         StartCoroutine(FindPlayerWithDelay(0.1f));
+        StartGame.AddListener(Initialize);
+        LevelChanged.AddListener(LevelUpdate);
+        LevelChangeComplete.AddListener(() => levelChanging = false);
+        _guestSpawner = FindObjectOfType<GuestSpawn>();
+    }
+    
+    private void Update()
+    {
+        if (gameStarted && !levelChanging)
+        {
+            if (_guests.Count == 0)
+            {
+                LevelChanged.Invoke();
+            }
+        }
+    }
+    // update level and spawn new guest
+    private void LevelUpdate()
+    {
+        Debug.Log("Level Update");
+        levelChanging = true;
+        gamelevel++;
+        currentGuestNum = starterGuestNum + gamelevel;
+        // spwan new guests
+        _guestSpawner.readyToSpawn(currentGuestNum);
+        LevelInfo(gamelevel);
+
+    }
+    
+    public  void Initialize()
+    {
+        gameStarted = true;
+        GameStartInfo(true, gamelevel);
+        
     }
 
     // generate new guest ID 
@@ -93,7 +133,13 @@ public class GuestManager : MonoBehaviour
         _currentGuestID = 0;
     }
 
-
+   // update level 
+   [Button("Update Level")]
+   public void ForcelevelIncrement()
+   {
+       destroyAllGuests();
+       LevelChanged.Invoke();
+   }
 
    
 
@@ -129,5 +175,19 @@ public class GuestManager : MonoBehaviour
             _player.RPC_SendClearAGuestInfO(guestID, isSatisfied);  
         }
     }
+    
+    //call it when game started, send to phone 
+    public void GameStartInfo(bool gameStart,int level)
+    {
+        
+    }
+    
+    //call it when new level start 
+    
+    public void LevelInfo(int level)
+    {
+        
+    }
+   
     
 }

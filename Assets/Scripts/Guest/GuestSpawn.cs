@@ -6,13 +6,15 @@ public class GuestSpawn : MonoBehaviour
 {
     [SerializeField] private List<GameObject> guestTypes;
     [SerializeField] private Transform spawnPoint;
-    [SerializeField] private int numGuestToSpawn = 4;
+    public int numGuestToSpawn = 1;
     private GameObject currentGuest;
     private List<Vector3> _potentialSpawnPoints;
     private List<int> indexesToSpawn;
     private List<int> indexesGusttype;
     private bool isreadyToSpawn = false;
     private bool isguestSpawned = false;
+
+    
     private void Awake()
     {
         _potentialSpawnPoints = new List<Vector3>();
@@ -70,13 +72,24 @@ public class GuestSpawn : MonoBehaviour
         
         isguestSpawned = true;
         
+        // call gamemanager to update level
+        GuestManager.Instance.LevelChangeComplete.Invoke();
+        
     }
-  
-    void Start()
+    public void readyToSpawn(int numGuestToSpawn)
     {
+        _potentialSpawnPoints = new List<Vector3>();
+        indexesToSpawn = new List<int>();
+        indexesGusttype = new List<int>();
+        this.numGuestToSpawn = numGuestToSpawn;
+        isguestSpawned = false;
         StartCoroutine(WaitForSpawnGuests());
     }
-
+    void Start()
+    {
+        
+    }
+    
     IEnumerator WaitForSpawnGuests()
     {
         // Wait until MRSceneManager reports that spawn points are calculated
@@ -92,7 +105,8 @@ public class GuestSpawn : MonoBehaviour
         // Wait until MRSceneManager reports that spawn points are calculated
         yield return new WaitUntil(() =>isguestSpawned);
         guest._onGuestArrived.Invoke();
-        
+       
+
     }
     // Update is called once per frame
     void Update()
@@ -111,5 +125,8 @@ public class GuestSpawn : MonoBehaviour
         //        SpawnGuest();
         //    }
         //}
+        
+        // check if all guests are satisfied
+        
     }
 }
