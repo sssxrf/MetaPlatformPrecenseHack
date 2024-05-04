@@ -146,7 +146,7 @@ public class Player : NetworkBehaviour
 #endif
 
 #if UNITY_ANDROID
-            Vector3 spawnPosCenter = new Vector3(MRSceneManager.Instance.RoomCenter.x, MRSceneManager.Instance.RoomCenter.y + 2, MRSceneManager.Instance.RoomCenter.z); 
+            Vector3 spawnPosCenter = new Vector3(MRSceneManager.Instance.RoomCenter.x + 1, MRSceneManager.Instance.calibrationHeight, MRSceneManager.Instance.RoomCenter.z); 
             FoodManager.Instance.SpawnfoodByName(foodtype, spawnPosCenter);
             HeadSetUIManager.Instance.UpdateMessages("food info Sent!");
 #endif
