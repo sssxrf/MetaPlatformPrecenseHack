@@ -11,8 +11,8 @@ public class GuestController : MonoBehaviour
     
     public enum GuestType
     {
-        Normal = 0,
-        Protection = 1
+        Purple = 0,
+        Orange = 1
     }
     [Header("Setup")]
     [SerializeField] float waitTime = 200f;
@@ -38,7 +38,7 @@ public class GuestController : MonoBehaviour
     //section for basic data, that shared to guest manager 
     // Values shared to mobile
      public Vector2 _posRelativeToWindow { get; set; }
-     public GuestType _guesttype { get; set; } = GuestType.Normal;
+     public GuestType _guesttype;
      public int _guestID  {get; set;} = -1;
      public bool _isSatisfied  {get; set;} = false;
      public int _urgentState  {get; set;} = 0;

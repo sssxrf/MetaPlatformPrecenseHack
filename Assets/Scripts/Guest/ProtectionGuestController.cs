@@ -53,7 +53,6 @@ public class ProtectionGuestController : GuestController
     void Start()
     {
         setUpEvents();
-        _guesttype = GuestType.Protection;
         
     }
 

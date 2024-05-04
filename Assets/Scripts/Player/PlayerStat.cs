@@ -37,6 +37,7 @@ public class PlayerStat : MonoBehaviour
 
     public void IncreaseCombo()
     {
+        Debug.Log("Combo increased");
         comboMeter++;
     }
 
