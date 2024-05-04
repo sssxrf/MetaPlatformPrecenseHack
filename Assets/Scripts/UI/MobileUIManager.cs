@@ -16,7 +16,7 @@ public class MobileUIManager : MonoBehaviour
     [SerializeField] private GameObject _mapmode;
 
     // Score bar
-    public int targetScore { get; set; } = 100; // The score needed to fill the progress bar.
+    public int targetScore { get; set; } = 20; // The score needed to fill the progress bar.
     private int currentScore = 0;
     public Image progressBar;
 
