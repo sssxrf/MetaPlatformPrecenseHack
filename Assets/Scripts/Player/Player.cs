@@ -59,6 +59,8 @@ public class Player : NetworkBehaviour
     #endregion
 
     #region RPC Messages
+
+    // Message Only
     [Rpc(RpcSources.InputAuthority, RpcTargets.StateAuthority, HostMode = RpcHostMode.SourceIsHostPlayer)]
     public void RPC_SendMessage(string message, RpcInfo info = default)
     {
@@ -94,6 +96,7 @@ public class Player : NetworkBehaviour
 
     }
 
+    // Room Info
     [Rpc(RpcSources.InputAuthority, RpcTargets.StateAuthority, HostMode = RpcHostMode.SourceIsHostPlayer)]
     public void RPC_SendRoomInfo(float roomlength, float roomwidth, RpcInfo info = default)
     {
@@ -124,7 +127,7 @@ public class Player : NetworkBehaviour
     }
 
 
-
+    // Food Info
     [Rpc(RpcSources.InputAuthority, RpcTargets.StateAuthority, HostMode = RpcHostMode.SourceIsHostPlayer)]
     public void RPC_SendFoodInfo(string foodtype, RpcInfo info = default)
     {
@@ -153,6 +156,90 @@ public class Player : NetworkBehaviour
             MobileUIManager.Instance.UpdateMessages("food info Sent!");
 #endif
     }
+
+    // New Guests Info
+    [Rpc(RpcSources.InputAuthority, RpcTargets.StateAuthority, HostMode = RpcHostMode.SourceIsHostPlayer)]
+    public void RPC_SendNewGuestInfo(int guestID, int guestType, int urgentState, Vector2 PosRelativeToWindow, RpcInfo info = default)
+    {
+        RPC_RelayNewGuestInfo(guestID, guestType, urgentState, PosRelativeToWindow, info.Source);
+    }
+
+    [Rpc(RpcSources.StateAuthority, RpcTargets.All, HostMode = RpcHostMode.SourceIsServer)]
+    public void RPC_RelayNewGuestInfo(int guestID, int guestType, int urgentState, Vector2 PosRelativeToWindow, PlayerRef messageSource)
+    {
+
+#if UNITY_STANDALONE_WIN
+        Debug.Log("RPC New guest is called");
+          ClientGuestManager.Instance.StoreNewGuestInfos(guestID, guestType, urgentState, PosRelativeToWindow);
+
+#endif
+
+#if UNITY_ANDROID
+
+#endif
+
+#if UNITY_IOS
+           ClientGuestManager.Instance.StoreNewGuestInfos(guestID, guestType, urgentState, PosRelativeToWindow);
+#endif
+    }
+
+    // Guests Info Update
+    [Rpc(RpcSources.InputAuthority, RpcTargets.StateAuthority, HostMode = RpcHostMode.SourceIsHostPlayer)]
+    public void RPC_SendUpdateGuestInfo(int guestID, int urgentState, RpcInfo info = default)
+    {
+        RPC_RelayUpdateGuestInfo(guestID, urgentState, info.Source);
+    }
+
+    [Rpc(RpcSources.StateAuthority, RpcTargets.All, HostMode = RpcHostMode.SourceIsServer)]
+    public void RPC_RelayUpdateGuestInfo(int guestID, int urgentState, PlayerRef messageSource)
+    {
+
+#if UNITY_STANDALONE_WIN
+        
+        ClientGuestManager.Instance.UpdateGuestInfos(guestID, urgentState);
+
+#endif
+
+#if UNITY_ANDROID
+
+#endif
+
+#if UNITY_IOS
+        ClientGuestManager.Instance.UpdateGuestInfos(guestID, urgentState);
+#endif
+
+    }
+
+    // Guests Info Update
+    [Rpc(RpcSources.InputAuthority, RpcTargets.StateAuthority, HostMode = RpcHostMode.SourceIsHostPlayer)]
+    public void RPC_SendClearAGuestInfO(int guestID, bool isSatisfied, RpcInfo info = default)
+    {
+        RPC_RelayClearAGuestInfo(guestID, isSatisfied, info.Source);
+    }
+
+    [Rpc(RpcSources.StateAuthority, RpcTargets.All, HostMode = RpcHostMode.SourceIsServer)]
+    public void RPC_RelayClearAGuestInfo(int guestID, bool isSatisfied, PlayerRef messageSource)
+    {
+
+#if UNITY_STANDALONE_WIN
+        ClientGuestManager.Instance.ClearAGuestInfos(guestID, isSatisfied);
+        
+
+#endif
+
+#if UNITY_ANDROID
+
+#endif
+
+#if UNITY_IOS
+        ClientGuestManager.Instance.ClearAGuestInfos(guestID, isSatisfied);
+#endif
+
+    }
+
+
+
+
     #endregion
 
 

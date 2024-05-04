@@ -66,7 +66,7 @@ public class WindowScaleManager : MonoBehaviour
         // Determine the smallest distance and corresponding edge
         float minDistance = Mathf.Min(distanceToLeft, distanceToRight, distanceToTop, distanceToBottom);
 
-        Debug.Log("mindist:" + minDistance);
+        //Debug.Log("mindist:" + minDistance);
         if (minDistance == distanceToLeft || minDistance == distanceToRight)
         {
             return false;   //width, then window is vertical

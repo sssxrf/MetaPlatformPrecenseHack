@@ -59,10 +59,18 @@ public class GuestController : MonoBehaviour
   
     
     //call this function to set up posrelative to window
-    public void SetPosRelativeToWindow(Vector2 pos)
+    public void SetPosRelativeToWindow(Vector3 worldPosition, Transform referenceTransform)
     {
-        _posRelativeToWindow = pos;
-        Debug.Log("Set pos relative to window");
+
+        // This converts the world position of objectA to the local coordinate system of objectB
+        Vector3 localPosition3D = referenceTransform.InverseTransformPoint(worldPosition);
+
+
+        Vector2 localPosition2D = new Vector2(localPosition3D.x, localPosition3D.y);
+
+
+        _posRelativeToWindow = localPosition2D;
+        //Debug.Log("Set pos relative to window");
     }
     protected void OnCollisionEnter(Collision other)
     {

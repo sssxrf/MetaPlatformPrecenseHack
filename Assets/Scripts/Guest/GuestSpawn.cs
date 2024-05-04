@@ -56,6 +56,7 @@ public class GuestSpawn : MonoBehaviour
                 currentGuest.transform.LookAt(MRSceneManager.Instance.CalibratedRoomCenter);
                 currentGuest.transform.rotation *= Quaternion.Euler(0, 90, 0);
                 var guestController = currentGuest.GetComponent<GuestController>();
+                guestController.SetPosRelativeToWindow(currentGuest.transform.position, MRSceneManager.Instance.FloorTrans);
                 StartCoroutine(WaitForGuestReady(guestController));
 
                 guestController._onGuestSatisfied.AddListener(PlayerStat.Instance.IncreaseCombo);
