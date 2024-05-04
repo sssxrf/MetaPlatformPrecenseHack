@@ -9,7 +9,7 @@ using System;
 public class MRSceneManager : MonoBehaviour
 {
     public static MRSceneManager Instance { get; private set; }
-    public bool testingMode = true;
+    public bool testingMode = false;
 
 
     #region SerializeField

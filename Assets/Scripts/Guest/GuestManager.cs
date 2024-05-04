@@ -26,9 +26,21 @@ public class GuestManager : MonoBehaviour
     private Dictionary<int, GameObject> _guests = new Dictionary<int, GameObject>();
     private int _currentGuestID = 0;
 
-    
 
-    
+    private GameObject _HeadsetPlayerPrefab;
+    private Player _player;
+
+    IEnumerator FindPlayerWithDelay(float delay)
+    {
+        while (_HeadsetPlayerPrefab == null)
+        {
+            yield return new WaitForSeconds(delay);
+            _HeadsetPlayerPrefab = GameObject.Find("PlayerPrefabHost(Clone)");
+        }
+        Debug.Log("HeadsetPlayer is found!");
+        _player = _HeadsetPlayerPrefab.GetComponent<Player>();
+    }
+
 
     private void Awake()
     {
@@ -47,6 +59,11 @@ public class GuestManager : MonoBehaviour
                 Destroy(gameObject);
             }
         }
+    }
+
+    private void Start()
+    {
+        StartCoroutine(FindPlayerWithDelay(0.1f));
     }
 
     // generate new guest ID 
@@ -84,12 +101,19 @@ public class GuestManager : MonoBehaviour
     public void SendNewGuestInfo(int guestID, int guestType, int urgentState, Vector2 PosRelativeToWindow)
     {
         Debug.Log("New Guest Info: " + guestID + " " + guestType + " " + urgentState + " " + PosRelativeToWindow);
+        if(_player != null)
+        {
+            _player.RPC_SendNewGuestInfo(guestID, guestType, urgentState, PosRelativeToWindow);
+        }
     }
 
     // call it when urgentState changes
     public void UpdateGuestInfo(int guestID, int urgentState)
     {
-
+        if (_player != null)
+        {
+            _player.RPC_SendUpdateGuestInfo(guestID, urgentState);
+        }
     } 
 
 
@@ -98,6 +122,10 @@ public class GuestManager : MonoBehaviour
     public void ClearAGuest(int guestID, bool isSatisfied)
     {
         Debug.Log("Guest " + guestID + " is cleared, isSatisfied: " + isSatisfied);
+        if (_player != null)
+        {
+            _player.RPC_SendClearAGuestInfO(guestID, isSatisfied);  
+        }
     }
     
 }
