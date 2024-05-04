@@ -127,6 +127,8 @@ public class MobileUIManager : MonoBehaviour
     {
         startCountdown = false;
         Debug.Log("Game End!");
+        timerText.text = string.Format("{0:00}:{1:00}", 0, 0);
+
     }
 
 }
