@@ -9,7 +9,7 @@ public class GuestManager : MonoBehaviour
     public static GuestManager Instance { get; private set; }
     public int gamelevel = 0;
     public int starterGuestNum = 1;
-    public UnityEvent StartGame;
+    public UnityEvent StartGameEvent;
     public UnityEvent LevelChanged;
 
     public UnityEvent LevelChangeComplete;
@@ -70,7 +70,7 @@ public class GuestManager : MonoBehaviour
     private void Start()
     {
         StartCoroutine(FindPlayerWithDelay(0.1f));
-        StartGame.AddListener(Initialize);
+        StartGameEvent.AddListener(Initialize);
         LevelChanged.AddListener(LevelUpdate);
         LevelChangeComplete.AddListener(() => levelChanging = false);
         _guestSpawner = FindObjectOfType<GuestSpawn>();
@@ -83,13 +83,22 @@ public class GuestManager : MonoBehaviour
             if (_guests.Count == 0)
             {
                 LevelChanged.Invoke();
+                StartCoroutine(WaitForLevelChange());
             }
         }
+    }
+
+    IEnumerator WaitForLevelChange()
+    {
+        // wait for 3 seconds
+        yield return new WaitForSeconds( 3f);
+        levelChanging = false;
+
     }
     // update level and spawn new guest
     private void LevelUpdate()
     {
-        Debug.Log("Level Update");
+        Debug.Log("Level Update " );
         levelChanging = true;
         gamelevel++;
         currentGuestNum = starterGuestNum + gamelevel;
@@ -117,7 +126,7 @@ public class GuestManager : MonoBehaviour
     public void RemoveGuestID(int guestID)
     {
         if (!_guests.ContainsKey(guestID)) return;
-        Destroy(_guests[guestID], 0.1f);
+        Destroy(_guests[guestID]);
         _guests.Remove(guestID);
     }
     

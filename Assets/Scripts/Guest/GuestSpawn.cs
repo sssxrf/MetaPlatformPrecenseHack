@@ -71,9 +71,7 @@ public class GuestSpawn : MonoBehaviour
         }
         
         isguestSpawned = true;
-        
-        // call gamemanager to update level
-        GuestManager.Instance.LevelChangeComplete.Invoke();
+   
         
     }
     public void readyToSpawn(int numGuestToSpawn)
