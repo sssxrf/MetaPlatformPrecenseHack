@@ -30,6 +30,13 @@ public class ClientGuestManager : MonoBehaviour
     #endregion
 
     #region Public Methods
+    public void StartGame(int targetScore, int Level, int timeLimit)
+    {
+        MobileUIManager.Instance.targetScore = targetScore;
+        MobileUIManager.Instance.totalTime = timeLimit;
+        MobileUIManager.Instance.StartCountDown();
+    }
+
     public void StoreNewGuestInfos(int newguestID, int newguestType, int newurgentState, Vector2 newPosRelativeToWindow)
     {
         GuestInfos guestInfo;
@@ -62,13 +69,17 @@ public class ClientGuestManager : MonoBehaviour
         {
             Destroy(_spawnedGuests[theguestID]);
 
+            Debug.Log("Clear a guest, issatisfied?"+ isSatisfied);
             if (isSatisfied)
             {
                 // earn reward
+                MobileUIManager.Instance.ChangeScore(1);
+
             }
             else
             {
                 // delete point
+                MobileUIManager.Instance.ChangeScore(-1);
             }
         }
     }
@@ -122,6 +133,7 @@ public class ClientGuestManager : MonoBehaviour
 
     private void UpdateGuestState(GuestInfos updatedguest)
     {
+        Debug.Log("update guest");
         var id = (updatedguest.guestType, updatedguest.urgentState);
 
         Destroy(_spawnedGuests[updatedguest.guestID]);

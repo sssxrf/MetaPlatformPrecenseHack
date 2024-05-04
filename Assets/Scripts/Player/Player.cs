@@ -36,6 +36,7 @@ public class Player : NetworkBehaviour
 #if UNITY_ANDROID
         transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
         Body = gameObject.transform.GetChild(0).gameObject;
+        gameObject.transform.GetChild(0).gameObject.SetActive(false);
         Body.SetActive(false);
 #endif
     }
@@ -146,7 +147,7 @@ public class Player : NetworkBehaviour
 #endif
 
 #if UNITY_ANDROID
-            Vector3 spawnPosCenter = new Vector3(MRSceneManager.Instance.RoomCenter.x, MRSceneManager.Instance.RoomCenter.y + 2, MRSceneManager.Instance.RoomCenter.z); 
+            Vector3 spawnPosCenter = new Vector3(MRSceneManager.Instance.RoomCenter.x + 1, MRSceneManager.Instance.calibrationHeight, MRSceneManager.Instance.RoomCenter.z); 
             FoodManager.Instance.SpawnfoodByName(foodtype, spawnPosCenter);
             HeadSetUIManager.Instance.UpdateMessages("food info Sent!");
 #endif
