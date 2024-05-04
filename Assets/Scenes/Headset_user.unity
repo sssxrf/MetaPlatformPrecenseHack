@@ -515,7 +515,7 @@ MonoBehaviour:
   foodModels:
   - {fileID: 919132149155446097, guid: c8c7f54fc777b469fa2563a1f90dcec2, type: 3}
   - {fileID: 919132149155446097, guid: 40a3780f43bbc44f3b525b9b56a26269, type: 3}
-  - {fileID: 919132149155446097, guid: d59f819bc7084456c9932fdace8c1567, type: 3}
+  - {fileID: 5155514587491999950}
 --- !u!4 &78713910
 Transform:
   m_ObjectHideFlags: 0
@@ -8922,7 +8922,7 @@ PrefabInstance:
     - target: {fileID: 3607379736726082710, guid: 45bf36a9b498f4abe828f3708b31a17a, type: 3}
       propertyPath: _SushiPrefab
       value: 
-      objectReference: {fileID: 2901257331452079920, guid: 8c798f6e2ea4c80479d91794e4810944, type: 3}
+      objectReference: {fileID: 998371763000849979, guid: de782779d7778e2489dc75dade68397f, type: 3}
     - target: {fileID: 3607379736726082710, guid: 45bf36a9b498f4abe828f3708b31a17a, type: 3}
       propertyPath: _MilkTeaPrefab
       value: 
@@ -11441,6 +11441,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: de782779d7778e2489dc75dade68397f, type: 3}
+--- !u!1 &5155514587491999950 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5984943858580858667, guid: de782779d7778e2489dc75dade68397f, type: 3}
+  m_PrefabInstance: {fileID: 5155514587491999949}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
