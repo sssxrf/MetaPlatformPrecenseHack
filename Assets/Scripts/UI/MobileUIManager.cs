@@ -16,12 +16,12 @@ public class MobileUIManager : MonoBehaviour
     [SerializeField] private GameObject _mapmode;
 
     // Score bar
-    public int targetScore { get; set; } = 20; // The score needed to fill the progress bar.
+    public int targetScore { get; set; } = 15; // The score needed to fill the progress bar.
     private float currentScore = 0;
     public Image progressBar;
 
     // Count down
-    public float totalTime { get; set; }  = 90; // Total time in seconds (1 minute 30 seconds)
+    public float totalTime { get; set; }  = 300; // Total time in seconds (1 minute 30 seconds)
     private float remainingTime;
     public TextMeshProUGUI timerText;
     private bool startCountdown;
@@ -55,7 +55,7 @@ public class MobileUIManager : MonoBehaviour
         remainingTime = totalTime;
         UpdateTimerDisplay();
         UpdateProgressBar();
-        StartCountDown();
+        //StartCountDown();
     }
 
     void Update()

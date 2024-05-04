@@ -188,7 +188,10 @@ public class GuestManager : MonoBehaviour
     //call it when game started, send to phone 
     public void GameStartInfo(bool gameStart,int level)
     {
-        
+        if (_player != null)
+        {
+            _player.RPC_SendStarttheGame(gameStart);
+        }
     }
     
     //call it when new level start 

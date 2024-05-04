@@ -37,6 +37,12 @@ public class ClientGuestManager : MonoBehaviour
         MobileUIManager.Instance.StartCountDown();
     }
 
+    public void StartGame()
+    {
+        
+        MobileUIManager.Instance.StartCountDown();
+    }
+
     public void StoreNewGuestInfos(int newguestID, int newguestType, int newurgentState, Vector2 newPosRelativeToWindow)
     {
         GuestInfos guestInfo;

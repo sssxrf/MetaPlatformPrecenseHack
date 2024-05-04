@@ -239,6 +239,33 @@ public class Player : NetworkBehaviour
     }
 
 
+    // Start Game
+    [Rpc(RpcSources.InputAuthority, RpcTargets.StateAuthority, HostMode = RpcHostMode.SourceIsHostPlayer)]
+    public void RPC_SendStarttheGame(bool start, RpcInfo info = default)
+    {
+        RPC_RelayStarttheGame(start, info.Source);
+    }
+    [Rpc(RpcSources.StateAuthority, RpcTargets.All, HostMode = RpcHostMode.SourceIsServer)]
+    public void RPC_RelayStarttheGame(bool start, PlayerRef messageSource)
+    {
+
+#if UNITY_STANDALONE_WIN
+        ClientGuestManager.Instance.StartGame();
+        
+
+#endif
+
+#if UNITY_ANDROID
+
+#endif
+
+#if UNITY_IOS
+        ClientGuestManager.Instance.StartGame();
+#endif
+
+    }
+
+
 
 
     #endregion
