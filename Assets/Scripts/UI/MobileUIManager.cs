@@ -17,7 +17,7 @@ public class MobileUIManager : MonoBehaviour
 
     // Score bar
     public int targetScore { get; set; } = 20; // The score needed to fill the progress bar.
-    private int currentScore = 0;
+    private float currentScore = 0;
     public Image progressBar;
 
     // Count down
@@ -55,6 +55,7 @@ public class MobileUIManager : MonoBehaviour
         remainingTime = totalTime;
         UpdateTimerDisplay();
         UpdateProgressBar();
+        StartCountDown();
     }
 
     void Update()
@@ -72,6 +73,8 @@ public class MobileUIManager : MonoBehaviour
                 TimerEnded();
             }
         }
+
+        ChangeScore(0.0001f);
         
     }
 
@@ -86,7 +89,7 @@ public class MobileUIManager : MonoBehaviour
     }
 
 
-    public void ChangeScore(int scoreToChange)
+    public void ChangeScore(float scoreToChange)
     {
         currentScore += scoreToChange;
         currentScore = Mathf.Clamp(currentScore, 0, targetScore); // Ensure score doesn't exceed max.
