@@ -57,6 +57,11 @@ public class GuestSpawn : MonoBehaviour
                 currentGuest.transform.rotation *= Quaternion.Euler(0, 90, 0);
                 var guestController = currentGuest.GetComponent<GuestController>();
                 StartCoroutine(WaitForGuestReady(guestController));
+
+                guestController._onGuestSatisfied.AddListener(PlayerStat.Instance.IncreaseCombo);
+                guestController._onGuestUnsatisfied.AddListener(PlayerStat.Instance.ClearCombo);
+                guestController._onWrongFood.AddListener(PlayerStat.Instance.ClearCombo);
+
             }
 
             Debug.Log("Guests are Spawned");
