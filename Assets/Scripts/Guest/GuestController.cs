@@ -193,8 +193,12 @@ public class GuestController : MonoBehaviour
                 _onGuestUnsatisfied.Invoke();
             }else if (currentTime >= waitTime * _urgentPercent)
             {
+                if (_urgentState == 0)
+                {
+                    _onGuestUrgent.Invoke();
+                }
+
                 _urgentState = 1;
-                _onGuestUrgent.Invoke();
             }
         }
         
