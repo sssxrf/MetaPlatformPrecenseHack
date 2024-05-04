@@ -36,6 +36,7 @@ public class Player : NetworkBehaviour
 #if UNITY_ANDROID
         transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
         Body = gameObject.transform.GetChild(0).gameObject;
+        gameObject.transform.GetChild(0).gameObject.SetActive(false);
         Body.SetActive(false);
 #endif
     }
