@@ -15,9 +15,16 @@ public class MobileUIManager : MonoBehaviour
     [SerializeField] private GameObject _foodmode;
     [SerializeField] private GameObject _mapmode;
 
+    // Score bar
     public int targetScore { get; set; } = 100; // The score needed to fill the progress bar.
     private int currentScore = 0;
     public Image progressBar;
+
+    // Count down
+    public float totalTime { get; set; }  = 90; // Total time in seconds (1 minute 30 seconds)
+    private float remainingTime;
+    public TextMeshProUGUI timerText;
+    private bool startCountdown;
 
     #endregion
 
@@ -45,7 +52,27 @@ public class MobileUIManager : MonoBehaviour
 
     private void Start()
     {
+        remainingTime = totalTime;
+        UpdateTimerDisplay();
         UpdateProgressBar();
+    }
+
+    void Update()
+    {
+        if (startCountdown)
+        {
+            if (remainingTime > 0)
+            {
+                remainingTime -= Time.deltaTime;
+                UpdateTimerDisplay();
+            }
+            else
+            {
+                remainingTime = 0;
+                TimerEnded();
+            }
+        }
+        
     }
 
     public void UpdateMessages(string message)
@@ -77,4 +104,26 @@ public class MobileUIManager : MonoBehaviour
             Debug.LogError("Progress bar image is not set.");
         }
     }
+
+    public void StartCountDown()
+    {
+        startCountdown = true;
+        remainingTime = totalTime;
+    }
+
+
+    private void UpdateTimerDisplay()
+    {
+        // Format the remaining time as mm:ss
+        int minutes = Mathf.FloorToInt(remainingTime / 60);
+        int seconds = Mathf.FloorToInt(remainingTime % 60);
+        timerText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
+    }
+
+    private void TimerEnded()
+    {
+        startCountdown = false;
+        Debug.Log("Game End!");
+    }
+
 }

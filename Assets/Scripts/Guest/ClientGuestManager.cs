@@ -30,6 +30,13 @@ public class ClientGuestManager : MonoBehaviour
     #endregion
 
     #region Public Methods
+    public void StartGame(int targetScore, int Level, int timeLimit)
+    {
+        MobileUIManager.Instance.targetScore = targetScore;
+        MobileUIManager.Instance.totalTime = timeLimit;
+        MobileUIManager.Instance.StartCountDown();
+    }
+
     public void StoreNewGuestInfos(int newguestID, int newguestType, int newurgentState, Vector2 newPosRelativeToWindow)
     {
         GuestInfos guestInfo;
