@@ -66,10 +66,13 @@ public class ClientGuestManager : MonoBehaviour
             if (isSatisfied)
             {
                 // earn reward
+                MobileUIManager.Instance.ChangeScore(1);
+
             }
             else
             {
                 // delete point
+                MobileUIManager.Instance.ChangeScore(-1);
             }
         }
     }

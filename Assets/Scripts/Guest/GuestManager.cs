@@ -95,7 +95,11 @@ public class GuestManager : MonoBehaviour
 
 
 
-   
+   // Game start!
+   public void StartGame(int targetScore, int Level, int timeLimit)
+    {
+
+    }
 
     // call it when spawning a new guest
     public void SendNewGuestInfo(int guestID, int guestType, int urgentState, Vector2 PosRelativeToWindow)
