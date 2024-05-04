@@ -196,8 +196,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a2ceddb3d8939d4d83028043545aec5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  waitTime: 200
+  waitTime: 30
   paneltyTime: 5
+  _urgentPercent: 0.7
   foodBubble:
   - {fileID: 1004634509436868900, guid: a96bbabfe305df345aee59003837b307, type: 3}
   - {fileID: 4854402930611853383, guid: 79f0021604b5ab04f80c42a0f6c7ad1b, type: 3}
@@ -229,6 +230,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  _onGuestUrgent:
+    m_PersistentCalls:
+      m_Calls: []
   onProtectionDestroyed:
     m_PersistentCalls:
       m_Calls: []
