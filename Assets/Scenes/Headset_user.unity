@@ -958,9 +958,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   guestTypes:
   - {fileID: 6833640943243769953, guid: 93236b8fdd042e64ca88dae98fee7974, type: 3}
-  - {fileID: 1435437687792879865, guid: 6591be05ca6616d4fb65c52d6850944b, type: 3}
   - {fileID: 1178031500477543814, guid: b2d357fe0d8636146adb1a0c3be8f03a, type: 3}
-  - {fileID: 2131363042257707814, guid: fca4c42e33c86e642807e49db5c16c85, type: 3}
   spawnPoint: {fileID: 0}
   numGuestToSpawn: 4
 --- !u!1 &158341846
@@ -1261,6 +1259,7 @@ GameObject:
   - component: {fileID: 229259284}
   - component: {fileID: 229259283}
   - component: {fileID: 229259282}
+  - component: {fileID: 229259285}
   m_Layer: 0
   m_Name: '[BuildingBlock] Controller Buttons Mapper'
   m_TagString: Untagged
@@ -1275,7 +1274,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 229259281}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d376240d064f4484e81824d51391caf3, type: 3}
   m_Name: 
@@ -1291,18 +1290,6 @@ MonoBehaviour:
           m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
           m_MethodName: SetActive
           m_Mode: 6
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-        - m_Target: {fileID: 915561487}
-          m_TargetAssemblyTypeName: MRSceneManager, Assembly-CSharp
-          m_MethodName: SendRoomInfo
-          m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -1401,6 +1388,109 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &229259285
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 229259281}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d376240d064f4484e81824d51391caf3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _buttonClickActions:
+  - Title: RoomInfo
+    Button: 2
+    ButtonMode: 1
+    Callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 2033440685}
+          m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_MethodName: SetActive
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 156799711}
+          m_TargetAssemblyTypeName: GuestManager, Assembly-CSharp
+          m_MethodName: Initialize
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 915561487}
+          m_TargetAssemblyTypeName: MRSceneManager, Assembly-CSharp
+          m_MethodName: ConfirmCalibration
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 915561487}
+          m_TargetAssemblyTypeName: MRSceneManager, Assembly-CSharp
+          m_MethodName: SendRoomInfo
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - Title: Openportal
+    Button: 1
+    ButtonMode: 1
+    Callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 935024004}
+          m_TargetAssemblyTypeName: ProjectorManager, Assembly-CSharp
+          m_MethodName: createProjectedWindow
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - Title: SwitchWindowBlock
+    Button: 4
+    ButtonMode: 1
+    Callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 935024004}
+          m_TargetAssemblyTypeName: ProjectorManager, Assembly-CSharp
+          m_MethodName: SwitchWindowBlock
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &229454181
 GameObject:
   m_ObjectHideFlags: 0
@@ -4770,7 +4860,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e684368346b5654f93d057917aacc12, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  testingMode: 1
+  testingMode: 0
   sceneManager: {fileID: 0}
   projector: {fileID: 935024001}
   skybox: {fileID: 1015179469}
@@ -4778,7 +4868,7 @@ MonoBehaviour:
   RightController: {fileID: 1640250123}
   numofPotentialPosForGuests: 8
   spawnOffset: 0.5
-  projectedOffset: 0.556
+  projectedOffset: 1.5
   _headset: {fileID: 1581680669}
 --- !u!1 &915688927
 GameObject:
@@ -4955,11 +5045,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3447007389358252987, guid: e8c0b2defa4828c4dad244d78aa266d4, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.59
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3447007389358252987, guid: e8c0b2defa4828c4dad244d78aa266d4, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.86100006
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3447007389358252987, guid: e8c0b2defa4828c4dad244d78aa266d4, type: 3}
       propertyPath: m_LocalRotation.w
@@ -4992,10 +5082,6 @@ PrefabInstance:
     - target: {fileID: 5152908225861682567, guid: e8c0b2defa4828c4dad244d78aa266d4, type: 3}
       propertyPath: m_Name
       value: projector
-      objectReference: {fileID: 0}
-    - target: {fileID: 5152908225861682567, guid: e8c0b2defa4828c4dad244d78aa266d4, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -82,8 +82,8 @@ public class GuestManager : MonoBehaviour
         {
             if (_guests.Count == 0)
             {
-                LevelChanged.Invoke();
-                StartCoroutine(WaitForLevelChange());
+                levelChanging = true;
+                StartCoroutine(WaitForLevelStart());
             }
         }
     }
@@ -95,11 +95,20 @@ public class GuestManager : MonoBehaviour
         levelChanging = false;
 
     }
+
+    private IEnumerator WaitForLevelStart()
+    {
+        // wait for 3 seconds
+        yield return new WaitForSeconds( 1f);
+        LevelChanged.Invoke();
+        StartCoroutine(WaitForLevelChange());
+
+    }
+    
     // update level and spawn new guest
     private void LevelUpdate()
     {
         Debug.Log("Level Update " );
-        levelChanging = true;
         gamelevel++;
         currentGuestNum = starterGuestNum + gamelevel;
         // spwan new guests

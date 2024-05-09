@@ -82,10 +82,10 @@ public class ProjectorManager : MonoBehaviour
         if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, wallLayerMask))
         {
             Debug.Log("Found wall hit");
-            currentOpeningWindow = Instantiate(ProjectedWindow, hit.point, Quaternion.LookRotation(-hit.normal) );
+            currentOpeningWindow = Instantiate(ProjectedWindow, hit.point,  Quaternion.LookRotation(-hit.normal) );
             // rotate the window to 90 degree on y 
             // currentOpeningWindow.transform.Rotate(0,90,0);
-            // newWall.transform.position = hit.point- hit.normal * 0.1f;
+            currentOpeningWindow.transform.position = hit.point- hit.normal * 0.2f;
             currentviewingWindowInterator = currentOpeningWindow.GetComponent<viewingWindowInterator>();
             //ProjectedWindows.Add(currentOpeningWindow.GetComponent<viewingWindowInterator>());
 
@@ -109,6 +109,10 @@ public class ProjectorManager : MonoBehaviour
             currentviewingWindowInterator.SwitchWindow();
             _isOpening = !_isOpening;
         }
+    }
+    public void SetProjectorPosition(Vector3 position)
+    {
+        transform.position = position;
     }
     #region Unity Methods
     private void Awake()
