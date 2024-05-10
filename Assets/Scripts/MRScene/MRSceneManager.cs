@@ -241,7 +241,9 @@ public class MRSceneManager : MonoBehaviour
 
     private void CalibrateProjectorAndSkybox()
     {
-        projector.transform.position = new Vector3(_calibratedRoomCenter.x, _calibratedRoomCenter.y - projectedOffset, _calibratedRoomCenter.z);
+        projector.transform.position = new Vector3(_calibratedRoomCenter.x, projector.transform.position .y , _calibratedRoomCenter.z);
+        projector.GetComponent<ProjectorManager>().SetProjectorPosition(new Vector3(_calibratedRoomCenter.x,
+            _calibratedRoomCenter.y - projectedOffset, _calibratedRoomCenter.z),_roomCenter);
         skybox.transform.position = new Vector3(_calibratedRoomCenter.x, _calibratedRoomCenter.y - projectedOffset, _calibratedRoomCenter.z);
     }
 

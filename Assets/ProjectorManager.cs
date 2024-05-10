@@ -20,9 +20,12 @@ public class ProjectorManager : MonoBehaviour
 
     #region SerializedField
     [SerializeField] GameObject ProjectedWindow;
+    [SerializeField] private GameObject ProjectorHead;
+    [SerializeField] private GameObject ProjectorBody;
+    [SerializeField] private GameObject ProjectorBase;
     [SerializeField] private List<Transform> ProjectorDirections;
     [SerializeField] private GrabInteractable grabInteractable;
-
+    
     private float goalAngle = 0f;
     private int currentDirectionIndex = 0;
     private int wallLayerMask;
@@ -31,7 +34,7 @@ public class ProjectorManager : MonoBehaviour
     private ProjectorState state = ProjectorState.Idle;
     private viewingWindowInterator currentviewingWindowInterator;
     private GameObject currentOpeningWindow;
-
+    private float heightDiff;
     private Vector2 _windowPos2D;
     private bool _isOpening = false;
     private static float _windowLen = 2f;
@@ -40,7 +43,7 @@ public class ProjectorManager : MonoBehaviour
     public bool isOpening => _isOpening;
     public float windowLen => _windowLen;
     public bool isWindowHorizontal => _isWindowHorizontal;
-
+    
     #endregion
 
     public void Initialized()
@@ -110,9 +113,15 @@ public class ProjectorManager : MonoBehaviour
             _isOpening = !_isOpening;
         }
     }
-    public void SetProjectorPosition(Vector3 position)
+    public void SetProjectorPosition(Vector3 ProjectorHeadposition,Vector3 roomCenter)
     {
-        transform.position = position;
+      
+        ProjectorHead.transform.position = ProjectorHeadposition;
+        ProjectorBody.transform.position = roomCenter;
+        ProjectorBase.transform.position = roomCenter;
+        var heightDiffAfter = ProjectorHead.transform.position.y - ProjectorBody.transform.position.y;
+        ProjectorBody.transform.localScale = new Vector3(ProjectorBody.transform.localScale.x, heightDiffAfter/heightDiff, ProjectorBody.transform.localScale.z);
+        
     }
     #region Unity Methods
     private void Awake()
@@ -138,6 +147,8 @@ public class ProjectorManager : MonoBehaviour
        
         grabInteractable.WhenSelectingInteractorRemoved.Action += RotationFixed;
         grabInteractable.WhenSelectingInteractorAdded.Action += Grabbed;
+        
+        heightDiff = ProjectorHead.transform.position.y - ProjectorBody.transform.position.y;
     }
 
     
