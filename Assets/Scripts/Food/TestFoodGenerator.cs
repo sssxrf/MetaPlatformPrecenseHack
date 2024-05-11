@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using Sirenix.OdinInspector;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class TestFoodGenerator : MonoBehaviour
 {
@@ -8,34 +10,34 @@ public class TestFoodGenerator : MonoBehaviour
     [SerializeField] private GameObject _MilkTeaPrefab;
     [SerializeField] private GameObject _RamenPrefab;
     [SerializeField] private Transform _foodGenPosition;
-
+    [SerializeField] private SpawnTable _spawnTable;
     private void GenerateFood(Food.FoodType type)
     {
         switch (type)
         {
 
             case Food.FoodType.Sushi:
-                Instantiate(_SushiPrefab, _foodGenPosition.position, Quaternion.identity);
+                _spawnTable.SpawnItem(_SushiPrefab);
                 break;
             case Food.FoodType.MilkTea:
-                Instantiate(_MilkTeaPrefab, _foodGenPosition.position, Quaternion.identity);
+                _spawnTable.SpawnItem(_MilkTeaPrefab);
                 break;
             case Food.FoodType.Ramen:
-                Instantiate(_RamenPrefab, _foodGenPosition.position, Quaternion.identity);
+                _spawnTable.SpawnItem(_RamenPrefab);
                 break;
         }
     }
-    
+    [Button]
     public void GenerateSushi()
     {
         GenerateFood(Food.FoodType.Sushi);
     }
-    
+    [Button]
     public void GenerateMilkTea()
     {
         GenerateFood(Food.FoodType.MilkTea);
     }
-    
+    [Button]
     public void GenerateRamen()
     {
         GenerateFood(Food.FoodType.Ramen);
