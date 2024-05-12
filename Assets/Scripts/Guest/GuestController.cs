@@ -43,6 +43,7 @@ public class GuestController : MonoBehaviour
      public bool _isSatisfied  {get; set;} = false;
      public int _urgentState  {get; set;} = 0;
      
+     Animator myAnimator;
      // storage variable 
      private GuestManager _guestManager;
      
@@ -112,6 +113,7 @@ public class GuestController : MonoBehaviour
         _isSatisfied = true;
         if (_guestManager != null)
         {
+            myAnimator.SetBool("isSatisfied", true);
             _guestManager.ClearAGuest(_guestID, _isSatisfied);
             _guestManager.RemoveGuestID(_guestID);
         }
@@ -122,6 +124,7 @@ public class GuestController : MonoBehaviour
         _isSatisfied = false;
         if (_guestManager != null)
         {
+            myAnimator.SetBool("isLeaving", true);
             _guestManager.ClearAGuest(_guestID, _isSatisfied);
             _guestManager.RemoveGuestID(_guestID);
         }
@@ -173,7 +176,7 @@ public class GuestController : MonoBehaviour
     {
         setUpEvents();
         GenerateFoodType();
-        
+        myAnimator = GetComponent<Animator>();
        
     }
     
