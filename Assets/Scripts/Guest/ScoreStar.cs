@@ -8,13 +8,15 @@ public class ScoreStar : MonoBehaviour
 {
     private GameObject Headset;
     [SerializeField] private float speed = 5f;
+    [SerializeField] MeshRenderer starMeshRenderer;
     public UnityEvent onStarCollected;
-   
+    
 
     private void OnCollisionEnter(Collision other)
     {
         if (other.gameObject.GetComponent<CollectZone>())
         {
+            starMeshRenderer.enabled = false;
             onStarCollected.Invoke();
             Destroy(gameObject);
         }
@@ -23,11 +25,11 @@ public class ScoreStar : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Destroy(gameObject,3f);
+        Destroy(gameObject,2f);
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         if (Headset != null)
         {
@@ -35,12 +37,13 @@ public class ScoreStar : MonoBehaviour
             Vector3 targetPosition = Headset.transform.position;
 
             // Smoothly move towards the target position
-            transform.position = Vector3.Lerp(transform.position, targetPosition, speed * Time.deltaTime);
+            transform.position = Vector3.MoveTowards(transform.position, targetPosition, speed * Time.deltaTime);
         }
         else
         {
             //find game object with collect zone 
             Headset = FindObjectOfType<CollectZone>().GameObject();
+            
         }
     }
 }

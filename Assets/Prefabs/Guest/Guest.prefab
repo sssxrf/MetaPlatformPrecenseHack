@@ -370,6 +370,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   _guesttype: 0
+  myAnimator: {fileID: 2135009898460801713}
 --- !u!65 &4238188533439658706
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -702,6 +703,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 70112e911f1554f21b95e69066f52415, type: 3}
+--- !u!95 &2135009898460801713 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 4487639270926528074, guid: 70112e911f1554f21b95e69066f52415, type: 3}
+  m_PrefabInstance: {fileID: 2586851875439101179}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &5260230438142806128 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7702931785372060811, guid: 70112e911f1554f21b95e69066f52415, type: 3}

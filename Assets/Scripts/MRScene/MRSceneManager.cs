@@ -5,6 +5,8 @@ using System.Linq;
 
 using Meta.XR.MRUtilityKit;
 using System;
+using TMPro;
+using UnityEngine.Events;
 
 public class MRSceneManager : MonoBehaviour
 {
@@ -20,7 +22,9 @@ public class MRSceneManager : MonoBehaviour
     [SerializeField] GameObject RightController;
     [SerializeField] int numofPotentialPosForGuests = 8;
     [SerializeField] float spawnOffset = 0.5f;
-    [SerializeField] float projectedOffset = 0.556f; 
+    [SerializeField] float projectedOffset = 0.556f;
+    [SerializeField] TextMeshProUGUI _TimerText;
+    [SerializeField] float _defaultTime = 300f;
     private static OVRSceneRoom m_SceneRoom;
 
     //private List<OVRScenePlane> m_SceneWalls = new List<OVRScenePlane>();
@@ -46,8 +50,13 @@ public class MRSceneManager : MonoBehaviour
     private List<Vector3> _potentialSpawnedPositions;
     private bool _isSpawnedPointsCalculated = false;
     private Vector3 _calibratedRoomCenter;
-
-
+    
+    // timer
+    public float _timer = 0f;
+    public int _score = 0;
+    public int maxScore = 15;
+    private bool _GameStarted = false; 
+    
     public float RoomLength => _roomLength;
     public float RoomWidth => _roomWidth;
     public Vector2 PlayerRelativePos => _playerRelativePos;
@@ -61,7 +70,11 @@ public class MRSceneManager : MonoBehaviour
     public bool IsSpawnedPointsCalculated => _isSpawnedPointsCalculated;
     public  Vector3 CalibratedRoomCenter => _calibratedRoomCenter;
 
-
+    
+    // Event 
+    public UnityEvent onScoreIncrease;
+    public UnityEvent onScoreDecrease;
+    
     #endregion
 
     #region Unity Methods
@@ -92,7 +105,7 @@ public class MRSceneManager : MonoBehaviour
         sceneManager.SceneModelLoadedSuccessfully += OnSceneLoaded;
         _potentialSpawnedPositions = new List<Vector3>();
     }
-
+    
     IEnumerator FindPlayerWithDelay(float delay)
     {
         while (_player == null)
@@ -106,12 +119,29 @@ public class MRSceneManager : MonoBehaviour
     private void Start()
     {
         StartCoroutine(FindPlayerWithDelay(0.1f));
+        onScoreIncrease.AddListener(scoreIncrease);
+        onScoreDecrease.AddListener(scoreDecrease);
+        _timer = _defaultTime;
         //OnRoomSetupComplete += () => StartCoroutine(GeneratePointsAroundCircleCoroutine());
     }
 
     private void Update()
     {
-
+        if (_GameStarted)
+        {
+            _timer -= Time.deltaTime;
+            // convert seconds to minutes and seconds
+            int minutes = Mathf.FloorToInt(_timer / 60);
+            int seconds = Mathf.FloorToInt(_timer % 60);
+            _TimerText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
+            if (_timer <= 0 || _score >= maxScore)
+            {
+                _timer = 0;
+                _GameStarted = false;
+                // game over
+                GuestManager.Instance.GameEnds();
+            }
+        }
         if (testingMode)
         {
             if ( _isCalibrationCompleted && !roomSetupTriggered)
@@ -137,6 +167,7 @@ public class MRSceneManager : MonoBehaviour
             _playerRelativePos = CalculateLocalPosition(_headset.transform.position, _floorTrans);
             //Debug.Log("length:" + _roomLength + "width:" + _roomWidth);
         }
+        
     }
 
 
@@ -200,12 +231,23 @@ public class MRSceneManager : MonoBehaviour
 
     public void ConfirmCalibration()
     {
+        if (_isCalibrationCompleted)
+        {
+            return;
+        }
         _calibrationHeight = (RightController.transform.position.y + LeftController.transform.position.y) / 2f;
         _calibratedRoomCenter = new Vector3(_roomCenter.x, _calibrationHeight, _roomCenter.z);
         CalibrateProjectorAndSkybox();
         _isCalibrationCompleted = true;
         Debug.Log("calibrationHeight:" + _calibrationHeight);
     }
+
+    public void startTimer()
+    {
+        Debug.Log("Game started ");
+        _GameStarted = true;
+    }
+    
     #endregion
 
     #region Private Methods
@@ -288,6 +330,13 @@ public class MRSceneManager : MonoBehaviour
             ApplyLayer(wall.gameObject, "Wall");
         }
     }
-
+    private void scoreIncrease()
+    {
+        _score+=3;
+    }
+    private void scoreDecrease()
+    {
+        _score--;
+    }
     #endregion
 }

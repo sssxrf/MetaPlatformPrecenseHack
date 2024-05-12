@@ -121,7 +121,8 @@ public class GuestManager : MonoBehaviour
     {
         gameStarted = true;
         GameStartInfo(true, gamelevel);
-        
+        MRSceneManager.Instance.startTimer();
+
     }
 
     // generate new guest ID 
@@ -150,6 +151,15 @@ public class GuestManager : MonoBehaviour
         _guests.Clear();
         _currentGuestID = 0;
     }
+    
+    [Button("game ends")]
+    public void GameEnds()
+    {
+        gameStarted = false;
+        GameStartInfo(false, gamelevel);
+        Invoke("destroyAllGuests",2f);
+    }
+    
 
    // update level 
    [Button("Update Level")]
@@ -209,6 +219,6 @@ public class GuestManager : MonoBehaviour
     {
         
     }
-   
+    
     
 }

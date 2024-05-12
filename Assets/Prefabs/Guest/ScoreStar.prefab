@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8727530653488128549}
   - component: {fileID: 2170219075177475274}
   - component: {fileID: 280048393711041942}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: ScoreStar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -96,7 +96,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa7aa2a558c357843b35e0e4111308cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 2
+  speed: 6
+  starMeshRenderer: {fileID: 8402125212375933135}
   onStarCollected:
     m_PersistentCalls:
       m_Calls:
@@ -122,7 +123,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6201847281000635716}
   - component: {fileID: 4129868678513878236}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: audioSouceObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -292,6 +293,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Star_Up
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 3c37ffcb9b2db5047b607bc24b6fa485, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -300,5 +305,10 @@ PrefabInstance:
 --- !u!4 &7264715775319645088 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 3c37ffcb9b2db5047b607bc24b6fa485, type: 3}
+  m_PrefabInstance: {fileID: 7159542517277916235}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &8402125212375933135 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -7511558181221131132, guid: 3c37ffcb9b2db5047b607bc24b6fa485, type: 3}
   m_PrefabInstance: {fileID: 7159542517277916235}
   m_PrefabAsset: {fileID: 0}
