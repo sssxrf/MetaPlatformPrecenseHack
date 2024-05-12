@@ -5059,6 +5059,34 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2594370337102493203, guid: e8c0b2defa4828c4dad244d78aa266d4, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2594370337102493203, guid: e8c0b2defa4828c4dad244d78aa266d4, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2594370337102493203, guid: e8c0b2defa4828c4dad244d78aa266d4, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2594370337102493203, guid: e8c0b2defa4828c4dad244d78aa266d4, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2594370337102493203, guid: e8c0b2defa4828c4dad244d78aa266d4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 2594370337102493203, guid: e8c0b2defa4828c4dad244d78aa266d4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 2594370337102493203, guid: e8c0b2defa4828c4dad244d78aa266d4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3447007389358252987, guid: e8c0b2defa4828c4dad244d78aa266d4, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -5099,6 +5127,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4724892091593224225, guid: e8c0b2defa4828c4dad244d78aa266d4, type: 3}
+      propertyPath: _RamenPrefab
+      value: 
+      objectReference: {fileID: 5547327147578615898, guid: d78202ab8ac84e44482134f115b19381, type: 3}
     - target: {fileID: 5152908225861682567, guid: e8c0b2defa4828c4dad244d78aa266d4, type: 3}
       propertyPath: m_Name
       value: projector
