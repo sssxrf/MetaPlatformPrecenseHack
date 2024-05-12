@@ -1405,9 +1405,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33aac8e98bf989741a8555cadb02a54f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _SushiPrefab: {fileID: 998371763000849979, guid: de782779d7778e2489dc75dade68397f, type: 3}
-  _MilkTeaPrefab: {fileID: 1225859419329719821, guid: c33850aa13cbac94788175aee497cb49, type: 3}
-  _RamenPrefab: {fileID: 7443703509063527374, guid: d6c1787ed284f6d428f7740e975e0167, type: 3}
+  _SushiPrefab: {fileID: 9112020898202637540, guid: 42d8297c51bc12e47adce88f5e0788b1, type: 3}
+  _MilkTeaPrefab: {fileID: 7736636010945032337, guid: 4288d85c0bb376c40879d4d0096b72e8, type: 3}
+  _RamenPrefab: {fileID: 9112020898202637540, guid: 42d8297c51bc12e47adce88f5e0788b1, type: 3}
   _foodGenPosition: {fileID: 4771504332966890100}
   _spawnTable: {fileID: 0}
 --- !u!114 &7736946195074994577 stripped

@@ -80,6 +80,7 @@ public class bow : MonoBehaviour
             _arrow = snapInteractor.gameObject;
             _bowSnapInteractor = snapInteractor;
         }
+        _arrow.transform.SetParent(null);
        
     }
 
