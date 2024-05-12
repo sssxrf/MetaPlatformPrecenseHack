@@ -13,7 +13,7 @@ public class FoodManager : MonoBehaviour
     [SerializeField] private List<GameObject> foodModels;
     [SerializeField] private SpawnTable _spawnTable;
     private Dictionary<string, GameObject> foodAssets;
-
+    
     private void Awake()
     {
         if (Instance == null)

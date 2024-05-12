@@ -13,7 +13,8 @@ public class ArrowInteractionControl : MonoBehaviour
         Inactive
     }
     [SerializeField] private GrabInteractable _grabInteractable;
-  
+    [SerializeField] private MeshRenderer ArrowMeshRenderer;
+    
     private IActiveState _attachTobow { get; set; }
     
     protected virtual void Awake()
@@ -22,12 +23,14 @@ public class ArrowInteractionControl : MonoBehaviour
     }
     void Start()
     {
+        ArrowMeshRenderer.enabled = false;
         _grabInteractable.WhenSelectingInteractorAdded.Action += ArrowPickedUp;
     }
 
     private void ArrowPickedUp(GrabInteractor obj)
     {
         // transform.SetParent(null);
+        ArrowMeshRenderer.enabled = true;
     }
 
 

@@ -516,6 +516,7 @@ MonoBehaviour:
   - {fileID: 7443703509063527374, guid: d6c1787ed284f6d428f7740e975e0167, type: 3}
   - {fileID: 1225859419329719821, guid: c33850aa13cbac94788175aee497cb49, type: 3}
   - {fileID: 998371763000849979, guid: de782779d7778e2489dc75dade68397f, type: 3}
+  _spawnTable: {fileID: 0}
 --- !u!4 &78713910
 Transform:
   m_ObjectHideFlags: 0
@@ -5053,6 +5054,10 @@ PrefabInstance:
     - target: {fileID: 803524316016172432, guid: e8c0b2defa4828c4dad244d78aa266d4, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1784246797879096615, guid: e8c0b2defa4828c4dad244d78aa266d4, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3447007389358252987, guid: e8c0b2defa4828c4dad244d78aa266d4, type: 3}
       propertyPath: m_LocalPosition.x
