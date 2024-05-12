@@ -21,7 +21,7 @@ public class MRSceneManager : MonoBehaviour
     [SerializeField] GameObject RightController;
     [SerializeField] int numofPotentialPosForGuests = 8;
     [SerializeField] float spawnOffset = 0.5f;
-    [SerializeField] float projectedOffset = 0.556f; 
+    [SerializeField] float projectedOffset = 0.556f;
     private static OVRSceneRoom m_SceneRoom;
 
     //private List<OVRScenePlane> m_SceneWalls = new List<OVRScenePlane>();
@@ -51,6 +51,7 @@ public class MRSceneManager : MonoBehaviour
     // timer
     public float _timer = 0f;
     public int _score = 0;
+    public int maxScore = 30;
     private bool _GameStarted = false; 
     
     public float RoomLength => _roomLength;

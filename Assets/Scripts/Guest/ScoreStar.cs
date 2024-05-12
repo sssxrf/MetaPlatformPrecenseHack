@@ -8,14 +8,16 @@ public class ScoreStar : MonoBehaviour
 {
     private GameObject Headset;
     [SerializeField] private float speed = 5f;
+    [SerializeField] MeshRenderer starMeshRenderer;
     public UnityEvent onStarCollected;
-   
+    
 
     private void OnCollisionEnter(Collision other)
     {
         if (other.gameObject.GetComponent<CollectZone>())
         {
             onStarCollected.Invoke();
+            starMeshRenderer.enabled = false;
             Destroy(gameObject);
         }
     }
@@ -35,7 +37,7 @@ public class ScoreStar : MonoBehaviour
             Vector3 targetPosition = Headset.transform.position;
 
             // Smoothly move towards the target position
-            transform.position = Vector3.Lerp(transform.position, targetPosition, speed * Time.deltaTime);
+            transform.position = Vector3.MoveTowards(transform.position, targetPosition, speed * Time.deltaTime);
         }
         else
         {
