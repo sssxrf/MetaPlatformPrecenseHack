@@ -16,8 +16,8 @@ public class ScoreStar : MonoBehaviour
     {
         if (other.gameObject.GetComponent<CollectZone>())
         {
-            onStarCollected.Invoke();
             starMeshRenderer.enabled = false;
+            onStarCollected.Invoke();
             Destroy(gameObject);
         }
     }
@@ -25,11 +25,11 @@ public class ScoreStar : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Destroy(gameObject,3f);
+        Destroy(gameObject,2f);
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         if (Headset != null)
         {
@@ -43,6 +43,7 @@ public class ScoreStar : MonoBehaviour
         {
             //find game object with collect zone 
             Headset = FindObjectOfType<CollectZone>().GameObject();
+            
         }
     }
 }

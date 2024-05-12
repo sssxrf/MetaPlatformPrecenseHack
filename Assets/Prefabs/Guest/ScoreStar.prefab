@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8727530653488128549}
   - component: {fileID: 2170219075177475274}
   - component: {fileID: 280048393711041942}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: ScoreStar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -123,7 +123,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6201847281000635716}
   - component: {fileID: 4129868678513878236}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: audioSouceObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -292,6 +292,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 3c37ffcb9b2db5047b607bc24b6fa485, type: 3}
       propertyPath: m_Name
       value: Star_Up
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 3c37ffcb9b2db5047b607bc24b6fa485, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

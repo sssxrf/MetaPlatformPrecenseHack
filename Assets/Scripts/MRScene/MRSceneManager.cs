@@ -5,6 +5,7 @@ using System.Linq;
 
 using Meta.XR.MRUtilityKit;
 using System;
+using TMPro;
 using UnityEngine.Events;
 
 public class MRSceneManager : MonoBehaviour
@@ -22,6 +23,8 @@ public class MRSceneManager : MonoBehaviour
     [SerializeField] int numofPotentialPosForGuests = 8;
     [SerializeField] float spawnOffset = 0.5f;
     [SerializeField] float projectedOffset = 0.556f;
+    [SerializeField] TextMeshProUGUI _TimerText;
+    [SerializeField] float _defaultTime = 300f;
     private static OVRSceneRoom m_SceneRoom;
 
     //private List<OVRScenePlane> m_SceneWalls = new List<OVRScenePlane>();
@@ -51,7 +54,7 @@ public class MRSceneManager : MonoBehaviour
     // timer
     public float _timer = 0f;
     public int _score = 0;
-    public int maxScore = 30;
+    public int maxScore = 15;
     private bool _GameStarted = false; 
     
     public float RoomLength => _roomLength;
@@ -118,6 +121,7 @@ public class MRSceneManager : MonoBehaviour
         StartCoroutine(FindPlayerWithDelay(0.1f));
         onScoreIncrease.AddListener(scoreIncrease);
         onScoreDecrease.AddListener(scoreDecrease);
+        _timer = _defaultTime;
         //OnRoomSetupComplete += () => StartCoroutine(GeneratePointsAroundCircleCoroutine());
     }
 
@@ -125,7 +129,18 @@ public class MRSceneManager : MonoBehaviour
     {
         if (_GameStarted)
         {
-            _timer += Time.deltaTime;
+            _timer -= Time.deltaTime;
+            // convert seconds to minutes and seconds
+            int minutes = Mathf.FloorToInt(_timer / 60);
+            int seconds = Mathf.FloorToInt(_timer % 60);
+            _TimerText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
+            if (_timer <= 0 || _score >= maxScore)
+            {
+                _timer = 0;
+                _GameStarted = false;
+                // game over
+                GuestManager.Instance.GameEnds();
+            }
         }
         if (testingMode)
         {
@@ -152,6 +167,7 @@ public class MRSceneManager : MonoBehaviour
             _playerRelativePos = CalculateLocalPosition(_headset.transform.position, _floorTrans);
             //Debug.Log("length:" + _roomLength + "width:" + _roomWidth);
         }
+        
     }
 
 
