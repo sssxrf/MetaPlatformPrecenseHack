@@ -5,6 +5,7 @@ using System.Linq;
 
 using Meta.XR.MRUtilityKit;
 using System;
+using UnityEngine.Events;
 
 public class MRSceneManager : MonoBehaviour
 {
@@ -46,8 +47,12 @@ public class MRSceneManager : MonoBehaviour
     private List<Vector3> _potentialSpawnedPositions;
     private bool _isSpawnedPointsCalculated = false;
     private Vector3 _calibratedRoomCenter;
-
-
+    
+    // timer
+    public float _timer = 0f;
+    public int _score = 0;
+    private bool _GameStarted = false; 
+    
     public float RoomLength => _roomLength;
     public float RoomWidth => _roomWidth;
     public Vector2 PlayerRelativePos => _playerRelativePos;
@@ -61,7 +66,11 @@ public class MRSceneManager : MonoBehaviour
     public bool IsSpawnedPointsCalculated => _isSpawnedPointsCalculated;
     public  Vector3 CalibratedRoomCenter => _calibratedRoomCenter;
 
-
+    
+    // Event 
+    public UnityEvent onScoreIncrease;
+    public UnityEvent onScoreDecrease;
+    
     #endregion
 
     #region Unity Methods
@@ -92,7 +101,7 @@ public class MRSceneManager : MonoBehaviour
         sceneManager.SceneModelLoadedSuccessfully += OnSceneLoaded;
         _potentialSpawnedPositions = new List<Vector3>();
     }
-
+    
     IEnumerator FindPlayerWithDelay(float delay)
     {
         while (_player == null)
@@ -106,12 +115,17 @@ public class MRSceneManager : MonoBehaviour
     private void Start()
     {
         StartCoroutine(FindPlayerWithDelay(0.1f));
+        onScoreIncrease.AddListener(scoreIncrease);
+        onScoreDecrease.AddListener(scoreDecrease);
         //OnRoomSetupComplete += () => StartCoroutine(GeneratePointsAroundCircleCoroutine());
     }
 
     private void Update()
     {
-
+        if (_GameStarted)
+        {
+            _timer += Time.deltaTime;
+        }
         if (testingMode)
         {
             if ( _isCalibrationCompleted && !roomSetupTriggered)
@@ -210,6 +224,13 @@ public class MRSceneManager : MonoBehaviour
         _isCalibrationCompleted = true;
         Debug.Log("calibrationHeight:" + _calibrationHeight);
     }
+
+    public void startTimer()
+    {
+        Debug.Log("Game started ");
+        _GameStarted = true;
+    }
+    
     #endregion
 
     #region Private Methods
@@ -292,6 +313,13 @@ public class MRSceneManager : MonoBehaviour
             ApplyLayer(wall.gameObject, "Wall");
         }
     }
-
+    private void scoreIncrease()
+    {
+        _score+=3;
+    }
+    private void scoreDecrease()
+    {
+        _score--;
+    }
     #endregion
 }

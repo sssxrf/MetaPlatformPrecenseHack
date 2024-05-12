@@ -866,7 +866,19 @@ MonoBehaviour:
   starterGuestNum: 1
   StartGameEvent:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 915561487}
+        m_TargetAssemblyTypeName: MRSceneManager, Assembly-CSharp
+        m_MethodName: startTimer
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   LevelChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -4814,6 +4826,14 @@ MonoBehaviour:
   spawnOffset: 0.5
   projectedOffset: 0.2
   _headset: {fileID: 1581680669}
+  _timer: 0
+  _score: 0
+  onScoreIncrease:
+    m_PersistentCalls:
+      m_Calls: []
+  onScoreDecrease:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &915688927
 GameObject:
   m_ObjectHideFlags: 0

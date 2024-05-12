@@ -121,7 +121,8 @@ public class GuestManager : MonoBehaviour
     {
         gameStarted = true;
         GameStartInfo(true, gamelevel);
-        
+        MRSceneManager.Instance.startTimer();
+
     }
 
     // generate new guest ID 
@@ -209,6 +210,6 @@ public class GuestManager : MonoBehaviour
     {
         
     }
-   
+    
     
 }

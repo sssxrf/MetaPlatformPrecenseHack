@@ -43,7 +43,7 @@ public class GuestController : MonoBehaviour
      public bool _isSatisfied  {get; set;} = false;
      public int _urgentState  {get; set;} = 0;
      
-     Animator myAnimator;
+     public Animator myAnimator;
      // storage variable 
      private GuestManager _guestManager;
      
@@ -161,12 +161,16 @@ public class GuestController : MonoBehaviour
         _onGuestArrived.AddListener(() => Debug.Log("Guest Arrived"));
         _onGuestArrived.AddListener(ConnectToManager);
         _onGuestSatisfied.AddListener(() => Debug.Log("Guest Satisfied"));
+        _onGuestSatisfied.AddListener(() => MRSceneManager.Instance.onScoreIncrease.Invoke());
         _onGuestUnsatisfied.AddListener(() => Debug.Log("Guest Unsatisfied"));
+        _onGuestUnsatisfied.AddListener(() => MRSceneManager.Instance.onScoreDecrease.Invoke());
         _onWrongFood.AddListener(() => Debug.Log("Wrong Food"));
         _onGuestSatisfied.AddListener(guestSatisfied);
         _onGuestUnsatisfied.AddListener(guestUnsatisfied);
         _onWrongFood.AddListener(sendWrongFood);
         _onGuestUrgent.AddListener(sendUrgentData);
+        
+        
     }
 
    
@@ -176,7 +180,7 @@ public class GuestController : MonoBehaviour
     {
         setUpEvents();
         GenerateFoodType();
-        myAnimator = GetComponent<Animator>();
+        // myAnimator = GetComponent<Animator>();
        
     }
     
@@ -207,5 +211,15 @@ public class GuestController : MonoBehaviour
         
     }
     
+    [Sirenix.OdinInspector.Button]
+    public void ForceGuestSatisfied()
+    {
+        _onGuestSatisfied.Invoke();
+    }
+    [Sirenix.OdinInspector.Button]
+    public void ForceGuestUnsatisfied()
+    {
+        _onGuestUnsatisfied.Invoke();
+    }
    
 }
