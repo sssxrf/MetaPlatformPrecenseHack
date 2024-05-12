@@ -200,6 +200,10 @@ public class MRSceneManager : MonoBehaviour
 
     public void ConfirmCalibration()
     {
+        if (_isCalibrationCompleted)
+        {
+            return;
+        }
         _calibrationHeight = (RightController.transform.position.y + LeftController.transform.position.y) / 2f;
         _calibratedRoomCenter = new Vector3(_roomCenter.x, _calibrationHeight, _roomCenter.z);
         CalibrateProjectorAndSkybox();
