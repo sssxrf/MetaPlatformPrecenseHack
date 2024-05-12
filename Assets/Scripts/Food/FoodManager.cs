@@ -1,7 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using Sirenix.OdinInspector;
 using UnityEngine;
-
+using UnityEngine.Rendering;
 
 
 public class FoodManager : MonoBehaviour
@@ -10,6 +11,7 @@ public class FoodManager : MonoBehaviour
 
     [SerializeField] private List<string> foodNames;
     [SerializeField] private List<GameObject> foodModels;
+    [SerializeField] private SpawnTable _spawnTable;
     private Dictionary<string, GameObject> foodAssets;
 
     private void Awake()
@@ -63,9 +65,26 @@ public class FoodManager : MonoBehaviour
         {
             if (food.Key == foodName)
             {
-                Instantiate(food.Value, spawnposition, Quaternion.identity);
+                _spawnTable.SpawnItem(food.Value);
                 break;
             }
         }
     }
+    
+    [Button] 
+    public void SpawnRamen()
+    {
+        SpawnfoodByName("Ramen", Vector3.zero);
+    }
+    [Button]
+    public void SpawnBoba()
+    {
+        SpawnfoodByName("Boba", Vector3.zero);
+    }
+    [Button]
+    public void SpawnSushi()
+    {
+        SpawnfoodByName("Sushi", Vector3.zero);
+    }
+    
 }
