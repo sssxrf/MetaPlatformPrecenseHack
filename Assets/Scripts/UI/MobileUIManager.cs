@@ -15,11 +15,12 @@ public class MobileUIManager : MonoBehaviour
     [SerializeField] private GameObject _foodmode;
     [SerializeField] private GameObject _mapmode;
 
+
     // Score bar
     public int targetScore { get; set; } = 15; // The score needed to fill the progress bar.
     private float currentScore = 0;
     public Image progressBar;
-
+    public Image gameOverImage;
     // Count down
     public float totalTime { get; set; }  = 300; // Total time in seconds (1 minute 30 seconds)
     private float remainingTime;
@@ -128,6 +129,10 @@ public class MobileUIManager : MonoBehaviour
         startCountdown = false;
         Debug.Log("Game End!");
         timerText.text = string.Format("{0:00}:{1:00}", 0, 0);
+         if (gameOverImage != null)
+            gameOverImage.gameObject.SetActive(true);
+        else
+            Debug.LogError("Game Over Image is not set in the inspector.");
 
     }
 

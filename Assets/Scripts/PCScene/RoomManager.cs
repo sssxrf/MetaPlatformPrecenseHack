@@ -37,7 +37,7 @@ public class RoomManager : MonoBehaviour
     private void Start()
     {
         // for debug
-        //DrawCenteredRoom(4f, 3f);
+        // DrawCenteredRoom(8f, 6f);
     }
 
     #endregion
@@ -60,6 +60,8 @@ public class RoomManager : MonoBehaviour
         positions[4] = positions[0];
 
         lineRenderer.SetPositions(positions);
+
+
     }
 
     public void SpawnedCenteredRoom(float length, float width)

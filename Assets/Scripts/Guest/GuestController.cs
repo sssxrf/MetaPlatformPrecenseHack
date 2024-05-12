@@ -113,27 +113,75 @@ public class GuestController : MonoBehaviour
         _isSatisfied = true;
         if (_guestManager != null)
         {
+            if(myAnimator != null){
             myAnimator.SetBool("isSatisfied", true);
-            _guestManager.ClearAGuest(_guestID, _isSatisfied);
-            _guestManager.RemoveGuestID(_guestID);
+            StartCoroutine(WaitForAnimationToEnd());
+            }
+            else
+            {
+                Debug.LogError("Animator not found on the guest.");
+                RemoveGuestImmediately();
+            }
+            
+        }
+        else{
+            Debug.LogError("Guest Manager not found.");
         }
     }
     
+    // protected void guestUnsatisfied()
+    // {
+    //     _isSatisfied = false;
+    //     if (_guestManager != null)
+    //     {
+    //         myAnimator.SetBool("isLeaving", true);
+    //         _guestManager.ClearAGuest(_guestID, _isSatisfied);
+    //         _guestManager.RemoveGuestID(_guestID);
+    //     }
+    // }
+
     protected void guestUnsatisfied()
     {
         _isSatisfied = false;
         if (_guestManager != null)
         {
-            myAnimator.SetBool("isLeaving", true);
-            _guestManager.ClearAGuest(_guestID, _isSatisfied);
-            _guestManager.RemoveGuestID(_guestID);
+            if (myAnimator != null)
+            {
+                myAnimator.SetBool("isLeaving", true);
+                StartCoroutine(WaitForAnimationToEnd());
+            }
+            else
+            {
+                Debug.LogError("Animator not found on the guest.");
+                RemoveGuestImmediately();
+            }
+        }
+        else
+        {
+            Debug.LogError("Guest Manager not found.");
         }
     }
 
-    
+    private IEnumerator WaitForAnimationToEnd()
+    {
+        // Assuming the leaving animation is 2 seconds long
+        yield return new WaitForSeconds(3.0f); 
+        RemoveGuestImmediately();
+    }
+
+    private void RemoveGuestImmediately()
+    {
+        _guestManager.ClearAGuest(_guestID, _isSatisfied);
+        _guestManager.RemoveGuestID(_guestID);
+    }
+
+
+
+
     protected void sendWrongFood()
     {
         currentTime += paneltyTime;
+        myAnimator.SetBool("isAngry", true);
     }
     // Connect to guest manager to update the guest list, and acquire guest id 
     private void ConnectToManager()
@@ -176,8 +224,8 @@ public class GuestController : MonoBehaviour
     {
         setUpEvents();
         GenerateFoodType();
-        myAnimator = GetComponent<Animator>();
-       
+        myAnimator = GetComponentInChildren<Animator>();
+
     }
     
     
