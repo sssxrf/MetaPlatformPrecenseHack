@@ -165,7 +165,7 @@ public class GuestController : MonoBehaviour
     private IEnumerator WaitForAnimationToEnd()
     {
         // Assuming the leaving animation is 2 seconds long
-        yield return new WaitForSeconds(5.0f); 
+        yield return new WaitForSeconds(4.0f); 
         RemoveGuestImmediately();
     }
 
