@@ -6,7 +6,7 @@ public class SpawnTable : MonoBehaviour
 {
     // this class spawn an item on the table in order based on availiable place 
     [SerializeField] private List<Transform> _spawnPoints;
-    
+    [SerializeField] private AudioSource _foodAppearSound;
     
     public void SpawnItem(GameObject item)
   
@@ -16,6 +16,7 @@ public class SpawnTable : MonoBehaviour
             if (_spawnPoints[i].childCount == 0)
             {
                 Instantiate(item, _spawnPoints[i].position, _spawnPoints[i].rotation, _spawnPoints[i]);
+                _foodAppearSound.Play();
                 break;
             }
         }

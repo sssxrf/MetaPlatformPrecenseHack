@@ -5146,6 +5146,14 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6863663585266754278, guid: e8c0b2defa4828c4dad244d78aa266d4, type: 3}
+      propertyPath: m_Volume
+      value: 0.57
+      objectReference: {fileID: 0}
+    - target: {fileID: 6863663585266754278, guid: e8c0b2defa4828c4dad244d78aa266d4, type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7095170388848909573, guid: e8c0b2defa4828c4dad244d78aa266d4, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -5214,7 +5222,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 935024000}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5a9cbfd5b9aa61d4bbbe61267fe57aa9, type: 3}
   m_Name: 
