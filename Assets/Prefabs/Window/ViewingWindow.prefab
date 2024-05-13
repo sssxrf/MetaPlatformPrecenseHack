@@ -309,7 +309,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   blockingWindow: {fileID: 38356331649238574}
-  virtualWindow: {fileID: 4916915705620536047}
+  virtualWindow: {fileID: 5194722593742638981}
 --- !u!1 &4916915705620536047
 GameObject:
   m_ObjectHideFlags: 0
@@ -328,7 +328,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &7099635109917002934
 Transform:
   m_ObjectHideFlags: 0
@@ -435,7 +435,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &8925157961520993778
 Transform:
   m_ObjectHideFlags: 0
