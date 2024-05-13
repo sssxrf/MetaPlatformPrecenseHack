@@ -67,13 +67,42 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 714875268951449d6ab90b2278908255, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7202371571126062438}
   m_SourcePrefab: {fileID: 100100000, guid: 714875268951449d6ab90b2278908255, type: 3}
 --- !u!4 &1482306810728269560 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 714875268951449d6ab90b2278908255, type: 3}
   m_PrefabInstance: {fileID: 1376007249908244755}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &2295119044139392066 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 714875268951449d6ab90b2278908255, type: 3}
+  m_PrefabInstance: {fileID: 1376007249908244755}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &7202371571126062438
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2295119044139392066}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 1d6446a54c0ed4c2585ac646c8e1ff0e, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1001 &5660124591565245927
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -126,6 +155,10 @@ PrefabInstance:
       propertyPath: _guesttype
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6715635529701711385, guid: 93236b8fdd042e64ca88dae98fee7974, type: 3}
+      propertyPath: myAnimator
+      value: 
+      objectReference: {fileID: 7202371571126062438}
     - target: {fileID: 6833640943243769953, guid: 93236b8fdd042e64ca88dae98fee7974, type: 3}
       propertyPath: m_Name
       value: Guest orange
