@@ -64,6 +64,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: test1-orangeMonster
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 714875268951449d6ab90b2278908255, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -103,6 +107,73 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!1001 &4136741503406222689
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 7134730812991510152}
+    m_Modifications:
+    - target: {fileID: 8260984973181091165, guid: eb74be2acbc3a4e3fa989c389bce2dab, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8260984973181091165, guid: eb74be2acbc3a4e3fa989c389bce2dab, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.244
+      objectReference: {fileID: 0}
+    - target: {fileID: 8260984973181091165, guid: eb74be2acbc3a4e3fa989c389bce2dab, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8260984973181091165, guid: eb74be2acbc3a4e3fa989c389bce2dab, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.8399041
+      objectReference: {fileID: 0}
+    - target: {fileID: 8260984973181091165, guid: eb74be2acbc3a4e3fa989c389bce2dab, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8260984973181091165, guid: eb74be2acbc3a4e3fa989c389bce2dab, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.54273474
+      objectReference: {fileID: 0}
+    - target: {fileID: 8260984973181091165, guid: eb74be2acbc3a4e3fa989c389bce2dab, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8260984973181091165, guid: eb74be2acbc3a4e3fa989c389bce2dab, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8260984973181091165, guid: eb74be2acbc3a4e3fa989c389bce2dab, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -65.74
+      objectReference: {fileID: 0}
+    - target: {fileID: 8260984973181091165, guid: eb74be2acbc3a4e3fa989c389bce2dab, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8786305977688008679, guid: eb74be2acbc3a4e3fa989c389bce2dab, type: 3}
+      propertyPath: m_Name
+      value: Guest-yellow-idle
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: eb74be2acbc3a4e3fa989c389bce2dab, type: 3}
+--- !u!95 &639614520408147016 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 3569373728472607017, guid: eb74be2acbc3a4e3fa989c389bce2dab, type: 3}
+  m_PrefabInstance: {fileID: 4136741503406222689}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &5461813472661131324 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8260984973181091165, guid: eb74be2acbc3a4e3fa989c389bce2dab, type: 3}
+  m_PrefabInstance: {fileID: 4136741503406222689}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &5660124591565245927
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -158,7 +229,7 @@ PrefabInstance:
     - target: {fileID: 6715635529701711385, guid: 93236b8fdd042e64ca88dae98fee7974, type: 3}
       propertyPath: myAnimator
       value: 
-      objectReference: {fileID: 7202371571126062438}
+      objectReference: {fileID: 639614520408147016}
     - target: {fileID: 6833640943243769953, guid: 93236b8fdd042e64ca88dae98fee7974, type: 3}
       propertyPath: m_Name
       value: Guest orange
@@ -172,6 +243,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 3282959805804157807, guid: 93236b8fdd042e64ca88dae98fee7974, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1482306810728269560}
+    - targetCorrespondingSourceObject: {fileID: 3282959805804157807, guid: 93236b8fdd042e64ca88dae98fee7974, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5461813472661131324}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 93236b8fdd042e64ca88dae98fee7974, type: 3}
 --- !u!4 &7134730812991510152 stripped
