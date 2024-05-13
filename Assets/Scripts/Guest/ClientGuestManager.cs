@@ -43,6 +43,18 @@ public class ClientGuestManager : MonoBehaviour
         MobileUIManager.Instance.StartCountDown();
     }
 
+    public void EndGame()
+    {
+        MobileUIManager.Instance.StopCountDown();
+        // destroy all remaining guests
+        foreach (var guest in _spawnedGuests)
+        {
+            // remove the guest from the dictionary
+            Destroy(guest.Value);
+            _guestsDic.Remove(guest.Key);
+            
+        }
+    }
     public void StoreNewGuestInfos(int newguestID, int newguestType, int newurgentState, Vector2 newPosRelativeToWindow)
     {
         GuestInfos guestInfo;

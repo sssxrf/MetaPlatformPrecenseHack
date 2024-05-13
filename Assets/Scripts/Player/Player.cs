@@ -264,6 +264,32 @@ public class Player : NetworkBehaviour
 #endif
 
     }
+    
+    // End Game
+    [Rpc(RpcSources.InputAuthority, RpcTargets.StateAuthority, HostMode = RpcHostMode.SourceIsHostPlayer)]
+    public void RPC_SendEndGame(bool end, RpcInfo info = default)
+    {
+        RPC_RelayEndGame(end, info.Source);
+    }
+    [Rpc(RpcSources.StateAuthority, RpcTargets.All, HostMode = RpcHostMode.SourceIsServer)]
+    public void RPC_RelayEndGame(bool end, PlayerRef messageSource)
+    {
+
+#if UNITY_STANDALONE_WIN
+        ClientGuestManager.Instance.EndGame();
+        
+
+#endif
+
+#if UNITY_ANDROID
+
+#endif
+
+#if UNITY_IOS
+        ClientGuestManager.Instance.EndGame();
+#endif
+
+    }
 
 
 

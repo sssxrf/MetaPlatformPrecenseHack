@@ -114,6 +114,10 @@ public class MobileUIManager : MonoBehaviour
         startCountdown = true;
         remainingTime = totalTime;
     }
+    public void StopCountDown()
+    {
+        TimerEnded();
+    }
 
 
     private void UpdateTimerDisplay()

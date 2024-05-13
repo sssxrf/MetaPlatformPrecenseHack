@@ -156,8 +156,8 @@ public class GuestManager : MonoBehaviour
     public void GameEnds()
     {
         gameStarted = false;
-        GameStartInfo(false, gamelevel);
         Invoke("destroyAllGuests",2f);
+        GameEndInfo(false, gamelevel);
     }
     
 
@@ -212,7 +212,14 @@ public class GuestManager : MonoBehaviour
             _player.RPC_SendStarttheGame(gameStart);
         }
     }
-    
+    public void GameEndInfo(bool gameStart,int level)
+    {
+        if (_player != null)
+        {
+            _player.RPC_SendEndGame(false);
+        }
+    }
+
     //call it when new level start 
     
     public void LevelInfo(int level)
