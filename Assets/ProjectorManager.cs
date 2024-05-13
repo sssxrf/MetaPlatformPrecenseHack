@@ -88,7 +88,7 @@ public class ProjectorManager : MonoBehaviour
             currentOpeningWindow = Instantiate(ProjectedWindow, hit.point,  Quaternion.LookRotation(-hit.normal) );
             // rotate the window to 90 degree on y 
             // currentOpeningWindow.transform.Rotate(0,90,0);
-            currentOpeningWindow.transform.position = hit.point- hit.normal * 0.8f;
+            currentOpeningWindow.transform.position = hit.point- hit.normal * 0.4f;
             currentviewingWindowInterator = currentOpeningWindow.GetComponent<viewingWindowInterator>();
             //ProjectedWindows.Add(currentOpeningWindow.GetComponent<viewingWindowInterator>());
 
