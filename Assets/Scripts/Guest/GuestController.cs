@@ -46,6 +46,8 @@ public class GuestController : MonoBehaviour
      public Animator myAnimator;
      // storage variable 
      private GuestManager _guestManager;
+
+     private bool _alreadyScored = false;
      
      
 
@@ -83,7 +85,11 @@ public class GuestController : MonoBehaviour
                
                 if (food.foodType == _foodType)
                 {
-                    _onGuestSatisfied.Invoke();
+                    if (!_alreadyScored)
+                    {
+                        _onGuestSatisfied.Invoke();
+                        _alreadyScored = true;
+                    } ;
                 }
                 else
                 {
@@ -245,7 +251,11 @@ public class GuestController : MonoBehaviour
             fillImage.fillAmount = (waitTime-currentTime) / waitTime;
             if (currentTime >= waitTime)
             {
-                _onGuestUnsatisfied.Invoke();
+                if (!_alreadyScored)
+                {
+                    _onGuestUnsatisfied.Invoke();
+                    _alreadyScored = true;
+                }
             }else if (currentTime >= waitTime * _urgentPercent)
             {
                 if (_urgentState == 0)

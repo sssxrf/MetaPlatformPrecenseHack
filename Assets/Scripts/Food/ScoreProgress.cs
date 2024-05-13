@@ -24,6 +24,10 @@ public class ScoreProgress : MonoBehaviour
         float currentProgressPercentage = (float)MRSceneManager.Instance._score/  (float)MRSceneManager.Instance.maxScore;
         float currentProgress = totalProgressDistance * currentProgressPercentage;
         Debug.Log(" Current Progress Percentage " + currentProgressPercentage );
+        if (currentProgressPercentage >= 1f)
+        {
+            currentProgress = totalProgressDistance;
+        }
         inside.transform.position = new Vector3(inside.transform.position.x,  bottom.transform.position.y + currentProgress,inside.transform.position.z);
         if (currentProgressPercentage >= 1f)
         {
