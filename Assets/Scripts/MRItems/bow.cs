@@ -20,6 +20,10 @@ public class bow : MonoBehaviour
     private GameObject _arrow;
     private SnapInteractor _bowSnapInteractor;
     private bool _isArrowAttached = false;
+    
+    [Header("Sound effect")]
+    [SerializeField] private AudioSource _pullSound;
+    [SerializeField] private AudioSource _releaseSound;
     // Start is called before the first frame update
     void Start()
     {
@@ -27,12 +31,23 @@ public class bow : MonoBehaviour
         _bowSnapInteractable.WhenSelectingInteractorAdded.Action += HandleArrowAttached;
         _bowSnapInteractable.WhenSelectingInteractorRemoved.Action += HandleArrowRemoved;
         _stringGrabInteractable.WhenSelectingInteractorRemoved.Action += HandleArrowReleased;
+        _stringGrabInteractable.WhenSelectingInteractorAdded.Action += HandleArrowPulled;
         //Update string constraint 
         FloatConstraint stringConstraint = new FloatConstraint();
         stringConstraint.Constrain = true;
         stringConstraint.Value = endPosition.position.z - startPosition.position.z;
         Debug.Log("string value " + stringConstraint.Value);
         _stringConstraint.Constraints.MaxZ = stringConstraint;
+    }
+
+    private void HandleArrowPulled(GrabInteractor obj)
+    {
+        if (!_isArrowAttached )
+        {
+            return;
+        }
+        Debug.Log("Arrow Pulled");
+        _pullSound.Play();
     }
 
     private void HandleArrowRemoved(SnapInteractor obj)
@@ -64,7 +79,8 @@ public class bow : MonoBehaviour
         arrowRb.isKinematic = false;
         arrowRb.useGravity = false;
         arrowRb.AddForce(stringPosition.up * 10, ForceMode.Impulse);
-        
+        _releaseSound.Play();
+        _pullSound.Stop();
         
         
     }
